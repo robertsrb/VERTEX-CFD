@@ -35,6 +35,19 @@
   </ParameterList>
 
   <!--
+      Scalar Response output.
+  -->
+  <ParameterList name="Scalar Response Output">
+    <Parameter name="Output Frequency" type="int" value="2" />
+    <ParameterList name="Force">
+      <Parameter name="Field Name" type="string" value="pressure_force_0, total_force_0, shear_tensor_0, viscous_force_0, total_force_1" />
+      <ParameterList name="Sidesets">
+        <Parameter name="block_1" type="string" value="cylinder" />
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+
+  <!--
       Map element blocks to physics blocks
   -->
   <ParameterList name="Block ID to Physics ID Mapping">
@@ -162,6 +175,9 @@
       <ParameterList name="local_time_step_size">
         <Parameter name="Type"  type="string" value="IncompressibleLocalTimeStepSize"/>
       </ParameterList> <!--local_time_step_size-->
+      <ParameterList name="aerodynamic_forces">
+        <Parameter name="Type"  type="string" value="IncompressibleLiftDrag"/>
+      </ParameterList> <!--aerodynamic_forces-->
     </ParameterList> <!--fluids-->
   </ParameterList> <!--Closure Models-->
 
