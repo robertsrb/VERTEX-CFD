@@ -9,8 +9,7 @@
 #include <cassert>
 
 #if defined(__cplusplus)
-extern "C"
-{
+extern "C" {
 #endif /* __cplusplus */
 
 /*

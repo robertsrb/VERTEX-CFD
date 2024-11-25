@@ -99,7 +99,7 @@ void runLinearTest1d()
     EXPECT_TRUE(result);
     EXPECT_NEAR(
         Sacado::ScalarValue<scalar_type>::eval(x(0)), -0.5, nonlinear_tol);
-} // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+}
 
 //---------------------------------------------------------------------------//
 TEST(NonlinearSolver, linear_1_residual)
@@ -153,7 +153,7 @@ void runQuadraticTest1d()
     EXPECT_TRUE(result);
     EXPECT_NEAR(
         Sacado::ScalarValue<scalar_type>::eval(x(0)), -1.0, nonlinear_tol);
-} // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+}
 
 //---------------------------------------------------------------------------//
 TEST(NonlinearSolver, quadratic_1_residual)
@@ -198,7 +198,7 @@ void runLinearTest2d()
         Sacado::ScalarValue<scalar_type>::eval(x(0)), 0.125, nonlinear_tol);
     EXPECT_NEAR(
         Sacado::ScalarValue<scalar_type>::eval(x(1)), 0.25, nonlinear_tol);
-} // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+}
 
 //---------------------------------------------------------------------------//
 TEST(NonlinearSolver, linear_2_residual)
@@ -247,7 +247,7 @@ void runQuadraticTest2d()
     EXPECT_NEAR(Sacado::ScalarValue<scalar_type>::eval(x(1)),
                 0.45339765151640377,
                 nonlinear_tol);
-} // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+}
 
 //---------------------------------------------------------------------------//
 TEST(NonlinearSolver, quadratic_2_residual)
@@ -296,7 +296,7 @@ void runLinearTest3d()
         Sacado::ScalarValue<scalar_type>::eval(x(1)), 2.0, nonlinear_tol);
     EXPECT_NEAR(
         Sacado::ScalarValue<scalar_type>::eval(x(2)), 2.0, nonlinear_tol);
-} // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+}
 
 //---------------------------------------------------------------------------//
 TEST(NonlinearSolver, linear_3_residual)
@@ -350,7 +350,7 @@ void runQuadraticTest3d()
     EXPECT_NEAR(Sacado::ScalarValue<scalar_type>::eval(x(2)),
                 2.8014721905507973,
                 nonlinear_tol);
-} // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+}
 
 //---------------------------------------------------------------------------//
 TEST(NonlinearSolver, quadratic_3_residual)
@@ -379,7 +379,7 @@ void failMaxIterTest()
     auto result = solve(
         std::integral_constant<std::size_t, Dim>{}, x, Func{}, nonlinear_tol, 1);
     EXPECT_FALSE(result);
-} // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+}
 
 //---------------------------------------------------------------------------//
 TEST(NonlinearSolver, fail_max_iter_residual)
@@ -428,7 +428,7 @@ void runDegenerateTest()
                         nonlinear_tol,
                         nonlinear_max_iter);
     EXPECT_FALSE(result);
-} // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
+}
 
 //---------------------------------------------------------------------------//
 TEST(NonlinearSolver, degenerate_jacobian_residual)

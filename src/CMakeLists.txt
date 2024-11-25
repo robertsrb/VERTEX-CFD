@@ -32,7 +32,6 @@ set(VERTEXCFD_CLOSUREMODEL_HEADERS
   closure_models/VertexCFD_Closure_WallDistance.hpp
   closure_models/VertexCFD_Closure_VectorFieldDivergence.hpp
   closure_models/VertexCFD_Closure_ConstantScalarField.hpp
-  incompressible_lsvof_solver/closure_models/VertexCFD_Closure_IncompressibleLSVOFConvectiveFlux.hpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleBuoyancySource.hpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleConvectiveFlux.hpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleLiftDrag.hpp
@@ -106,7 +105,6 @@ set(VERTEXCFD_CLOSUREMODEL_SOURCES
   closure_models/VertexCFD_ClosureModelFactory_Jacobian3d.cpp
   closure_models/VertexCFD_ClosureModelFactory_Tangent2d.cpp
   closure_models/VertexCFD_ClosureModelFactory_Tangent3d.cpp
-  incompressible_lsvof_solver/closure_models/VertexCFD_Closure_IncompressibleLSVOFConvectiveFlux.cpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleBuoyancySource.cpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleConvectiveFlux.cpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleLiftDrag.cpp
@@ -499,8 +497,6 @@ if(VertexCFD_ENABLE_TESTING)
   add_subdirectory(incompressible_solver/closure_models/unit_test)
   add_subdirectory(incompressible_solver/initial_conditions/unit_test)
   add_subdirectory(incompressible_solver/fluid_properties/unit_test)
-  # Incompressible LSVOF flow
-  add_subdirectory(incompressible_lsvof_solver/closure_models/unit_test)
   # Turbulence models
   add_subdirectory(turbulence_models/closure_models/unit_test)
   add_subdirectory(turbulence_models/boundary_conditions/unit_test)

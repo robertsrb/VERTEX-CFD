@@ -3,6 +3,10 @@
 
 #include "VertexCFD_TempusTimeStepControl_GlobalCFL.hpp"
 
+#include <Teuchos_ParameterList.hpp>
+#include <Teuchos_RCP.hpp>
+#include <Teuchos_StandardParameterEntryValidators.hpp>
+
 #include <algorithm>
 #include <string>
 
@@ -118,12 +122,7 @@ void GlobalCFL<Scalar>::setNextTimeStep(
 
     // If it is out of the bounds specified by the user then restrict it
     // before setting it.
-    const int dt_index = working_state->getIndex() - 1;
-    if (dt_index == 0 && tsc.getInitTimeStep() != tsc.getMinTimeStep())
-    {
-        dt = tsc.getInitTimeStep();
-    }
-    else if (dt < tsc.getMinTimeStep())
+    if (dt < tsc.getMinTimeStep())
     {
         dt = tsc.getMinTimeStep();
     }

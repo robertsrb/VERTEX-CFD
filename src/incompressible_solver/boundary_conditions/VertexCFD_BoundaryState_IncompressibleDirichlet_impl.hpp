@@ -37,8 +37,8 @@ IncompressibleDirichlet<EvalType, Traits, NumSpaceDim>::IncompressibleDirichlet(
     // f(t) = a * t + b for each variable
     _time_init = bc_params.isType<double>("Time Initial")
                      ? bc_params.get<double>(
-                           "Time "
-                           "Initial")
+                         "Time "
+                         "Initial")
                      : 0.0;
     _time_final = bc_params.isType<double>("Time Final")
                       ? bc_params.get<double>("Time Final")

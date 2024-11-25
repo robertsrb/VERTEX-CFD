@@ -36,7 +36,7 @@ class GlobalCFL : virtual public Strategy<Scalar>
         Tempus::Status& integrator_status) override;
 
   private:
-    enum class CflTransitionType
+    enum CflTransitionType
     {
         steps,
         time

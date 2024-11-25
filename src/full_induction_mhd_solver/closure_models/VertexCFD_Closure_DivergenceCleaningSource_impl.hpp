@@ -16,7 +16,7 @@ template<class EvalType, class Traits, int NumSpaceDim>
 DivergenceCleaningSource<EvalType, Traits, NumSpaceDim>::DivergenceCleaningSource(
     const panzer::IntegrationRule& ir)
     : _div_cleaning_potential_source(
-          "DIV_CLEANING_SOURCE_magnetic_correction_potential", ir.dl_scalar)
+        "DIV_CLEANING_SOURCE_magnetic_correction_potential", ir.dl_scalar)
     , _grad_scalar_magnetic_potential("GRAD_scalar_magnetic_potential",
                                       ir.dl_vector)
 {

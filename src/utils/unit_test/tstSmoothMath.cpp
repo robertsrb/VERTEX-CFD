@@ -1,4 +1,4 @@
-#include <VertexCFD_Utils_SmoothMath.hpp>
+#include "VertexCFD_Utils_SmoothMath.hpp"
 
 #include <Phalanx_KokkosDeviceTypes.hpp>
 
@@ -597,12 +597,12 @@ void normTest()
     sfad_3d_view vec_sfad_3d("vec_dfad_3d");
 
     // Create host mirror views for initialization
-    auto vec_dbl_2d_host = Kokkos::create_mirror_view(vec_dbl_2d);
-    auto vec_dbl_3d_host = Kokkos::create_mirror_view(vec_dbl_3d);
-    auto vec_dfad_2d_host = Kokkos::create_mirror_view(vec_dfad_2d);
-    auto vec_dfad_3d_host = Kokkos::create_mirror_view(vec_dfad_3d);
-    auto vec_sfad_2d_host = Kokkos::create_mirror_view(vec_sfad_2d);
-    auto vec_sfad_3d_host = Kokkos::create_mirror_view(vec_sfad_3d);
+    auto vec_dbl_2d_host = Kokkos::create_mirror(vec_dbl_2d);
+    auto vec_dbl_3d_host = Kokkos::create_mirror(vec_dbl_3d);
+    auto vec_dfad_2d_host = Kokkos::create_mirror(vec_dfad_2d);
+    auto vec_dfad_3d_host = Kokkos::create_mirror(vec_dfad_3d);
+    auto vec_sfad_2d_host = Kokkos::create_mirror(vec_sfad_2d);
+    auto vec_sfad_3d_host = Kokkos::create_mirror(vec_sfad_3d);
 
     // Initialize the vectors
     vec_dbl_2d_host(0) = 0.25;
@@ -642,16 +642,6 @@ void normTest()
     dfad_results_view dfad_2d_results("2d_dfad_results", num_dfad_result, 3);
     dfad_results_view dfad_3d_results("3d_dfad_results", num_dfad_result, 4);
 
-    // Intialize the dfad-type results views
-    for (int i = 0; i < num_dfad_result; ++i)
-    {
-        dfad_2d_results(i) = 0.0;
-        dfad_2d_results(i).diff(0, 2);
-
-        dfad_3d_results(i) = 0.0;
-        dfad_3d_results(i).diff(0, 3);
-    }
-
     sfad_2d_results_view sfad_2d_results("2d_sfad_results");
     sfad_3d_results_view sfad_3d_results("3d_sfad_results");
 
@@ -690,10 +680,10 @@ void normTest()
 
     // Kokkos create_mirror_view_and_copy gives an error for DFAD types
     // when node type is CUDA. Use two-step copy for these Views.
-    auto dfad_2d_host = Kokkos::create_mirror(dfad_2d_results);
-    Kokkos::deep_copy(dfad_2d_host, dfad_2d_results);
-    auto dfad_3d_host = Kokkos::create_mirror(dfad_3d_results);
-    Kokkos::deep_copy(dfad_3d_host, dfad_3d_results);
+    auto dfad_2d_host = Kokkos::create_mirror_view_and_copy(
+        Kokkos::HostSpace{}, dfad_2d_results);
+    auto dfad_3d_host = Kokkos::create_mirror_view_and_copy(
+        Kokkos::HostSpace{}, dfad_3d_results);
 
     EXPECT_DOUBLE_EQ(0.30009331881932994, dbl_host(0));
     EXPECT_DOUBLE_EQ(0.545028, dbl_host(1));
@@ -778,18 +768,18 @@ void metricNormTest()
 
     // Kokkos create_mirror_view_and_copy gives an error for DFAD types
     // when node type is CUDA. Use two-step copy for these Views.
-    auto vec_dfad_2d_host = Kokkos::create_mirror(vec_dfad_2d);
-    Kokkos::deep_copy(vec_dfad_2d_host, vec_dfad_2d);
-    auto vec_dfad_3d_host = Kokkos::create_mirror(vec_dfad_3d);
-    Kokkos::deep_copy(vec_dfad_3d_host, vec_dfad_3d);
-    auto identity_dfad_2d_host = Kokkos::create_mirror(identity_dfad_2d);
-    Kokkos::deep_copy(identity_dfad_2d_host, identity_dfad_2d);
-    auto identity_dfad_3d_host = Kokkos::create_mirror(identity_dfad_3d);
-    Kokkos::deep_copy(identity_dfad_3d_host, identity_dfad_3d);
-    auto metric_dfad_2d_host = Kokkos::create_mirror(metric_dfad_2d);
-    Kokkos::deep_copy(metric_dfad_2d_host, metric_dfad_2d);
-    auto metric_dfad_3d_host = Kokkos::create_mirror(metric_dfad_3d);
-    Kokkos::deep_copy(metric_dfad_3d_host, metric_dfad_3d);
+    auto vec_dfad_2d_host = Kokkos::create_mirror_view_and_copy(
+        Kokkos::HostSpace{}, vec_dfad_2d);
+    auto vec_dfad_3d_host = Kokkos::create_mirror_view_and_copy(
+        Kokkos::HostSpace{}, vec_dfad_3d);
+    auto identity_dfad_2d_host = Kokkos::create_mirror_view_and_copy(
+        Kokkos::HostSpace{}, identity_dfad_2d);
+    auto identity_dfad_3d_host = Kokkos::create_mirror_view_and_copy(
+        Kokkos::HostSpace{}, identity_dfad_3d);
+    auto metric_dfad_2d_host = Kokkos::create_mirror_view_and_copy(
+        Kokkos::HostSpace{}, metric_dfad_2d);
+    auto metric_dfad_3d_host = Kokkos::create_mirror_view_and_copy(
+        Kokkos::HostSpace{}, metric_dfad_3d);
 
     // Identity metrics for 2d and 3d
     for (int i = 0; i < 2; ++i)
@@ -866,16 +856,6 @@ void metricNormTest()
     Kokkos::deep_copy(metric_dfad_2d, metric_dfad_2d_host);
     Kokkos::deep_copy(metric_dfad_3d, metric_dfad_3d_host);
 
-    // Intialize the dfad-type results views
-    for (int i = 0; i < num_dfad_result; ++i)
-    {
-        dfad_2d_result(i) = 0.0;
-        dfad_2d_result(i).diff(0, 2);
-
-        dfad_3d_result(i) = 0.0;
-        dfad_3d_result(i).diff(0, 3);
-    }
-
     // Tolerance
     const double tol = 1.0;
 
@@ -919,10 +899,10 @@ void metricNormTest()
 
     // Kokkos create_mirror_view_and_copy gives an error for DFAD types
     // when node type is CUDA. Use two-step copy for these Views.
-    auto dfad_2d_host = Kokkos::create_mirror(dfad_2d_result);
-    Kokkos::deep_copy(dfad_2d_host, dfad_2d_result);
-    auto dfad_3d_host = Kokkos::create_mirror(dfad_3d_result);
-    Kokkos::deep_copy(dfad_3d_host, dfad_3d_result);
+    auto dfad_2d_host = Kokkos::create_mirror_view_and_copy(
+        Kokkos::HostSpace{}, dfad_2d_result);
+    auto dfad_3d_host = Kokkos::create_mirror_view_and_copy(
+        Kokkos::HostSpace{}, dfad_3d_result);
 
     EXPECT_DOUBLE_EQ(0.300093318819329935, dfad_2d_host(0).val());
     EXPECT_DOUBLE_EQ(0.833074194999028128, dfad_2d_host(0).fastAccessDx(0));

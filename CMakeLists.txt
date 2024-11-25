@@ -46,13 +46,11 @@ find_package(YAPF)
 find_package(MPI REQUIRED)
 
 find_package(Trilinos REQUIRED)
-if (Trilinos_VERSION VERSION_LESS 13 OR Trilinos_VERSION VERSION_GREATER_EQUAL 15)
+if (Trilinos_VERSION VERSION_LESS 13 OR Trilinos_VERSION VERSION_GREATER_EQUAL 17)
     message(FATAL_ERROR "Incompatible Trilinos version ${Trilinos_VERSION}. Only Trilinos versions 13 and 14 are supported.")
 endif ()
 
 find_package(Python COMPONENTS Interpreter Development.Module)
-
-find_package(pybind11)
 
 if (VertexCFD_ENABLE_SUPERLU)
   find_package(SuperLU_dist REQUIRED)

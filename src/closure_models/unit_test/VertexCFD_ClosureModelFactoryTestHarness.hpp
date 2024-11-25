@@ -110,8 +110,10 @@ struct ClosureModelFactoryTestFixture
         // Make sure the factory returned something.
         ASSERT_FALSE(evaluators.is_null());
 
-        // The factory should return a single evaluator.
+        // The factory should return the given number of evaluators.
         ASSERT_EQ(num_evaluators, evaluators->size());
+
+        // Check evaluator at the given index
         auto eval = evaluators->at(eval_index);
 
         // The evaluator should be castable to the derived evaluator type.

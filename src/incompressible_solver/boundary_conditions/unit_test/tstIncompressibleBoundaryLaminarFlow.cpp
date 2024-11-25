@@ -117,9 +117,13 @@ void testEval(const bool build_temp_equ, const ContinuityModel continuity_model)
     }
 
     // Set non-trivial values for quadrature points
-    test_fixture.int_values->ip_coordinates(0, 0, 1) = 0.7375;
+    auto ip_coord_view
+        = test_fixture.int_values->ip_coordinates.get_static_view();
+    auto ip_coord_mirror = Kokkos::create_mirror(ip_coord_view);
+    ip_coord_mirror(0, 0, 1) = 0.7375;
     if (num_space_dim == 3)
-        test_fixture.int_values->ip_coordinates(0, 0, 2) = 0.9775;
+        ip_coord_mirror(0, 0, 2) = 0.9775;
+    Kokkos::deep_copy(ip_coord_view, ip_coord_mirror);
 
     // Create dependencies
     double nanval = std::numeric_limits<double>::quiet_NaN();
