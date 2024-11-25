@@ -49,10 +49,9 @@ void GlobalTimeStep<Scalar>::setNextTimeStep(
     // Get time step index (1-based) and compute linear weight
     const auto dt_index = working_state->getIndex() - 1;
     const auto wt
-        = _dt_transition_steps > 0
-              ? std::min(static_cast<double>(dt_index) / _dt_transition_steps,
-                         1.0)
-              : 1.0;
+        = _dt_transition_steps > 0 ? std::min(
+              static_cast<double>(dt_index) / _dt_transition_steps, 1.0)
+                                   : 1.0;
 
     const double dt_init
         = std::max(tsc.getMinTimeStep(), tsc.getInitTimeStep());

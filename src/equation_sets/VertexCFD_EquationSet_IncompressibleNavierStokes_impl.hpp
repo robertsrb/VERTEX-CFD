@@ -90,14 +90,13 @@ IncompressibleNavierStokes<EvalType>::IncompressibleNavierStokes(
                          false,
                          "Induction equation constant source boolean");
 
-    const auto turbulence_validator = Teuchos::rcp(
-        new Teuchos::StringToIntegralParameterEntryValidator<short>(
-            Teuchos::tuple<std::string>("No Turbulence Model",
-                                        "Spalart-Allmaras",
-                                        "Standard K-Epsilon",
-                                        "Realizable K-Epsilon",
-                                        "WALE"),
-            "Turbulence Model"));
+    const auto turbulence_validator = Teuchos::rcp(new Teuchos::StringValidator(
+        Teuchos::tuple<std::string>("No Turbulence Model",
+                                    "Spalart-Allmaras",
+                                    "Standard K-Epsilon",
+                                    "Realizable K-Epsilon",
+                                    "WALE")));
+
     valid_parameters.set("Turbulence Model",
                          "No Turbulence Model",
                          "Turbulence model choice",

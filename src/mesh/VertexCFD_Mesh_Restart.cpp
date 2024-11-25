@@ -424,8 +424,7 @@ RestartReader::RestartReader(const Teuchos::RCP<const Teuchos::Comm<int>>& comm,
                                                       "Name"))
 {
     // Get the MPI communicator.
-    auto mcomm = Teuchos::rcp_dynamic_cast<const Teuchos::MpiComm<int>>(comm);
-    MPI_Comm mpi_comm = Teuchos::getRawMpiComm(*mcomm);
+    MPI_Comm mpi_comm = Teuchos::getRawMpiComm(*comm);
 
     // Open the restart file.
     MPI_File restart_file;

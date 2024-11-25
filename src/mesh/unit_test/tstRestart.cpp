@@ -9,6 +9,7 @@
 #include <Panzer_STKConnManager.hpp>
 #include <Panzer_STK_SquareQuadMeshFactory.hpp>
 
+#include <Thyra_DefaultSpmdVector.hpp>
 #include <Thyra_TpetraThyraWrappers.hpp>
 #include <Thyra_VectorStdOps.hpp>
 

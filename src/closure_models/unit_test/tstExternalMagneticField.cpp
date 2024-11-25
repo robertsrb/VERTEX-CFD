@@ -29,10 +29,14 @@ void testEval(const int num_space_dim,
     // Set non-trivial quadrature points to avoid x = y
     if (ext_magn_type == ExtMagnType::toroidal)
     {
-        test_fixture.int_values->ip_coordinates(0, 0, 0) = 0.2;
-        test_fixture.int_values->ip_coordinates(0, 0, 1) = 0.3;
+        auto ip_coord_view
+            = test_fixture.int_values->ip_coordinates.get_static_view();
+        auto ip_coord_mirror = Kokkos::create_mirror(ip_coord_view);
+        ip_coord_mirror(0, 0, 0) = 0.2;
+        ip_coord_mirror(0, 0, 1) = 0.3;
         if (num_space_dim == 3)
-            test_fixture.int_values->ip_coordinates(0, 0, 2) = 1.0;
+            ip_coord_mirror(0, 0, 2) = 1.0;
+        Kokkos::deep_copy(ip_coord_view, ip_coord_mirror);
     }
 
     const auto& ir = *test_fixture.ir;
@@ -104,13 +108,13 @@ TEST(ConstantExternalMagneticField2D, Jacobian)
 }
 
 //-----------------------------------------------------------------//
-TEST(OneOverRadiusExternalMagneticField2D, Residual)
+TEST(ToroidalExternalMagneticField2D, Residual)
 {
     testEval<panzer::Traits::Residual>(2, ExtMagnType::toroidal);
 }
 
 //-----------------------------------------------------------------//
-TEST(OneOverRadiusExternalMagneticField2D, Jacobian)
+TEST(ToroidalExternalMagneticField2D, Jacobian)
 {
     testEval<panzer::Traits::Jacobian>(2, ExtMagnType::toroidal);
 }

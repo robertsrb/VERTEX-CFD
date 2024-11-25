@@ -151,8 +151,12 @@ void testEval(const Kokkos::Array<double, 3> time_values,
         = build_temp_equ ? 325 : std::numeric_limits<double>::quiet_NaN();
 
     // Set non-trivial quadrature points to avoid x = y
-    test_fixture.int_values->ip_coordinates(0, 0, 0) = 0.7375;
-    test_fixture.int_values->ip_coordinates(0, 0, 1) = 0.9775;
+    auto ip_coord_view
+        = test_fixture.int_values->ip_coordinates.get_static_view();
+    auto ip_coord_mirror = Kokkos::create_mirror(ip_coord_view);
+    ip_coord_mirror(0, 0, 0) = 0.7375;
+    ip_coord_mirror(0, 0, 1) = 0.9775;
+    Kokkos::deep_copy(ip_coord_view, ip_coord_mirror);
 
     // Initialize dependecy evaluator
     const auto dep_eval = Teuchos::rcp(new Dependencies<EvalType>(
