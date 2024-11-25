@@ -153,8 +153,6 @@ add_subdirectory(src)
 
 add_subdirectory(examples)
 
-file(COPY regression_test DESTINATION .)
-
 ##---------------------------------------------------------------------------##
 ## Package Configuration
 ##---------------------------------------------------------------------------##

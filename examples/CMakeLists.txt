@@ -39,8 +39,6 @@ set(REGRESSION_EXO_FILES
     mesh/incompressible/2d_concentric_convection.exo
     mesh/incompressible/turbulent_channel_mesh_one.exo
     mesh/incompressible/2d_tee_junction.exo
-    mesh/full_induction_mhd/ldc_bl_41x41_30deg.exo
-    mesh/full_induction_mhd/ldc_bl_81x81.exo
     )
 file(COPY ${REGRESSION_EXO_FILES} DESTINATION .)
 
