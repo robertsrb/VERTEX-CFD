@@ -5,4 +5,4 @@ VERTEX-CFD is a performance portable software package for computational fluid dy
 
 ## [GPU BUILD INSTRUCTIONS](docs/install-vertexcfd/install-vertexcfd-on-narsil-gpu.md)
 
-## [RUNNING CASES WITH VERTEX-CFD](docs/run-vertexcfd/Run-incompressible-channel.md)
+## [RUNNING CASES WITH VERTEX-CFD](docs/run-vertexcfd/run-incompressible-channel.md)
