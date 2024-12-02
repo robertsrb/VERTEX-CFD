@@ -311,7 +311,7 @@
         <Parameter name="Final Time"             type="double" value="20.0"/>
         <Parameter name="Final Time Index"       type="int"    value="10000"/>
         <Parameter name="Minimum Time Step"      type="double" value="5e-8"/>
-        <Parameter name="Initial Time Step"      type="double" value="5e-4"/>
+        <Parameter name="Initial Time Step"      type="double" value="5e-8"/>
         <Parameter name="Maximum Time Step"      type="double" value="5e-1"/>
         <Parameter name="Minimum Order"          type="int"    value="1"/>
         <Parameter name="Initial Order"          type="int"    value="1"/>
