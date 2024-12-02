@@ -9,5 +9,6 @@ VertexCFD_add_tests(
   TurbulenceFixed
   TurbulenceInletOutlet
   TurbulenceKEpsilonWallFunction
+  TurbulenceKOmegaWallResolved
   TurbulenceSymmetry
   )

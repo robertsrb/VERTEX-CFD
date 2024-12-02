@@ -51,6 +51,8 @@ struct Dependencies : public PHX::EvaluatorWithBaseImpl<panzer::Traits>,
     PHX::MDField<scalar_type, panzer::Cell, panzer::Point, panzer::Dim>
         _grad_lagrange_pressure;
 
+    PHX::MDField<scalar_type, panzer::Cell, panzer::Point, panzer::Dim> _normals;
+
     Dependencies(const panzer::IntegrationRule& ir,
                  const double u0,
                  const double u1,
@@ -68,12 +70,15 @@ struct Dependencies : public PHX::EvaluatorWithBaseImpl<panzer::Traits>,
         , _grad_velocity_2("GRAD_velocity_2", ir.dl_vector)
         , _grad_temperature("GRAD_temperature", ir.dl_vector)
         , _grad_lagrange_pressure("GRAD_lagrange_pressure", ir.dl_vector)
-
+        , _normals("Side Normal", ir.dl_vector)
     {
         this->addEvaluatedField(_lagrange_pressure);
         this->addEvaluatedField(_grad_velocity_0);
         this->addEvaluatedField(_grad_velocity_1);
         this->addEvaluatedField(_grad_velocity_2);
+
+        this->addEvaluatedField(_normals);
+
         if (_build_tmp_equ)
             this->addEvaluatedField(_grad_temperature);
         if (_continuity_model == ContinuityModel::EDAC)
@@ -81,7 +86,7 @@ struct Dependencies : public PHX::EvaluatorWithBaseImpl<panzer::Traits>,
         this->setName("Incompressible Laminar Flow Unit Test Dependencies");
     }
 
-    void evaluateFields(typename panzer::Traits::EvalData /**d**/) override
+    void evaluateFields(typename panzer::Traits::EvalData d) override
     {
         _lagrange_pressure.deep_copy(_u0 + _u1);
         _grad_velocity_0.deep_copy(_u0 * _u0);
@@ -91,6 +96,29 @@ struct Dependencies : public PHX::EvaluatorWithBaseImpl<panzer::Traits>,
             _grad_temperature.deep_copy(_u0 - _u1);
         if (_continuity_model == ContinuityModel::EDAC)
             _grad_lagrange_pressure.deep_copy(_u0 - _u1);
+
+        Kokkos::parallel_for(
+            "incompressible boundary laminar flow test dependencies",
+            Kokkos::RangePolicy<PHX::exec_space>(0, d.num_cells),
+            *this);
+    }
+
+    KOKKOS_INLINE_FUNCTION
+    void operator()(const int c) const
+    {
+        const int num_point = _lagrange_pressure.extent(1);
+        const int num_space_dim = _grad_velocity_0.extent(2);
+
+        for (int qp = 0; qp < num_point; ++qp)
+        {
+            // Set gradient and normal vectors
+            for (int d = 0; d < num_space_dim; ++d)
+            {
+                _normals(c, qp, d) = 0.0;
+                if (d == 0)
+                    _normals(c, qp, d) = -1.0;
+            }
+        }
     }
 };
 
@@ -117,12 +145,13 @@ void testEval(const bool build_temp_equ, const ContinuityModel continuity_model)
     }
 
     // Set non-trivial values for quadrature points
+    test_fixture.int_values->ip_coordinates(0, 0, 0) = 0.0;
     test_fixture.int_values->ip_coordinates(0, 0, 1) = 0.7375;
     if (num_space_dim == 3)
         test_fixture.int_values->ip_coordinates(0, 0, 2) = 0.9775;
 
     // Create dependencies
-    double nanval = std::numeric_limits<double>::quiet_NaN();
+    const double nanval = std::numeric_limits<double>::quiet_NaN();
     const double u0 = 0.2;
     const double u1 = 0.3;
     const double u2 = num_space_dim == 3 ? 0.4 : nanval;
@@ -146,8 +175,16 @@ void testEval(const bool build_temp_equ, const ContinuityModel continuity_model)
 
     // Create the param list to initialize the evaluator
     Teuchos::ParameterList bc_params;
-    bc_params.set("Minimum height", -2.0);
-    bc_params.set("Maximum height", 2.2);
+    Teuchos::Array<double> origin_coord(num_space_dim);
+    origin_coord[0] = 0.0;
+    origin_coord[1] = 0.1;
+    if (num_space_dim == 3)
+    {
+        origin_coord[2] = 0.0;
+    }
+
+    bc_params.set("Origin Coordinates", origin_coord);
+    bc_params.set("Characteristic Radius", 2.1);
     bc_params.set("Average velocity", 3.0);
     const double T_bc = build_temp_equ ? 4.0 : nanval;
     if (build_temp_equ)
@@ -189,8 +226,8 @@ void testEval(const bool build_temp_equ, const ContinuityModel continuity_model)
     // Evaluate boundary values.
     test_fixture.evaluate<EvalType>();
 
-    const double u_ref = num_space_dim == 2 ? 3.944993622448979
-                                            : 3.9599829931972788;
+    const double u_ref = num_space_dim == 2 ? 4.085299744897959
+                                            : 4.147057823129252;
 
     // Check boundary values.
     const auto boundary_phi_result = test_fixture.getTestFieldData<EvalType>(

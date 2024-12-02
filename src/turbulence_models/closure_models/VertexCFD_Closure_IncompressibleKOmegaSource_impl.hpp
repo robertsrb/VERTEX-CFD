@@ -165,7 +165,7 @@ void IncompressibleKOmegaSource<EvalType, Traits, NumSpaceDim>::operator()(
                                        / (1.0 + 100.0 * chi_w);
 
             // Turbulent kinetic energy terms
-            _k_prod(cell, point) = _nu_t(cell, point) * Sij_Sij;
+            _k_prod(cell, point) = 2.0 * _nu_t(cell, point) * Sij_Sij;
 
             _k_dest(cell, point)
                 = -_beta_star * _turb_specific_dissipation_rate(cell, point)
@@ -183,7 +183,7 @@ void IncompressibleKOmegaSource<EvalType, Traits, NumSpaceDim>::operator()(
 
             // Turbulent dissipation rate terms
             _w_prod(cell, point)
-                = _gamma * _turb_specific_dissipation_rate(cell, point)
+                = _gamma * _turb_specific_dissipation_rate(cell, point) * 2.0
                   * _nu_t(cell, point) * Sij_Sij
                   / SmoothMath::max(
                       _turb_kinetic_energy(cell, point), max_tol, 0.0);

@@ -124,12 +124,12 @@ void testEval(const bool limited)
         = test_fixture.getTestFieldData<EvalType>(eval->_w_source);
 
     // Expected values
-    double exp_k_source = num_space_dim == 3 ? 2.57420625 : 1.13905;
-    const double exp_w_source = num_space_dim == 3 ? 44.524757611667624
-                                                   : 19.57778525141911;
+    double exp_k_source = num_space_dim == 3 ? 5.1781125 : 2.3078;
+    const double exp_w_source = num_space_dim == 3 ? 89.20778886166762
+                                                   : 39.63353525141912;
     if (limited)
     {
-        exp_k_source = num_space_dim == 3 ? 0.5643 : 0.5643;
+        exp_k_source = 0.5643;
     }
 
     // Assert values

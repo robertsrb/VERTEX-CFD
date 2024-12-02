@@ -48,7 +48,7 @@ for dim in dim_list:
         grad_k_grad_w += grad_k[i] * grad_w[i]
         for j in range(0, dim):
             S_ij = 0.5 * (grad_vel[i, j] + grad_vel[j, i])
-            P += nu_t * pow(S_ij, 2.0)
+            P += 2.0 * nu_t * pow(S_ij, 2.0)
             for l in range(0, dim):
                 chi_w += ((0.5 * (grad_vel[i, j] - grad_vel[j, i])) *
                           (0.5 * (grad_vel[j, l] - grad_vel[l, j])) *

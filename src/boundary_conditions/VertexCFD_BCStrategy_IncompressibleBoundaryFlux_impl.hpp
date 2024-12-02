@@ -133,6 +133,13 @@ void IncompressibleBoundaryFlux<EvalType, NumSpaceDim>::setup(
             _equ_dof_tm_pair.insert(
                 {"turb_dissipation_rate_equation", "turb_dissipation_rate"});
         }
+        else if (std::string::npos != _turbulence_model_name.find("K-Omega"))
+        {
+            _equ_dof_tm_pair.insert(
+                {"turb_kinetic_energy_equation", "turb_kinetic_energy"});
+            _equ_dof_tm_pair.insert({"turb_specific_dissipation_rate_equation",
+                                     "turb_specific_dissipation_rate"});
+        }
     }
 
     // Initialize equation names and variables for FIM

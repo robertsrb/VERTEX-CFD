@@ -10,9 +10,12 @@
 #include "turbulence_models/boundary_conditions/VertexCFD_BoundaryState_TurbulenceFixed.hpp"
 #include "turbulence_models/boundary_conditions/VertexCFD_BoundaryState_TurbulenceInletOutlet.hpp"
 #include "turbulence_models/boundary_conditions/VertexCFD_BoundaryState_TurbulenceKEpsilonWallFunction.hpp"
+#include "turbulence_models/boundary_conditions/VertexCFD_BoundaryState_TurbulenceKOmegaWallResolved.hpp"
 #include "turbulence_models/boundary_conditions/VertexCFD_BoundaryState_TurbulenceSymmetry.hpp"
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleKEpsilonDiffusivityCoefficient.hpp"
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleKEpsilonEddyViscosity.hpp"
+#include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleKOmegaDiffusivityCoefficient.hpp"
+#include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleKOmegaEddyViscosity.hpp"
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleRealizableKEpsilonEddyViscosity.hpp"
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleSpalartAllmarasDiffusivityCoefficient.hpp"
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleSpalartAllmarasEddyViscosity.hpp"
@@ -114,6 +117,29 @@ class TurbulenceBoundaryStateFactory
                             panzer::Traits>(ir));
                     evaluators.push_back(eddy_visc_op);
                 }
+            }
+            // K-Omega model family
+            else if (std::string::npos
+                     != _turbulence_model_name.find("K-Omega"))
+            {
+                // K-Omega turbulence variable names
+                turb_field_names_vct.push_back("turb_kinetic_energy");
+                turb_field_names_vct.push_back(
+                    "turb_specific_dissipation_rate");
+
+                // K-Omega closure models
+                const auto eval_coeff = Teuchos::rcp(
+                    new ClosureModel::IncompressibleKOmegaDiffusivityCoefficient<
+                        EvalType,
+                        panzer::Traits>(ir, fluid_prop, user_params));
+                evaluators.push_back(eval_coeff);
+
+                const auto eval_eddy = Teuchos::rcp(
+                    new ClosureModel::IncompressibleKOmegaEddyViscosity<
+                        EvalType,
+                        panzer::Traits,
+                        NumSpaceDim>(ir));
+                evaluators.push_back(eval_eddy);
             }
             // WALE algebraic LES model
             else if (std::string::npos != _turbulence_model_name.find("WALE"))
@@ -262,6 +288,16 @@ class TurbulenceBoundaryStateFactory
                 found_model = true;
             }
 
+            else if (bc_type == "K-Omega Wall-Resolved")
+            {
+                const auto state = Teuchos::rcp(
+                    new TurbulenceKOmegaWallResolved<EvalType, Traits>(
+                        ir, bc_params));
+                evaluators.push_back(state);
+
+                found_model = true;
+            }
+
             // Error message if model not found
             if (!found_model)
             {
@@ -273,6 +309,7 @@ class TurbulenceBoundaryStateFactory
                 msg += "Fixed,\n";
                 msg += "InletOutlet,\n";
                 msg += "K-Epsilon Wall Function,\n";
+                msg += "K-Omega Wall-Resolved,\n";
                 msg += "Symmetry\n";
                 msg += "\n";
                 throw std::runtime_error(msg);

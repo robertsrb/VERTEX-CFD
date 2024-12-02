@@ -9,6 +9,9 @@
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleKEpsilonDiffusivityCoefficient.hpp"
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleKEpsilonEddyViscosity.hpp"
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleKEpsilonSource.hpp"
+#include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleKOmegaDiffusivityCoefficient.hpp"
+#include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleKOmegaEddyViscosity.hpp"
+#include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleKOmegaSource.hpp"
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleRealizableKEpsilonEddyViscosity.hpp"
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleRealizableKEpsilonSource.hpp"
 #include "turbulence_models/closure_models/VertexCFD_Closure_IncompressibleSpalartAllmarasDiffusivityCoefficient.hpp"
@@ -79,6 +82,19 @@ void TurbulenceFactory<EvalType, NumSpaceDim>::buildClosureModel(
         epsilon_names_list.set("Equation Name",
                                "turb_dissipation_rate_equation");
         turb_names_list_vct.push_back(epsilon_names_list);
+    }
+    else if (std::string::npos != turbulence_model_name.find("K-Omega"))
+    {
+        Teuchos::ParameterList k_names_list;
+        k_names_list.set("Field Name", "turb_kinetic_energy");
+        k_names_list.set("Equation Name", "turb_kinetic_energy_equation");
+        turb_names_list_vct.push_back(k_names_list);
+
+        Teuchos::ParameterList omega_names_list;
+        omega_names_list.set("Field Name", "turb_specific_dissipation_rate");
+        omega_names_list.set("Equation Name",
+                             "turb_specific_dissipation_rate_equation");
+        turb_names_list_vct.push_back(omega_names_list);
     }
 
     // Add generic closure models for each variable in turbulence model
@@ -173,6 +189,26 @@ void TurbulenceFactory<EvalType, NumSpaceDim>::buildClosureModel(
                                                  num_space_dim>(*ir));
             evaluators->push_back(eval_source);
         }
+    }
+    // K-Omega model family closure models
+    else if (std::string::npos != turbulence_model_name.find("K-Omega"))
+    {
+        auto eval_coeff = Teuchos::rcp(
+            new IncompressibleKOmegaDiffusivityCoefficient<EvalType,
+                                                           panzer::Traits>(
+                *ir, incompressible_fluidprop_params, user_params));
+        evaluators->push_back(eval_coeff);
+
+        auto eval_source = Teuchos::rcp(
+            new IncompressibleKOmegaSource<EvalType, panzer::Traits, num_space_dim>(
+                *ir, user_params));
+        evaluators->push_back(eval_source);
+
+        auto eval_eddy = Teuchos::rcp(
+            new IncompressibleKOmegaEddyViscosity<EvalType,
+                                                  panzer::Traits,
+                                                  num_space_dim>(*ir));
+        evaluators->push_back(eval_eddy);
     }
     // WALE algebraic LES model
     else if (std::string::npos != turbulence_model_name.find("WALE"))

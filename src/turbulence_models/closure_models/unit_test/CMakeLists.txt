@@ -17,5 +17,6 @@ VertexCFD_add_tests(
   IncompressibleKOmegaSource
   IncompressibleRealizableKEpsilonEddyViscosity
   IncompressibleRealizableKEpsilonSource
+  IncompressibleSSTDiffusivityCoefficient
   IncompressibleWALEEddyViscosity
   )

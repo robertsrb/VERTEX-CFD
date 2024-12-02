@@ -26,14 +26,28 @@ IncompressibleLaminarFlow<EvalType, Traits, NumSpaceDim>::IncompressibleLaminarF
     , _lagrange_pressure("lagrange_pressure", ir.dl_scalar)
     , _grad_lagrange_pressure("GRAD_lagrange_pressure", ir.dl_vector)
     , _grad_temperature("GRAD_temperature", ir.dl_vector)
+    , _normals("Side Normal", ir.dl_vector)
     , _solve_temp(fluid_prop.solveTemperature())
     , _continuity_model_name(continuity_model_name)
-    , _min(bc_params.get<double>("Minimum height"))
-    , _max(bc_params.get<double>("Maximum height"))
+    , _radius(bc_params.get<double>("Characteristic Radius"))
     , _vel_avg(bc_params.get<double>("Average velocity"))
     , _vel_max(num_space_dim == 2 ? 3.0 / 2.0 * _vel_avg : 2.0 * _vel_avg)
     , _T_bc(std::numeric_limits<double>::quiet_NaN())
 {
+    // Get origin coordinates if specified
+    if (bc_params.isType<Teuchos::Array<double>>("Origin Coordinates"))
+    {
+        const auto origin_coord
+            = bc_params.get<Teuchos::Array<double>>("Origin Coordinates");
+        for (int dim = 0; dim < num_space_dim; ++dim)
+            _origin_coord[dim] = origin_coord[dim];
+    }
+    else
+    {
+        for (int dim = 0; dim < num_space_dim; ++dim)
+            _origin_coord[dim] = 0.0;
+    }
+
     if (continuity_model_name == "AC")
     {
         _continuity_model = ContinuityModel::AC;
@@ -62,6 +76,7 @@ IncompressibleLaminarFlow<EvalType, Traits, NumSpaceDim>::IncompressibleLaminarF
                                    "BOUNDARY_GRAD_velocity_");
 
     // Add dependent fields
+    this->addDependentField(_normals);
     this->addDependentField(_lagrange_pressure);
     if (_continuity_model == ContinuityModel::EDAC)
         this->addDependentField(_grad_lagrange_pressure);
@@ -104,26 +119,15 @@ void IncompressibleLaminarFlow<EvalType, Traits, NumSpaceDim>::operator()(
 
     Kokkos::parallel_for(
         Kokkos::TeamThreadRange(team, 0, num_point), [&](const int point) {
+            using std::pow;
             // Set lagrange pressure
             _boundary_lagrange_pressure(cell, point)
                 = _lagrange_pressure(cell, point);
 
-            // Set boundary values for velocity components
-            double r2 = _ip_coords(cell, point, 1) * _ip_coords(cell, point, 1);
-            const double H = 0.5 * (_max - _min);
-            _boundary_velocity[1](cell, point) = 0.0;
-            if (num_grad_dim == 3)
-            {
-                r2 += _ip_coords(cell, point, 2) * _ip_coords(cell, point, 2);
-                _boundary_velocity[2](cell, point) = 0.0;
-            }
-            _boundary_velocity[0](cell, point) = _vel_max
-                                                 * (1.0 - r2 / (H * H));
-
             if (_solve_temp)
                 _boundary_temperature(cell, point) = _T_bc;
 
-            // Set gradients at boundaries.
+            // Set velocity and gradients at boundaries.
             for (int d = 0; d < num_grad_dim; ++d)
             {
                 if (_continuity_model == ContinuityModel::EDAC)
@@ -134,6 +138,20 @@ void IncompressibleLaminarFlow<EvalType, Traits, NumSpaceDim>::operator()(
 
                 for (int vel_dim = 0; vel_dim < num_space_dim; ++vel_dim)
                 {
+                    // Calculate boundary velocity and gradient.
+                    // Negative wall normal is used to show inward direction.
+                    _boundary_velocity[vel_dim](cell, point) = 0.0;
+                    for (int dim = 0; dim < num_space_dim; ++dim)
+                    {
+                        _boundary_velocity[vel_dim](cell, point)
+                            -= _vel_max * _normals(cell, point, vel_dim)
+                               * (1.0 / num_space_dim
+                                  - pow(_ip_coords(cell, point, dim)
+                                            - _origin_coord[dim],
+                                        2)
+                                        / (_radius * _radius));
+                    }
+
                     _boundary_grad_velocity[vel_dim](cell, point, d)
                         = _grad_velocity[vel_dim](cell, point, d);
                 }
