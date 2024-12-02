@@ -12,6 +12,7 @@ set(REGRESSION_XML_FILES
     inputs/incompressible/incompressible_2d_tee_junction.xml
     inputs/incompressible/incompressible_2d_planar_poiseuille.xml
     inputs/incompressible/incompressible_2d_planar_poiseuille_cuda.xml
+    inputs/incompressible/incompressible_2d_k_omega_turbulence_channel.xml
     inputs/incompressible/incompressible_2d_standard_k_epsilon_turbulence_channel.xml
     inputs/incompressible/incompressible_2d_realizable_k_epsilon_turbulence_channel.xml
     inputs/incompressible/incompressible_2d_spalart_allmaras_turbulence_channel.xml
@@ -38,6 +39,7 @@ set(REGRESSION_EXO_FILES
     mesh/incompressible/2d_concentric_cylinders_rad80.exo
     mesh/incompressible/2d_concentric_convection.exo
     mesh/incompressible/turbulent_channel_mesh_one.exo
+    mesh/incompressible/2d-short-channel-h-1-ret-180-yp-0-10.exo
     mesh/incompressible/2d_tee_junction.exo
     mesh/full_induction_mhd/ldc_bl_41x41_30deg.exo
     mesh/full_induction_mhd/ldc_bl_81x81.exo

@@ -104,8 +104,8 @@
       <ParameterList name="Data">
         <Parameter name="Type" type="string" value="Laminar Flow"/>
         <Parameter name="Average velocity" type="double" value="1.0"/>
-        <Parameter name="Maximum height" type="double" value="0.25"/>
-        <Parameter name="Minimum height" type="double" value="-0.25"/>
+        <Parameter name="Characteristic Radius" type="double" value="0.25"/>
+        <Parameter name="Origin Coordinates" type="Array(double)" value="{0.0, 0.0}"/>
       </ParameterList> <!--Data-->
     </ParameterList> <!--(Unnamed)-->
 
