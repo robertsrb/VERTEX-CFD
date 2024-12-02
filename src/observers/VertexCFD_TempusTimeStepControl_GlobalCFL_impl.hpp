@@ -122,7 +122,12 @@ void GlobalCFL<Scalar>::setNextTimeStep(
 
     // If it is out of the bounds specified by the user then restrict it
     // before setting it.
-    if (dt < tsc.getMinTimeStep())
+    const int dt_index = working_state->getIndex() - 1;
+    if (dt_index == 0 && tsc.getInitTimeStep() != tsc.getMinTimeStep())
+    {
+        dt = tsc.getInitTimeStep();
+    }
+    else if (dt < tsc.getMinTimeStep())
     {
         dt = tsc.getMinTimeStep();
     }

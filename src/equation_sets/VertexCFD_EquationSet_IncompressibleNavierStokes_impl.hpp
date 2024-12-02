@@ -95,6 +95,7 @@ IncompressibleNavierStokes<EvalType>::IncompressibleNavierStokes(
                                     "Spalart-Allmaras",
                                     "Standard K-Epsilon",
                                     "Realizable K-Epsilon",
+                                    "K-Omega",
                                     "WALE")));
 
     valid_parameters.set("Turbulence Model",
@@ -175,6 +176,13 @@ IncompressibleNavierStokes<EvalType>::IncompressibleNavierStokes(
             {"turb_kinetic_energy_equation", "turb_kinetic_energy"});
         _equ_dof_tm_pair.insert(
             {"turb_dissipation_rate_equation", "turb_dissipation_rate"});
+    }
+    else if (std::string::npos != _turbulence_model.find("K-Omega"))
+    {
+        _equ_dof_tm_pair.insert(
+            {"turb_kinetic_energy_equation", "turb_kinetic_energy"});
+        _equ_dof_tm_pair.insert({"turb_specific_dissipation_rate_equation",
+                                 "turb_specific_dissipation_rate"});
     }
 
     // Initialize equation names and variables names for full induction model

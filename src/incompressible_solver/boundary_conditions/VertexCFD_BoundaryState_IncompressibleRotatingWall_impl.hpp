@@ -51,8 +51,8 @@ IncompressibleRotatingWall<EvalType, Traits, NumSpaceDim>::IncompressibleRotatin
                                            "Angular Velocity "
                                            "Initial")
                                            ? bc_params.get<double>(
-                                               "Angular Velocity "
-                                               "Initial")
+                                                 "Angular Velocity "
+                                                 "Initial")
                                            : angular_velocity_final;
     const double dt = _time_final - _time_init;
     _a_vel = (angular_velocity_final - angular_velocity_init) / dt;

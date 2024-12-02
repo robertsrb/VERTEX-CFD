@@ -73,6 +73,9 @@ class IncompressibleLaminarFlow
     PHX::MDField<const scalar_type, panzer::Cell, panzer::Point, panzer::Dim>
         _grad_temperature;
 
+    PHX::MDField<const scalar_type, panzer::Cell, panzer::Point, panzer::Dim>
+        _normals;
+
     Kokkos::Array<
         PHX::MDField<const scalar_type, panzer::Cell, panzer::Point, panzer::Dim>,
         num_space_dim>
@@ -88,8 +91,8 @@ class IncompressibleLaminarFlow
     };
     ContinuityModel _continuity_model;
 
-    double _min;
-    double _max;
+    Kokkos::Array<double, num_space_dim> _origin_coord;
+    double _radius;
     double _vel_avg;
     double _vel_max;
     double _T_bc;

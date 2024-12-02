@@ -138,30 +138,6 @@ class IncompressibleBoundaryStateFactory
                         ir, fluid_prop, continuity_model_name));
                 found_model = true;
             }
-
-            if (bc_params.get<std::string>("Type") == "Velocity Wall Function")
-            {
-                state = Teuchos::rcp(
-                    new IncompressibleWallFunction<EvalType, Traits, num_space_dim>(
-                        ir, fluid_prop, continuity_model_name));
-                found_model = true;
-            }
-
-            if (bc_params.get<std::string>("Type") == "Velocity Wall Function")
-            {
-                state = Teuchos::rcp(
-                    new IncompressibleWallFunction<EvalType, Traits, num_space_dim>(
-                        ir, fluid_prop, continuity_model_name));
-                found_model = true;
-            }
-
-            if (bc_params.get<std::string>("Type") == "Velocity Wall Function")
-            {
-                state = Teuchos::rcp(
-                    new IncompressibleWallFunction<EvalType, Traits, num_space_dim>(
-                        ir, fluid_prop, continuity_model_name));
-                found_model = true;
-            }
         }
 
         if (!found_model)

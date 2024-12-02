@@ -17,8 +17,8 @@ InductionResistiveFlux<EvalType, Traits, NumSpaceDim>::InductionResistiveFlux(
     const std::string& flux_prefix,
     const std::string& gradient_prefix)
     : _magnetic_correction_potential_flux(
-        flux_prefix + "RESISTIVE_FLUX_magnetic_correction_potential",
-        ir.dl_vector)
+          flux_prefix + "RESISTIVE_FLUX_magnetic_correction_potential",
+          ir.dl_vector)
     , _resistivity("resistivity", ir.dl_scalar)
     , _grad_resistivity("GRAD_resistivity", ir.dl_vector)
     , _variable_resistivity(mhd_props.variableResistivity())

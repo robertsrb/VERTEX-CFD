@@ -17,8 +17,8 @@ InductionConvectiveFlux<EvalType, Traits, NumSpaceDim>::InductionConvectiveFlux(
     const std::string& flux_prefix,
     const std::string& field_prefix)
     : _magnetic_correction_potential_flux(
-        flux_prefix + "CONVECTIVE_FLUX_magnetic_correction_potential",
-        ir.dl_vector)
+          flux_prefix + "CONVECTIVE_FLUX_magnetic_correction_potential",
+          ir.dl_vector)
     , _scalar_magnetic_potential(field_prefix + "scalar_magnetic_potential",
                                  ir.dl_scalar)
     , _magnetic_pressure("magnetic_pressure", ir.dl_scalar)

@@ -20,8 +20,8 @@ ElectricPotentialCrossProductFlux<EvalType, Traits, NumSpaceDim>::
         const std::string& flux_prefix,
         const std::string& field_prefix)
     : _electric_potential_flux(
-        flux_prefix + "ELECTRIC_POTENTIAL_FLUX_electric_potential_equation",
-        ir.dl_vector)
+          flux_prefix + "ELECTRIC_POTENTIAL_FLUX_electric_potential_equation",
+          ir.dl_vector)
     , _sigma(fluid_prop.constantElectricalConductivity())
 {
     // Evaluated fields
