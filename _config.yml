@@ -1,9 +1,9 @@
 # Site settings
 title: AdditiveFOAM
 description: AdditiveFOAM documentation
-baseurl: "/AdditiveFOAM"
+baseurl: "/VERTEX-CFD"
 url: "https://ORNL.github.io"
-repository: ORNL/AdditiveFOAM
+repository: ORNL/VERTEX-CFD
 
 permalink: pretty
 
@@ -24,13 +24,13 @@ logo: "https://raw.githubusercontent.com/ORNL-MDF/additivefoam-website-assets/ma
 
 # External navigation links
 nav_external_links:
-  - title: AdditiveFOAM on GitHub
-    url: "https://github.com/ORNL/AdditiveFOAM"
+  - title: VERTEX-CFD on GitHub
+    url: "https://github.com/ORNL/VERTEX-CFD"
 
 # Aux links for the upper right navigation
 aux_links:
   "AdditiveFOAM on GitHub":
-    - "https://github.com/ORNL/AdditiveFOAM"
+    - "https://github.com/ORNL/VERTEX-CFD"
 
 # Makes Aux links open in a new tab. Default is false
 aux_links_new_tab: false
