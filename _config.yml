@@ -1,6 +1,6 @@
-title: Minimal theme
+title: VERTEX-CFD
 logo: docs/figures/logo.png
-description: Minimal is a theme for GitHub Pages.
+description: VERTEX-CFD is a performance portable software package for computational fluid dynamics (CFD) simulations on CPU or GPU architectures.
 show_downloads: true
 google_analytics:
 theme: jekyll-theme-minimal
