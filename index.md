@@ -1,4 +1,4 @@
-# VERTEX-CFD
+# VERTEX-CFD README file
 VERTEX-CFD is a performance portable software package for computational fluid dynamics (CFD) simulations on CPU or GPU architectures, built upon the [Trilinos](https://trilinos.github.io/) numerical library.
 
 ## [CPU BUILD INSTRUCTIONS](docs/install-vertexcfd/install-vertexcfd-on-narsil-cpu.md)
@@ -7,4 +7,4 @@ VERTEX-CFD is a performance portable software package for computational fluid dy
 
 ## [RUNNING CASES WITH VERTEX-CFD](docs/run-vertexcfd/run-incompressible-channel.md)
 
-test
+test3
