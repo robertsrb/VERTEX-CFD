@@ -7,5 +7,4 @@ VERTEX-CFD is a performance portable software package for computational fluid dy
 
 ## [RUNNING CASES WITH VERTEX-CFD](run-vertexcfd/run-incompressible-channel.md)
 
-test4
 test5
