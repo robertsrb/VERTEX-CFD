@@ -25,6 +25,7 @@ We encourage you to contribute to AdditiveFOAM! Please check the [guidelines](ht
 - [Benjamin Stump](https://www.ornl.gov/staff-profile/benjamin-c-stump)
 - [Alex Plotkowski](https://www.ornl.gov/staff-profile/alex-j-plotkowski)
 - [Sam T. Reeve](https://www.ornl.gov/staff-profile/samuel-t-reeve)
+- [Sam T. Reeve](https://www.ornl.gov/staff-profile/samuel-t-reeve)
 
 
 ## Citing
