@@ -7,7 +7,7 @@ repository: ORNL/VERTEX-CFD
 
 permalink: pretty
 
-remote_theme: just-the-docs/just-the-docs
+theme: just-the-docs
 
 plugins:
   - jekyll-remote-theme
