@@ -122,14 +122,21 @@ class SidesetGeometry
             global_num_side,
             nodes_per_side,
             num_space_dim);
-        MPI_Allgatherv(local_sides.data(),
-                       local_sides.size(),
+
+        // Create host-side mirror for sides
+        auto local_sides_host = Kokkos::create_mirror_view(local_sides);
+        Kokkos::deep_copy(local_sides_host, local_sides);
+        auto global_sides_host = Kokkos::create_mirror_view(_global_sides);
+
+        MPI_Allgatherv(local_sides_host.data(),
+                       local_sides_host.size(),
                        MPI_DOUBLE,
-                       _global_sides.data(),
+                       global_sides_host.data(),
                        global_counts.data(),
                        receive_displacements.data(),
                        MPI_DOUBLE,
                        mpi_comm);
+        Kokkos::deep_copy(_global_sides, global_sides_host);
     }
 
     // Get the side topology.

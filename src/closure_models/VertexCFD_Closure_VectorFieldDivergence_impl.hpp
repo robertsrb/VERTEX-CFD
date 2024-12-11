@@ -42,7 +42,7 @@ void VectorFieldDivergence<EvalType, Traits, NumSpaceDim>::evaluateFields(
 {
     auto policy = panzer::HP::inst().teamPolicy<scalar_type, PHX::Device>(
         workset.num_cells);
-    Kokkos::parallel_for(policy, *this, this->getName());
+    Kokkos::parallel_for(this->getName(), policy, *this);
 }
 
 //---------------------------------------------------------------------------//

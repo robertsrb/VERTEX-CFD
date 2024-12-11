@@ -1,6 +1,10 @@
 #include "VertexCFD_LinearSolvers_LOWSFactoryBuilder.hpp"
 #include "VertexCFD_LinearSolvers_PreconditionerFactory.hpp"
 
+#ifdef VERTEXCFD_HAVE_HYPRE
+#include "VertexCFD_LinearSolvers_HyprePreconditionerFactory.hpp"
+#endif
+
 #include <PanzerCore_config.hpp>
 #include <Panzer_NodeType.hpp>
 #include <Stratimikos_DefaultLinearSolverBuilder.hpp>
@@ -53,6 +57,16 @@ LOWSFactoryBuilder::buildLOWS(Teuchos::RCP<Teuchos::ParameterList> params)
         builder.setPreconditioningStrategyFactory(
             Teuchos::abstractFactoryStd<Base, Impl>(), "VertexCFD");
     }
+
+#ifdef VERTEXCFD_HAVE_HYPRE
+    {
+        // Register HYPRE preconditioner factory with Stratimikos
+        using Base = Thyra::PreconditionerFactoryBase<double>;
+        using Impl = VertexCFD::LinearSolvers::HyprePreconditionerFactory;
+        builder.setPreconditioningStrategyFactory(
+            Teuchos::abstractFactoryStd<Base, Impl>(), "Hypre");
+    }
+#endif
 
     builder.setParameterList(params);
     Teuchos::RCP<Thyra::LinearOpWithSolveFactoryBase<double>> lowsFactory

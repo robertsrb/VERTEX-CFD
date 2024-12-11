@@ -40,7 +40,7 @@ WallDistance<EvalType, Traits, NumSpaceDim>::WallDistance(
                                                         wall_names);
     _topology = surfaces.topology();
     _key = _topology->getKey();
-    _sides = Kokkos::create_mirror_view(surfaces.sides());
+    _sides = surfaces.sides();
 
     _normals = Kokkos::View<double**, PHX::mem_space>(
         "normals", _sides.extent(0), num_space_dim);

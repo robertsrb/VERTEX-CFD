@@ -1,4 +1,5 @@
-#include <VertexCFD_EvaluatorTestHarness.hpp>
+#include "VertexCFD_EvaluatorTestHarness.hpp"
+#include "observers/VertexCFD_TempusObserver_WriteMatrix.hpp"
 
 #include <EpetraExt_CrsMatrixIn.h>
 #include <EpetraExt_MultiVectorIn.h>
@@ -11,7 +12,6 @@
 #include <Trilinos_version.h>
 
 #include <CDR_Model.hpp>
-#include <observers/VertexCFD_TempusObserver_WriteMatrix.hpp>
 
 //---------------------------------------------------------------------------//
 // TESTS

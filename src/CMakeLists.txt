@@ -405,6 +405,17 @@ if(VertexCFD_ENABLE_SUPERLU)
     )
 endif()
 
+if(VertexCFD_ENABLE_HYPRE)
+  list(APPEND VERTEXCFD_LINEARSOLVER_HEADERS
+    linear_solvers/VertexCFD_LinearSolvers_Hypre.hpp
+    linear_solvers/VertexCFD_LinearSolvers_HyprePreconditionerFactory.hpp
+    )
+  list(APPEND VERTEXCFD_LINEARSOLVER_SOURCES
+    linear_solvers/VertexCFD_LinearSolvers_Hypre.cpp
+    linear_solvers/VertexCFD_LinearSolvers_HyprePreconditionerFactory.cpp
+    )
+endif()
+
 set(VERTEXCFD_DRIVER_HEADERS
   drivers/VertexCFD_ExternalFieldsManager.hpp
   drivers/VertexCFD_InitialConditionManager.hpp
@@ -446,7 +457,12 @@ target_link_libraries(VertexCFD PUBLIC
 
 if (CMAKE_CUDA_COMPILER)
     target_link_libraries(VertexCFD PUBLIC CUDA::cusolver)
-endif ()
+  endif ()
+
+if( VertexCFD_ENABLE_HYPRE )
+  target_link_libraries(VertexCFD PUBLIC HYPRE::HYPRE HYPREDRV::HYPREDRV)
+endif()
+
 if(VertexCFD_ENABLE_SUPERLU)
     target_link_libraries(VertexCFD PUBLIC SuperLU_dist::SuperLU_dist)
 endif ()

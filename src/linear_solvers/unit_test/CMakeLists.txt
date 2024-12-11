@@ -1,3 +1,5 @@
+configure_file( VertexCFD_LinearSolverUnitTestConfig.hpp.cmakein VertexCFD_LinearSolverUnitTestConfig.hpp )
+
 set(TEST_HARNESS_DIR ${CMAKE_SOURCE_DIR}/src/test_harness)
 include(${TEST_HARNESS_DIR}/TestHarness.cmake)
 
@@ -14,3 +16,11 @@ if(${VERTEXCFD_KOKKOS_DEVICE_TYPE} STREQUAL "CUDA")
   )
 endif()
 
+if(VertexCFD_ENABLE_HYPRE)
+  VertexCFD_add_tests(
+    LIBS VertexCFD
+    NAMES
+    Hypre
+    HyprePreconditionerFactory
+    )
+endif()

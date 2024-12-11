@@ -47,7 +47,7 @@ macro(VertexCFD_add_tests)
             set(_test_name ${_target}_np_${_procs}_nt_${_threads})
             add_test(NAME ${_test_name} COMMAND
               ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} ${_procs} ${MPIEXEC_PREFLAGS}
-              ${_target} ${MPIEXEC_POSTFLAGS} ${gtest_args} --kokkos-threads=${_threads})
+              ${_target} ${MPIEXEC_POSTFLAGS} ${gtest_args} --kokkos-num-threads=${_threads})
             set_property(TEST ${_test_name} PROPERTY PROCESSORS ${_total_threads})
             set_property(TEST ${_test_name} PROPERTY ENVIRONMENT "OMP_NUM_THREADS=${_threads}")
           endforeach()
@@ -55,7 +55,7 @@ macro(VertexCFD_add_tests)
           set(_test_name ${_target}_np_${_procs})
           add_test(NAME ${_target}_np_${_procs} COMMAND
             ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} ${_procs} ${MPIEXEC_PREFLAGS}
-            ${_target} ${MPIEXEC_POSTFLAGS} ${gtest_args} --kokkos-threads=1)
+            ${_target} ${MPIEXEC_POSTFLAGS} ${gtest_args} --kokkos-num-threads=1)
           set_property(TEST ${_test_name} PROPERTY PROCESSORS ${_procs})
         endif()
       endforeach()
@@ -65,14 +65,14 @@ macro(VertexCFD_add_tests)
           set(_test_name ${_target}_nt_${_threads})
           add_test(NAME ${_target}_nt_${_threads} COMMAND
             ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 1 ${MPIEXEC_PREFLAGS}
-            ${_target} ${MPIEXEC_POSTFLAGS} ${gtest_args} --kokkos-threads=${_threads})
+            ${_target} ${MPIEXEC_POSTFLAGS} ${gtest_args} --kokkos-num-threads=${_threads})
           set_property(TEST ${_test_name} PROPERTY PROCESSORS ${_threads})
           set_property(TEST ${_test_name} PROPERTY ENVIRONMENT "OMP_NUM_THREADS=${_threads}")
         endforeach()
       else()
         add_test(NAME ${_target} COMMAND
           ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 1 ${MPIEXEC_PREFLAGS}
-          ${_target} ${MPIEXEC_POSTFLAGS} ${gtest_args} --kokkos-threads=1)
+          ${_target} ${MPIEXEC_POSTFLAGS} ${gtest_args} --kokkos-num-threads=1)
         set_property(TEST ${_target} PROPERTY PROCESSORS 1)
       endif()
     endif()

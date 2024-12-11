@@ -25,10 +25,16 @@
 #include "responses/VertexCFD_ResponseManager.hpp"
 #include "responses/VertexCFD_Response_Utils.hpp"
 
+#include <Trilinos_version.h>
+
 #include <Tempus_IntegratorBasic.hpp>
 #include <Tempus_IntegratorObserverComposite.hpp>
 
 #include <NOX.H>
+#include <NOX_Observer_Vector.hpp>
+#if TRILINOS_MAJOR_MINOR_VERSION >= 160000
+#include <NOX_Observer_ReusePreconditionerFactory.hpp>
+#endif
 
 #include <Panzer_InitialCondition_Builder.hpp>
 #include <Panzer_NodeType.hpp>
@@ -45,8 +51,6 @@
 #include <Teuchos_TimeMonitor.hpp>
 
 #include <Kokkos_Core.hpp>
-
-#include <Trilinos_version.h>
 
 #include <mpi.h>
 
@@ -293,14 +297,34 @@ void run_vertexcfd(
     ic_manager->applyInitialConditions(
         num_space_dim, *physics_manager, solution, solution_dot);
 
+    // Make vector of observers
+    auto nox_observer_vector = Teuchos::rcp(new NOX::ObserverVector());
+
     // Setup iteration output observers.
-    Teuchos::RCP<NOX::Observer> nox_iteration_observer
+    auto nox_iteration_observer
         = Teuchos::rcp(new VertexCFD::NOXObserver::IterationOutput());
+    nox_observer_vector->pushBack(nox_iteration_observer);
+
+    // If available/requested, make an observer to reuse preconditioner
+#if TRILINOS_MAJOR_MINOR_VERSION >= 160000
+    auto& nox_params = solver_params->sublist("Default Stepper")
+                           .sublist("Default Solver")
+                           .sublist("NOX");
+    if (nox_params.isSublist("Reuse Preconditioner"))
+    {
+        auto nox_prec_reuse_observer = NOX::createReusePreconditionerObserver(
+            nox_params.sublist("Reuse Preconditioner"));
+        nox_observer_vector->pushBack(nox_prec_reuse_observer);
+    }
+#endif
+
+    // Register observer vector with NOX parameters
     solver_params->sublist("Default Stepper")
         .sublist("Default Solver")
         .sublist("NOX")
         .sublist("Solver Options")
-        .set("User Defined Pre/Post Operator", nox_iteration_observer);
+        .set<Teuchos::RCP<NOX::Observer>>("User Defined Pre/Post Operator",
+                                          nox_observer_vector);
 
     // Setup time integrator -- toggle interface on Trilinos version
 #if TRILINOS_MAJOR_MINOR_VERSION >= 130100

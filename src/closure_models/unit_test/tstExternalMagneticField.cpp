@@ -1,5 +1,5 @@
-#include <VertexCFD_EvaluatorTestHarness.hpp>
-#include <closure_models/unit_test/VertexCFD_ClosureModelFactoryTestHarness.hpp>
+#include "VertexCFD_EvaluatorTestHarness.hpp"
+#include "closure_models/unit_test/VertexCFD_ClosureModelFactoryTestHarness.hpp"
 
 #include "closure_models/VertexCFD_Closure_ExternalMagneticField.hpp"
 
@@ -29,10 +29,14 @@ void testEval(const int num_space_dim,
     // Set non-trivial quadrature points to avoid x = y
     if (ext_magn_type == ExtMagnType::toroidal)
     {
-        test_fixture.int_values->ip_coordinates(0, 0, 0) = 0.2;
-        test_fixture.int_values->ip_coordinates(0, 0, 1) = 0.3;
+        auto ip_coord_view
+            = test_fixture.int_values->ip_coordinates.get_static_view();
+        auto ip_coord_mirror = Kokkos::create_mirror(ip_coord_view);
+        ip_coord_mirror(0, 0, 0) = 0.2;
+        ip_coord_mirror(0, 0, 1) = 0.3;
         if (num_space_dim == 3)
-            test_fixture.int_values->ip_coordinates(0, 0, 2) = 1.0;
+            ip_coord_mirror(0, 0, 2) = 1.0;
+        Kokkos::deep_copy(ip_coord_view, ip_coord_mirror);
     }
 
     const auto& ir = *test_fixture.ir;
@@ -53,6 +57,24 @@ void testEval(const int num_space_dim,
         ext_magn_vct[1] = exp_by;
         ext_magn_vct[2] = exp_bz;
         user_params.set("External Magnetic Field Value", ext_magn_vct);
+
+        // Add a test for time dependent external magnetic field
+        if (num_space_dim == 3)
+        {
+            const double time = 0.25;
+            test_fixture.setTime(time);
+            Teuchos::Array<double> dB0_dt(3);
+            for (int d = 0; d < 3; ++d)
+            {
+                dB0_dt[d] = pow(-1.1, d) * (d + 0.2);
+                ext_magn_vct[d] += dB0_dt[d] * time;
+            }
+            user_params.set("External Magnetic Field Time Rate of Change",
+                            dB0_dt);
+            exp_bx += dB0_dt[0] * time;
+            exp_by += dB0_dt[1] * time;
+            exp_bz += dB0_dt[2] * time;
+        }
     }
     else if (ext_magn_type == ExtMagnType::toroidal)
     {
@@ -104,25 +126,25 @@ TEST(ConstantExternalMagneticField2D, Jacobian)
 }
 
 //-----------------------------------------------------------------//
-TEST(OneOverRadiusExternalMagneticField2D, Residual)
+TEST(ToroidalExternalMagneticField2D, Residual)
 {
     testEval<panzer::Traits::Residual>(2, ExtMagnType::toroidal);
 }
 
 //-----------------------------------------------------------------//
-TEST(OneOverRadiusExternalMagneticField2D, Jacobian)
+TEST(ToroidalExternalMagneticField2D, Jacobian)
 {
     testEval<panzer::Traits::Jacobian>(2, ExtMagnType::toroidal);
 }
 
 //-----------------------------------------------------------------//
-TEST(ExternalMagneticField3D, Residual)
+TEST(TimeDependentExternalMagneticField3D, Residual)
 {
     testEval<panzer::Traits::Residual>(3);
 }
 
 //-----------------------------------------------------------------//
-TEST(ExternalMagneticField3D, Jacobian)
+TEST(TimeDependentExternalMagneticField3D, Jacobian)
 {
     testEval<panzer::Traits::Jacobian>(3);
 }

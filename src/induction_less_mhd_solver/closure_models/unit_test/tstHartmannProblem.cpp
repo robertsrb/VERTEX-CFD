@@ -24,7 +24,11 @@ void testEval()
     const auto& ir = *test_fixture.ir;
 
     // Set non-trivial y values
-    test_fixture.int_values->ip_coordinates(0, 0, 1) = 0.5;
+    auto ip_coord_view
+        = test_fixture.int_values->ip_coordinates.get_static_view();
+    auto ip_coord_mirror = Kokkos::create_mirror(ip_coord_view);
+    ip_coord_mirror(0, 0, 1) = 0.5;
+    Kokkos::deep_copy(ip_coord_view, ip_coord_mirror);
 
     // Initialize class object to test
     Teuchos::ParameterList user_params;

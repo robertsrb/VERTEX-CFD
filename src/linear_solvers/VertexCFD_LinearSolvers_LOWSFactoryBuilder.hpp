@@ -22,7 +22,7 @@ class LOWSFactoryBuilder
     // Prevent construction
     LOWSFactoryBuilder() = delete;
 
-    // Build solver from solver name
+    // Build solver from solver name.
     static Teuchos::RCP<Thyra::LinearOpWithSolveFactoryBase<double>>
     buildLOWS(Teuchos::RCP<Teuchos::ParameterList> params);
 };

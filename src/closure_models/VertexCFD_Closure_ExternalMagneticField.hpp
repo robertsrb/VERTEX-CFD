@@ -45,6 +45,7 @@ class ExternalMagneticField : public panzer::EvaluatorWithBaseImpl<Traits>,
 
   private:
     Kokkos::Array<double, field_size> _ext_magn_vct;
+    Kokkos::Array<double, field_size> _d_ext_magn_vct_dt;
     double _toroidal_field_magn;
     int _ir_degree;
     int _ir_index;

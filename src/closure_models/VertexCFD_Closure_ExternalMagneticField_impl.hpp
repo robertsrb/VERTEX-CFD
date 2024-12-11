@@ -37,8 +37,22 @@ ExternalMagneticField<EvalType, Traits>::ExternalMagneticField(
     {
         const auto ext_magn_vct = user_params.get<Teuchos::Array<double>>(
             "External Magnetic Field Value");
+
+        const auto zero_array = Teuchos::Array<double>(field_size, 0.0);
+        const auto d_ext_magn_vct_dt
+            = user_params.isType<Teuchos::Array<double>>(
+                  "External Magnetic Field Time Rate of "
+                  "Change")
+                  ? user_params.get<Teuchos::Array<double>>(
+                        "External Magnetic Field Time Rate "
+                        "of Change")
+                  : zero_array;
+
         for (int dim = 0; dim < field_size; ++dim)
+        {
             _ext_magn_vct[dim] = ext_magn_vct[dim];
+            _d_ext_magn_vct_dt[dim] = d_ext_magn_vct_dt[dim];
+        }
     }
     else if (_ext_magn_type == ExtMagnType::toroidal)
     {
@@ -66,6 +80,14 @@ template<class EvalType, class Traits>
 void ExternalMagneticField<EvalType, Traits>::evaluateFields(
     typename Traits::EvalData workset)
 {
+    if (_ext_magn_type == ExtMagnType::constant)
+    {
+        for (int dim = 0; dim < field_size; ++dim)
+        {
+            _ext_magn_vct[dim] += _d_ext_magn_vct_dt[dim] * workset.time;
+        }
+    }
+
     _ip_coords = workset.int_rules[_ir_index]->ip_coordinates;
     auto policy = panzer::HP::inst().teamPolicy<scalar_type, PHX::Device>(
         workset.num_cells);

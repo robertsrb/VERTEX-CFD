@@ -3,6 +3,10 @@
 
 #include "VertexCFD_TempusTimeStepControl_GlobalCFL.hpp"
 
+#include <Teuchos_ParameterList.hpp>
+#include <Teuchos_RCP.hpp>
+#include <Teuchos_StandardParameterEntryValidators.hpp>
+
 #include <algorithm>
 #include <string>
 
