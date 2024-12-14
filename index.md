@@ -11,14 +11,15 @@ As part of the VERTEX initiative, the primary mission of the VERTEX-CFD team is 
 # Mathematics
 
 # Conclusions
-ERTEX-CFD is a CFD solver that relies on a finite element discretization method to solve for the incompressible Navier-Stokes equations coupled to a temperature equation and an electric potential equation. The code relies on the  Trilinos package and offers a wide range of temporal integrators, solvers and preconditioners to run on CPU- and GPU-enabled platforms. The code was verified and validated for steady and unsteady incompressible flows with benchmark cases taken from the published literature: natural convection, viscous heating, laminar flow over a circle, and turbulent channels.
+VERTEX-CFD is a CFD solver that relies on a finite element discretization method to solve for the incompressible Navier-Stokes equations coupled to a temperature equation and an electric potential equation. Reynolds Averaged Navier-Stokes turbulence models and large eddy simulation model are also available. The code relies on the  Trilinos package and offers a wide range of temporal integrators, solvers and preconditioners to run on CPU- and GPU-enabled platforms. The code was verified and validated for steady and unsteady incompressible flows with benchmark cases taken from the published literature: natural convection, viscous heating, laminar flow over a circle, and turbulent channels. It was also demonstrated that VERTEX-CFD solver scales on CPUs (Perlmutter) and GPUs (Perlmutter and Summit) architectures.
 
-Future work includes addition of new RANS turbulent models, verification and validation of the MHD solver, implementation of large eddy simulation models, and deployment of VERTEX-CFD on Summit \cite{summit2018} for testing and optimization of the solver on NVIDIA GPUs.
+Current and future work include addition of a conjugate heat transfer (CHT) model, conjugate electric transfer model, and deployment of VERTEX-CFD on Frontier \cite{summit2018} for testing and optimization of the solver on AMD GPUs.
 
 # Acknolegements
+This work was funded by the Laboratory Directed Research and Development (LDRD) program at Oak Ridge National Laboratory, and the Scientific Discovery through Advanced Computing (SciDac) programm.
 
 # Disclaimer
-Notice: This manuscript has been authored by UT-Battelle, LLC, under contract DE-AC05-00OR22725 with the US Department of Energy (DOE). The US government retains and the publisher, by accepting the article for publication, acknowledges that the US government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this manuscript, or allow others to do so, for US government purposes. DOE will provide public access to these results of federally sponsored research in accordance with the DOE Public Access Plan (http://energy.gov/downloads/doe-public-access-plan).
+This manuscript has been authored by UT-Battelle, LLC, under contract DE-AC05-00OR22725 with the US Department of Energy (DOE). The US government retains and the publisher, by accepting the article for publication, acknowledges that the US government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this manuscript, or allow others to do so, for US government purposes. DOE will provide public access to these results of federally sponsored research in accordance with the DOE Public Access Plan (http://energy.gov/downloads/doe-public-access-plan).
 
 ## [CPU BUILD INSTRUCTIONS](docs/install-vertexcfd/install-vertexcfd-on-narsil-cpu.md)
 
