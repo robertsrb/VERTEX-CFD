@@ -2,7 +2,7 @@
 
 # Summary:
 
-The demand for high-performance computational fluid dynamics and multiphysics software packages has grown in recent years as a response to efforts in complex engineering and research applications. While the widespread deployment of high-performance computing (HPC) resources has enabled larger, more complex simulations to be conducted, few commercial or open-source software packages are available which scale performantly on various computing architectures, and represent the multitude of physical processes relevant to these applications. The VERTEX initiative at Oak Ridge National Laboratory was created to address this technical gap, with a special emphasis on high-fidelity multiphysics modeling of coupled turbulent fluid flow, heat transfer, and magnetohydrodynamics for applications in fusion and fission energy, isotope separation and enrichment, and other spaces. The VERTEX-CFD module was developed to solve the governing equations of these problems using a high-order continuous Galerkin finite element framework, employing an artificial compressiblity method for pressure-velocity coupling and fully-implicit monolithic solvers. Special attention was paid during the development process to ensure performance portability across both CPU and GPU computing platforms. In this work, we present the results of a comprehensive verification and validation (V\&V) suite designed to assess the accuracy and convergence behavior of the VERTEX-CFD module for problems involving laminar, heated flows. Comparisons were made to closed-form analytical solutions as well as experiments to ensure both numerical and physical accuracy. The performance and scaling behavior of the software was examined for a representative problem on both CPU and GPU architectures, up to the scale of thousands of compute nodes. These analyses demonstrate the capabilities of the VERTEX-CFD, build trust in the solver accuracy, and provide the basis for future work.
+The demand for high-performance computational fluid dynamics and multiphysics software packages has grown in recent years as a response to efforts in complex engineering and research applications. While the widespread deployment of high-performance computing (HPC) resources has enabled larger, more complex simulations to be conducted, few commercial or open-source software packages are available which scale performantly on various computing architectures, and represent the multitude of physical processes relevant to these applications. The VERTEX initiative at Oak Ridge National Laboratory was created to address this technical gap, with a special emphasis on high-fidelity multiphysics modeling of coupled turbulent fluid flow, heat transfer, and magnetohydrodynamics for applications in fusion and fission energy, isotope separation and enrichment, and other spaces. The VERTEX-CFD module was developed to solve the governing equations of these problems using a high-order continuous Galerkin finite element framework, employing an artificial compressiblity method for pressure-velocity coupling and fully-implicit monolithic solvers. Special attention was paid during the development process to ensure performance portability across both CPU and GPU computing platforms. In this work, we present the results of a comprehensive verification and validation (V&V) suite designed to assess the accuracy and convergence behavior of the VERTEX-CFD module for problems involving laminar, heated flows. Comparisons were made to closed-form analytical solutions as well as experiments to ensure both numerical and physical accuracy. The performance and scaling behavior of the software was examined for a representative problem on both CPU and GPU architectures, up to the scale of thousands of compute nodes. These analyses demonstrate the capabilities of the VERTEX-CFD, build trust in the solver accuracy, and provide the basis for future work.
 
 
 # Statement of need
@@ -17,14 +17,13 @@ The long term objectives of the VERTEX initiative is to faciliate the addiiton o
 VERTEX-CFD solver is still under active development and currently implement the following capabilities: incompressible Navier-Stokes equations, temperature equation, induction-less and full-induction MHD models, RANS turbulence models and WALE (LES) turbulence model. Each new physics is implemented in closure models with unit tests. Physical models and coupling between equations were verified and validated against bechmark problems taken from the published literature: isothermal flows, heated flows, transient and steady-state cases, turbulent cases. VERTEX-CFD solver has demonstrated second-order temporal and spatial accuracy. Scaling of the VERTEX-CFD solver was assessed on CPUs and GPUs architecture. It was found that strong and weak scaling were comparable to other CFD solvers alike NekRS. (ADD FIGURE).
 
 
-# Mathematics
+# [CPU BUILD INSTRUCTIONS](docs/install-vertexcfd/install-vertexcfd-on-narsil-cpu.md)
 
 
-# Conclusions
+# [GPU BUILD INSTRUCTIONS](docs/install-vertexcfd/install-vertexcfd-on-narsil-gpu.md)
 
-VERTEX-CFD is a CFD solver that relies on a finite element discretization method to solve for the incompressible Navier-Stokes equations coupled to a temperature equation and an electric potential equation. Reynolds Averaged Navier-Stokes turbulence models and large eddy simulation model are also available. The code relies on the  Trilinos package and offers a wide range of temporal integrators, solvers and preconditioners to run on CPU- and GPU-enabled platforms. The code was verified and validated for steady and unsteady incompressible flows with benchmark cases taken from the published literature: natural convection, viscous heating, laminar flow over a circle, and turbulent channels. It was also demonstrated that VERTEX-CFD solver scales on CPUs (Perlmutter) and GPUs (Perlmutter and Summit) architectures.
 
-Current and future work include addition of a conjugate heat transfer (CHT) model, conjugate electric transfer model, and deployment of VERTEX-CFD on Frontier for testing and optimization of the solver on AMD GPUs.
+# [RUNNING CASES WITH VERTEX-CFD](docs/run-vertexcfd/run-incompressible-channel.md)
 
 
 # Acknolegements
@@ -34,13 +33,4 @@ This work was funded by the Laboratory Directed Research and Development (LDRD) 
 
 # Disclaimer
 
-This manuscript has been authored by UT-Battelle, LLC, under contract DE-AC05-00OR22725 with the US Department of Energy (DOE). The US government retains and the publisher, by accepting the article for publication, acknowledges that the US government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this manuscript, or allow others to do so, for US government purposes. DOE will provide public access to these results of federally sponsored research in accordance with the DOE Public Access Plan (http://energy.gov/downloads/doe-public-access-plan).
-
-
-# [CPU BUILD INSTRUCTIONS](docs/install-vertexcfd/install-vertexcfd-on-narsil-cpu.md)
-
-
-# [GPU BUILD INSTRUCTIONS](docs/install-vertexcfd/install-vertexcfd-on-narsil-gpu.md)
-
-
-# [RUNNING CASES WITH VERTEX-CFD](docs/run-vertexcfd/run-incompressible-channel.md)
+This manuscript has been authored by UT-Battelle, LLC, under contract DE-AC05-00OR22725 with the US Department of Energy (DOE). The US government retains and the publisher, by accepting the article for publication, acknowledges that the US government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this manuscript, or allow others to do so, for US government purposes. DOE will provide public access to these results of federally sponsored research in accordance with the [DOE Public Access Plan](http://energy.gov/downloads/doe-public-access-plan).
