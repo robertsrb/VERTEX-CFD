@@ -3,9 +3,11 @@ title: 'VERTEX-CFD: A multiphysics platform for fusion applications'
 tags:
   - Computational Fluid Dynamics
 authors:
-  - name: Marco
+  - name: Marco Delchini
     affiliation: 1
     corresponding: true
+  - name: Kellis Kincaid
+    affiliation: 1
 affiliations:
   - name: Nuclear Energy and Fuel Cycle Division, Oak Ridge National Laboratory
     index: 1
