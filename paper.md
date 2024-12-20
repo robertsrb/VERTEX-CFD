@@ -26,4 +26,20 @@ The long term objectives of the VERTEX initiative is to faciliate the addiiton o
 
 
 # Current capabilities
+
 VERTEX-CFD solver is still under active development and currently implement the following capabilities: incompressible Navier-Stokes equations, temperature equation, induction-less and full-induction MHD models, RANS turbulence models and WALE (LES) turbulence model. Each new physics is implemented in closure models with unit tests. Physical models and coupling between equations were verified and validated against bechmark problems taken from the published literature: isothermal flows, heated flows, transient and steady-state cases, turbulent cases. VERTEX-CFD solver has demonstrated second-order temporal and spatial accuracy. Scaling of the VERTEX-CFD solver was assessed on CPUs and GPUs architecture. It was found that strong and weak scaling were comparable to other CFD solvers alike NekRS. (ADD FIGURE).
+
+
+# Conclusions
+
+VERTEX-CFD is a CFD solver that relies on a finite element discretization method to solve for the incompressible Navier-Stokes equations coupled to a temperature equation and an electric potential equation. Reynolds Averaged Navier-Stokes turbulence models and large eddy simulation model are also available. The code relies on the  Trilinos package and offers a wide range of temporal integrators, solvers and preconditioners to run on CPU- and GPU-enabled platforms. The code was verified and validated for steady and unsteady incompressible flows with benchmark cases taken from the published literature: natural convection, viscous heating, laminar flow over a circle, and turbulent channels. It was also demonstrated that VERTEX-CFD solver scales on CPUs (Perlmutter) and GPUs (Perlmutter and Summit) architectures.
+
+
+# Acknolegements
+
+This work was funded by the Laboratory Directed Research and Development (LDRD) program at Oak Ridge National Laboratory, and the Scientific Discovery through Advanced Computing (SciDac) programm.
+
+
+# Disclaimer
+
+This manuscript has been authored by UT-Battelle, LLC, under contract DE-AC05-00OR22725 with the US Department of Energy (DOE). The US government retains and the publisher, by accepting the article for publication, acknowledges that the US government retains a nonexclusive, paid-up, irrevocable, worldwide license to publish or reproduce the published form of this manuscript, or allow others to do so, for US government purposes. DOE will provide public access to these results of federally sponsored research in accordance with the [DOE Public Access Plan](http://energy.gov/downloads/doe-public-access-plan).
