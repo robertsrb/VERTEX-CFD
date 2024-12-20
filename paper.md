@@ -7,8 +7,8 @@ authors:
     affiliation: 1
     corresponding: true
 affiliations:
-- name: Nuclear Energy and Fuel Cycle Division, Oak Ridge National Laboratory
-   index: 1
+  - name: Nuclear Energy and Fuel Cycle Division, Oak Ridge National Laboratory
+    index: 1
 date: 19 December 2024
 bibliography: paper.bib
 ---
