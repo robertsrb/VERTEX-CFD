@@ -10,9 +10,19 @@ authors:
     corresponding: true
   - name: Kellis Kincaid
     affiliation: 1
+  - name: Furkan Oz
+    affiliation: 1
+  - name: Jason DeGraw
+    affiliation: 2
+  - name: Kalyan Gottiparthi
+    affiliation: 3
 affiliations:
   - name: Nuclear Energy and Fuel Cycle Division, Oak Ridge National Laboratory
     index: 1
+  - name: Building and Transportation Division, Oak Ridge National Laboratory
+    index: 2
+  - name: National Center for Computation Science Division, Oak Ridge National Laboratory
+    index: 3
 date: 19 December 2024
 bibliography: paper.bib
 ---
@@ -35,7 +45,9 @@ The long term objectives of the VERTEX initiative is to faciliate the additon of
 
 # Conclusions
 
-VERTEX-CFD is a CFD solver that relies on a finite element discretization method to solve for the incompressible Navier-Stokes equations coupled to a temperature equation and an electric potential equation. Reynolds Averaged Navier-Stokes turbulence models and large eddy simulation model are also available. The code relies on the  Trilinos package and offers a wide range of temporal integrators, solvers and preconditioners to run on CPU- and GPU-enabled platforms. The code was verified and validated for steady and unsteady incompressible flows with benchmark cases taken from the published literature: natural convection, viscous heating, laminar flow over a circle, and turbulent channels. It was also demonstrated that VERTEX-CFD solver scales on CPUs (Perlmutter) and GPUs (Perlmutter and Summit) architectures.
+VERTEX-CFD is an open-source CFD solver that relies on a finite element discretization method to solve for the incompressible Navier-Stokes equations coupled to a temperature equation and MHD equation. Reynolds Averaged Navier-Stokes (RANS) turbulence models and large eddy simulation model are also available. The code relies on the  Trilinos package and offers a wide range of temporal integrators, solvers and preconditioners to run on CPU- and GPU-enabled platforms. The code was verified and validated for steady and unsteady incompressible flows with benchmark cases taken from the published literature: natural convection, viscous heating, laminar flow over a circle, and turbulent channels. It was also demonstrated that VERTEX-CFD solver scales on CPUs (Perlmutter) and GPUs (Perlmutter and Summit) architectures.
+
+Future development will focus on implementing wall functions for RANS models, and the addition of conjugate heat transfer capabilities.
 
 
 # Acknolegements
