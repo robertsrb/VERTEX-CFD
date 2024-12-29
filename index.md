@@ -5,7 +5,8 @@ nav_order: 1
 permalink: /
 ---
 
-An open-source CFD code for additive manufacturing built on OpenFOAM.
+An open-source CFD code for multi-physics modeling and simulation with a focus on fusion application.
+{: .fs-6 .fw-300 }
 
 ---
 
@@ -13,9 +14,9 @@ An open-source CFD code for additive manufacturing built on OpenFOAM.
 We encourage you to contribute to AdditiveFOAM! Please check the guidelines on how to do so.
 
 #### Contributors
-- [John Coleman](https://www.ornl.gov/staff-profile/john-s-coleman)
+- [Marco Delchini](https://www.ornl.gov/staff-profile/marc-olivier-delchini)
 - [Kellis Kincaid](https://www.ornl.gov/staff-profile/kellis-c-kincaid)
-- [Gerry L. Knapp](https://www.ornl.gov/staff-profile/gerald-l-knapp)
-- [Benjamin Stump](https://www.ornl.gov/staff-profile/benjamin-c-stump)
-- [Alex Plotkowski](https://www.ornl.gov/staff-profile/alex-j-plotkowski)
-- [Sam T. Reeve](https://www.ornl.gov/staff-profile/samuel-t-reeve)
+- [Furkan Oz](https://www.ornl.gov/staff-profile/furkan-oz)
+
+
+## Citing
