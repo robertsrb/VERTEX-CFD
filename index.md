@@ -9,6 +9,7 @@ An open-source CFD code for multi-physics modeling and simulation with a focus o
 {: .fs-6 .fw-300 }
 
 [User Guide](docs/index.html){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+
 [View it on GitHub][AdditiveFOAM repo]{: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
@@ -25,3 +26,16 @@ We encourage you to contribute to VERTEX-CFD! Please check the guidelines on how
 - [Filipe Leite Brandao](https://www.ornl.gov/staff-profile/filipe-leite-brandao)
 
 ## Citing
+If you use VERTEX-CFD in your work, please cite the Zenodo DOI [![DOI](DOI_NUMBER)](DOI_NUMBER) of the version you used as a software citation:
+```bibtex
+@software{vertex-cod,
+  author       = {AUTHORS},
+  title        = {VERTEX-CFD: Release 1.0},
+  month        = jun,
+  year         = 2024,
+  publisher    = {Zenodo},
+  version      = {1.0.0},
+  doi          = {DOI_NUMBER},
+  url          = {DOI_URL}
+}
+```
