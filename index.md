@@ -28,7 +28,7 @@ We encourage you to contribute to VERTEX-CFD! Please check the guidelines on how
 ## Citing
 If you use VERTEX-CFD in your work, please cite the Zenodo DOI [![DOI](DOI_NUMBER)](DOI_NUMBER) of the version you used as a software citation:
 ```bibtex
-@software{vertex-cod,
+@software{vertex-cfd,
   author       = {AUTHORS},
   title        = {VERTEX-CFD: Release 1.0},
   month        = jun,
