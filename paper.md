@@ -55,7 +55,7 @@ The long term objectives of the VERTEX initiative is to facilitate the addition 
 
 VERTEX-CFD is an open-source CFD solver that relies on a finite element discretization method to solve for the incompressible Navier-Stokes equations coupled to a temperature equation and MHD equation. Reynolds Averaged Navier-Stokes (RANS) turbulence models and large eddy simulation model are also available. The code relies on the  Trilinos package and offers a wide range of temporal integrators, solvers and preconditioners to run on CPU- and GPU-enabled platforms. VERTEX-CFD solver was verified and validated for steady and unsteady incompressible flows with benchmark cases taken from the published literature: natural convection, viscous heating, laminar flow over a circle, and turbulent channels. It was also demonstrated that VERTEX-CFD solver scales on CPUs (Perlmutter) and GPUs (Perlmutter and Summit [@olcf-web]) architectures.
 
-Future development will focus on implementing wall functions for RANS models, and the addition of conjugate heat transfer capabilities.
+Future development will focus on implementing wall functions for RANS models, and adding conjugate heat transfer capabilities.
 
 
 # Acknowledgements
