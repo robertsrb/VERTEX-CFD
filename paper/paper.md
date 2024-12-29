@@ -16,7 +16,11 @@ authors:
     affiliation: 2
   - name: Kalyan Gottiparthi
     affiliation: 3
+  - name: Doug Stefanski
+    affiliation: 4
   - name: Ryan Glasby
+    affiliation: 4
+  - name: Stuart Slattery
     affiliation: 4
   - name: Franklin Stuart
     affiliation: 5
