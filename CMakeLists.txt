@@ -2,14 +2,10 @@
 # Project settings
 #------------------------------------------------------------------------------#
 
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.12)
 include(CheckLanguage)
 
 project(VertexCFD LANGUAGES CXX)
-check_language(CUDA)
-if (CMAKE_CUDA_COMPILER)
-  enable_language(CUDA)
-endif ()
 set(PROJECT_VERSION "0.0-dev" )
 
 if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CXX_FLAGS)
@@ -25,6 +21,12 @@ option(CMAKE_VERBOSE_MAKEFILE "Generate verbose Makefiles" OFF)
 include(GNUInstallDirs)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+# Set the exodiff path relative to Trilinos installation path
+set(EXODIFF_PATH ${Trilinos_ROOT}/bin/exodiff)
+
+# Set the Trilinos lib path relative to Trilinos installation path
+set(TRILINOS_LIB ${Trilinos_ROOT}/lib64)
 
 option(NO_PARMETIS_SUPPORT "No parmetis support" ON)
 add_compile_definitions(NO_PARMETIS_SUPPORT)
@@ -46,31 +48,19 @@ find_package(YAPF)
 find_package(MPI REQUIRED)
 
 find_package(Trilinos REQUIRED)
-if (Trilinos_VERSION VERSION_LESS 13 OR Trilinos_VERSION VERSION_GREATER_EQUAL 17)
-    message(FATAL_ERROR "Incompatible Trilinos version ${Trilinos_VERSION}. Only Trilinos versions 13 and 14 are supported.")
+if (Trilinos_VERSION VERSION_LESS 16 OR Trilinos_VERSION VERSION_GREATER_EQUAL 17)
+    message(FATAL_ERROR "Incompatible Trilinos version ${Trilinos_VERSION}. Only Trilinos version 16 and above are supported.")
 endif ()
 
-if (VertexCFD_ENABLE_HYPRE)
-  find_package(HYPRE REQUIRED)
-  if (HYPRE_FOUND)
-    message( STATUS "Found HYPRE: ${HYPRE_DIR}" )
-  endif()
-  find_package(HYPREDRV REQUIRED)
-  if (HYPREDRV_FOUND)
-    message( STATUS "Found HYPREDrive: ${HYPREDRV_DIR}" )
-  endif()
-  add_compile_definitions(VERTEXCFD_HAVE_HYPRE)
+# FIXME Tacho requires rocblas, rocsparse, and rocsolver with HIP but doesn't
+# enforce this dependency explicitly through version 16.0.0
+if(Kokkos_ENABLE_HIP AND NOT (ShyLU_NodeTacho_ENABLE_ROCSOLVER AND ShyLU_NodeTacho_ENABLE_ROCSPARSE AND ShyLU_NodeTacho_ENABLE_ROCBLAS))
+    message(FATAL_ERROR "ShyLU_NodeTacho wasn't configured with the ROC* TPLs enabled!")
 endif()
 
 if (VertexCFD_ENABLE_HYPRE)
   find_package(HYPRE REQUIRED)
-  if (HYPRE_FOUND)
-    message( STATUS "Found HYPRE: ${HYPRE_DIR}" )
-  endif()
   find_package(HYPREDRV REQUIRED)
-  if (HYPREDRV_FOUND)
-    message( STATUS "Found HYPREDrive: ${HYPREDRV_DIR}" )
-  endif()
   add_compile_definitions(VERTEXCFD_HAVE_HYPRE)
 endif()
 
@@ -92,6 +82,8 @@ endif()
 # therefore is not accessible here which would have been perferable.
 if (Kokkos_ENABLE_CUDA)
   set(VERTEXCFD_KOKKOS_DEVICE_TYPE "CUDA")
+elseif (Kokkos_ENABLE_HIP)
+  set(VERTEXCFD_KOKKOS_DEVICE_TYPE "HIP")
 elseif (Kokkos_ENABLE_OPENMP)
   set(VERTEXCFD_KOKKOS_DEVICE_TYPE "OPENMP")
 elseif (Kokkos_ENABLE_SERIAL)
@@ -110,10 +102,6 @@ endif()
 
 # output Phalanx/Panzer device type
 message( STATUS "Phalanx/Panzer Kokkos device type: ${VERTEXCFD_KOKKOS_DEVICE_TYPE}" )
-
-if (CMAKE_CUDA_COMPILER)
-    find_package(CUDAToolkit)
-endif ()
 
 #------------------------------------------------------------------------------#
 # Tests and Documentation
@@ -178,6 +166,15 @@ add_subdirectory(src)
 add_subdirectory(examples)
 
 file(COPY regression_test DESTINATION .)
+
+# Delete the unwanted file from the destination
+file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/regression_test/vertexcfd_test.py.in)
+file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/regression_test/rename_variables_exodus.py.in)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/regression_test/vertexcfd_test.py.in
+  ${CMAKE_CURRENT_BINARY_DIR}/regression_test/vertexcfd_test.py)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/regression_test/rename_variables_exodus.py.in
+  ${CMAKE_CURRENT_BINARY_DIR}/regression_test/rename_variables_exodus.py)
 
 ##---------------------------------------------------------------------------##
 ## Package Configuration
