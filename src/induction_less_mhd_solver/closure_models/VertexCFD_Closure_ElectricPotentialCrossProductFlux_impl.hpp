@@ -49,7 +49,8 @@ void ElectricPotentialCrossProductFlux<EvalType, Traits, NumSpaceDim>::evaluateF
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void ElectricPotentialCrossProductFlux<EvalType, Traits, NumSpaceDim>::operator()(
+KOKKOS_INLINE_FUNCTION void
+ElectricPotentialCrossProductFlux<EvalType, Traits, NumSpaceDim>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

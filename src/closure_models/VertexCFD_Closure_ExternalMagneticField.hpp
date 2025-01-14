@@ -49,6 +49,7 @@ class ExternalMagneticField : public panzer::EvaluatorWithBaseImpl<Traits>,
     double _toroidal_field_magn;
     int _ir_degree;
     int _ir_index;
+    double _time;
 
     enum ExtMagnType
     {

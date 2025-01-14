@@ -61,7 +61,8 @@ void IncompressibleKEpsilonSource<EvalType, Traits, NumSpaceDim>::evaluateFields
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void IncompressibleKEpsilonSource<EvalType, Traits, NumSpaceDim>::operator()(
+KOKKOS_INLINE_FUNCTION void
+IncompressibleKEpsilonSource<EvalType, Traits, NumSpaceDim>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

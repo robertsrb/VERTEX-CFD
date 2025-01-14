@@ -40,7 +40,7 @@ void MagneticPressure<EvalType, Traits>::evaluateFields(
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits>
-void MagneticPressure<EvalType, Traits>::operator()(
+KOKKOS_INLINE_FUNCTION void MagneticPressure<EvalType, Traits>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

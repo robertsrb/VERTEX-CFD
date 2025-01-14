@@ -113,8 +113,9 @@ void WallDistance<EvalType, Traits, NumSpaceDim>::evaluateFields(
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void WallDistance<EvalType, Traits, NumSpaceDim>::operator()(RegistrationTag,
-                                                             const int cell) const
+KOKKOS_INLINE_FUNCTION void
+WallDistance<EvalType, Traits, NumSpaceDim>::operator()(RegistrationTag,
+                                                        const int cell) const
 {
     const int num_point = _distance.extent(1);
     for (int point = 0; point < num_point; ++point)
@@ -166,8 +167,9 @@ void WallDistance<EvalType, Traits, NumSpaceDim>::operator()(RegistrationTag,
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void WallDistance<EvalType, Traits, NumSpaceDim>::operator()(EvaluateTag,
-                                                             const int cell) const
+KOKKOS_INLINE_FUNCTION void
+WallDistance<EvalType, Traits, NumSpaceDim>::operator()(EvaluateTag,
+                                                        const int cell) const
 {
     const int num_point = _distance.extent(1);
     for (int point = 0; point < num_point; ++point)

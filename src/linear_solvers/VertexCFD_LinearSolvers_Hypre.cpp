@@ -134,7 +134,7 @@ void Hypre::initialize()
                 globally_contiguous_col_map_ = makeContiguousColumnMap(Aconst);
                 globally_contiguous_row_map_ = rcp(
                     new Tpetra::Map<>(A_->getRowMap()->getGlobalNumElements(),
-                                      A_->getRowMap()->getNodeNumElements(),
+                                      A_->getRowMap()->getLocalNumElements(),
                                       0,
                                       A_->getRowMap()->getComm()));
             }
@@ -400,8 +400,8 @@ int Hypre::copyTpetraToHypre()
             "Hypre<Tpetra::RowMatrix<double, LocalOrdinal, HYPRE_Int, Node>: "
             "Unsupported matrix configuration: Tpetra::CrsMatrix required");
 
-    std::vector<HYPRE_Int> new_indices(matrix->getNodeMaxNumRowEntries());
-    for (LO i = 0; i < (LO)matrix->getNodeNumRows(); i++)
+    std::vector<HYPRE_Int> new_indices(matrix->getLocalMaxNumRowEntries());
+    for (LO i = 0; i < (LO)matrix->getLocalNumRows(); i++)
     {
         typename Tpetra::CrsMatrix<>::values_host_view_type values;
         typename Tpetra::CrsMatrix<>::local_inds_host_view_type indices;
@@ -458,7 +458,7 @@ Teuchos::RCP<const Tpetra::Map<>> Hypre::makeContiguousColumnMap(
         // The domain map isn't linear, so we need a new domain map
         Teuchos::RCP<Tpetra::Map<>> contiguous_domain_map = Teuchos::rcp(
             new Tpetra::Map<>(domain_map->getGlobalNumElements(),
-                              domain_map->getNodeNumElements(),
+                              domain_map->getLocalNumElements(),
                               0,
                               domain_map->getComm()));
         if (importer)
@@ -466,7 +466,7 @@ Teuchos::RCP<const Tpetra::Map<>> Hypre::makeContiguousColumnMap(
             // If there's an importer then we can use it to get a new column
             // map
             GoVector my_gids_hypre(
-                domain_map, contiguous_domain_map->getNodeElementList());
+                domain_map, contiguous_domain_map->getLocalElementList());
 
             // import the HYPRE GIDs
             GoVector col_gids_hypre(column_map);
@@ -485,7 +485,7 @@ Teuchos::RCP<const Tpetra::Map<>> Hypre::makeContiguousColumnMap(
             // domain map isn't linear, so just use the new domain map
             return Teuchos::rcp(
                 new Tpetra::Map<>(column_map->getGlobalNumElements(),
-                                  contiguous_domain_map->getNodeElementList(),
+                                  contiguous_domain_map->getLocalElementList(),
                                   0,
                                   column_map->getComm()));
         }

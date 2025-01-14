@@ -91,7 +91,8 @@ void TurbulenceKEpsilonWallFunction<EvalType, Traits, NumSpaceDim>::evaluateFiel
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void TurbulenceKEpsilonWallFunction<EvalType, Traits, NumSpaceDim>::operator()(
+KOKKOS_INLINE_FUNCTION void
+TurbulenceKEpsilonWallFunction<EvalType, Traits, NumSpaceDim>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

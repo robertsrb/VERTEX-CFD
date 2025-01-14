@@ -57,7 +57,7 @@ IncompressibleNoSlip<EvalType, Traits, NumSpaceDim>::IncompressibleNoSlip(
         *this, ir.dl_vector, _grad_velocity, "GRAD_velocity_");
 
     if (_solve_temp)
-        this->addEvaluatedField(_grad_temperature);
+        this->addDependentField(_grad_temperature);
 
     this->setName("Boundary State Incompressible No-Slip");
 }
@@ -74,7 +74,8 @@ void IncompressibleNoSlip<EvalType, Traits, NumSpaceDim>::evaluateFields(
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void IncompressibleNoSlip<EvalType, Traits, NumSpaceDim>::operator()(
+KOKKOS_INLINE_FUNCTION void
+IncompressibleNoSlip<EvalType, Traits, NumSpaceDim>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

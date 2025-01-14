@@ -167,7 +167,7 @@ void MetricTensor<EvalType, Traits>::evaluateFields(
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits>
 template<int NumSpaceDim>
-void MetricTensor<EvalType, Traits>::operator()(
+KOKKOS_INLINE_FUNCTION void MetricTensor<EvalType, Traits>::operator()(
     std::integral_constant<int, NumSpaceDim>,
     const int cell,
     const int point) const

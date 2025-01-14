@@ -65,7 +65,8 @@ void IncompressibleWALEEddyViscosity<EvalType, Traits, NumSpaceDim>::evaluateFie
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void IncompressibleWALEEddyViscosity<EvalType, Traits, NumSpaceDim>::operator()(
+KOKKOS_INLINE_FUNCTION void
+IncompressibleWALEEddyViscosity<EvalType, Traits, NumSpaceDim>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     using std::pow;

@@ -71,7 +71,8 @@ void IncompressiblePlanarPoiseuilleExact<EvalType, Traits, NumSpaceDim>::
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void IncompressiblePlanarPoiseuilleExact<EvalType, Traits, NumSpaceDim>::operator()(
+KOKKOS_INLINE_FUNCTION void
+IncompressiblePlanarPoiseuilleExact<EvalType, Traits, NumSpaceDim>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

@@ -33,6 +33,8 @@ set(VERTEXCFD_CLOSUREMODEL_HEADERS
   closure_models/VertexCFD_Closure_VectorFieldDivergence.hpp
   closure_models/VertexCFD_Closure_ConstantScalarField.hpp
   incompressible_lsvof_solver/closure_models/VertexCFD_Closure_IncompressibleLSVOFConvectiveFlux.hpp
+  incompressible_lsvof_solver/closure_models/VertexCFD_Closure_IncompressibleLSVOFScalarConvectiveFlux.hpp
+  incompressible_lsvof_solver/closure_models/VertexCFD_Closure_IncompressibleLSVOFViscousFlux.hpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleBuoyancySource.hpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleConvectiveFlux.hpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleLiftDrag.hpp
@@ -108,6 +110,8 @@ set(VERTEXCFD_CLOSUREMODEL_SOURCES
   closure_models/VertexCFD_ClosureModelFactory_Tangent2d.cpp
   closure_models/VertexCFD_ClosureModelFactory_Tangent3d.cpp
   incompressible_lsvof_solver/closure_models/VertexCFD_Closure_IncompressibleLSVOFConvectiveFlux.cpp
+  incompressible_lsvof_solver/closure_models/VertexCFD_Closure_IncompressibleLSVOFScalarConvectiveFlux.cpp
+  incompressible_lsvof_solver/closure_models/VertexCFD_Closure_IncompressibleLSVOFViscousFlux.cpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleBuoyancySource.cpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleConvectiveFlux.cpp
   incompressible_solver/closure_models/VertexCFD_Closure_IncompressibleLiftDrag.cpp
@@ -455,7 +459,7 @@ target_link_libraries(VertexCFD PUBLIC
   Utils
   )
 
-if (CMAKE_CUDA_COMPILER)
+if (Kokkos_ENABLE_CUDA)
     target_link_libraries(VertexCFD PUBLIC CUDA::cusolver)
   endif ()
 

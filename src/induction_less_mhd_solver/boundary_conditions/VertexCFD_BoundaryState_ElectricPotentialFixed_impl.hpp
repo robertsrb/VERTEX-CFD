@@ -68,7 +68,8 @@ void ElectricPotentialFixed<EvalType, Traits>::evaluateFields(
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits>
-void ElectricPotentialFixed<EvalType, Traits>::operator()(
+KOKKOS_INLINE_FUNCTION void
+ElectricPotentialFixed<EvalType, Traits>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

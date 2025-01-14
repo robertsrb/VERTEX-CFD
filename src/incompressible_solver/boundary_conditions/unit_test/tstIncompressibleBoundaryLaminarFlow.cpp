@@ -148,6 +148,7 @@ void testEval(const bool build_temp_equ, const ContinuityModel continuity_model)
     auto ip_coord_view
         = test_fixture.int_values->ip_coordinates.get_static_view();
     auto ip_coord_mirror = Kokkos::create_mirror(ip_coord_view);
+    ip_coord_mirror(0, 0, 0) = 0.0;
     ip_coord_mirror(0, 0, 1) = 0.7375;
     if (num_space_dim == 3)
         ip_coord_mirror(0, 0, 2) = 0.9775;

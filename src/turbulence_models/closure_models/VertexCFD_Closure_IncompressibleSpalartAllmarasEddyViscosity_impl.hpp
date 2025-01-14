@@ -44,7 +44,8 @@ void IncompressibleSpalartAllmarasEddyViscosity<EvalType, Traits>::evaluateField
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits>
-void IncompressibleSpalartAllmarasEddyViscosity<EvalType, Traits>::operator()(
+KOKKOS_INLINE_FUNCTION void
+IncompressibleSpalartAllmarasEddyViscosity<EvalType, Traits>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

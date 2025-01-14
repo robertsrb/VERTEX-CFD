@@ -1,8 +1,8 @@
 #include "VertexCFD_LinearSolverUnitTestConfig.hpp"
 
-#include <VertexCFD_EvaluatorTestHarness.hpp>
-#include <VertexCFD_SolverTester.hpp>
-#include <linear_solvers/VertexCFD_LinearSolvers_Hypre.hpp>
+#include "VertexCFD_EvaluatorTestHarness.hpp"
+#include "VertexCFD_SolverTester.hpp"
+#include "linear_solvers/VertexCFD_LinearSolvers_Hypre.hpp"
 
 #include <Teuchos_DefaultMpiComm.hpp>
 
@@ -11,7 +11,7 @@
 
 #include <Phalanx_KokkosDeviceTypes.hpp>
 
-#include <KokkosCompat_ClassicNodeAPI_Wrapper.hpp>
+#include <Tpetra_KokkosCompat_ClassicNodeAPI_Wrapper.hpp>
 
 //---------------------------------------------------------------------------//
 // TESTS

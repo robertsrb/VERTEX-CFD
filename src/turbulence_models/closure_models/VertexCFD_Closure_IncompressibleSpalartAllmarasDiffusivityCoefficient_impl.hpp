@@ -44,8 +44,9 @@ void IncompressibleSpalartAllmarasDiffusivityCoefficient<EvalType, Traits>::
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits>
-void IncompressibleSpalartAllmarasDiffusivityCoefficient<EvalType, Traits>::
-operator()(const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
+KOKKOS_INLINE_FUNCTION void
+IncompressibleSpalartAllmarasDiffusivityCoefficient<EvalType, Traits>::operator()(
+    const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();
     const int num_point = _diffusivity_var.extent(1);

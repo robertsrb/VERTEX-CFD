@@ -53,7 +53,7 @@ void Step<EvalType, Traits>::evaluateFields(typename Traits::EvalData workset)
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits>
-void Step<EvalType, Traits>::operator()(
+KOKKOS_INLINE_FUNCTION void Step<EvalType, Traits>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

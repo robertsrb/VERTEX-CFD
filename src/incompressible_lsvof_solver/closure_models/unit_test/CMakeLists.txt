@@ -5,5 +5,7 @@ VertexCFD_add_tests(
   LIBS VertexCFD
   NAMES
   IncompressibleLSVOFConvectiveFlux
+  IncompressibleLSVOFScalarConvectiveFlux
+  IncompressibleLSVOFViscousFlux
   )
 

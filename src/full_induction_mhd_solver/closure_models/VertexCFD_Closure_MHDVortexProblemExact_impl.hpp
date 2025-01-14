@@ -68,7 +68,8 @@ void MHDVortexProblemExact<EvalType, Traits, NumSpaceDim>::evaluateFields(
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void MHDVortexProblemExact<EvalType, Traits, NumSpaceDim>::operator()(
+KOKKOS_INLINE_FUNCTION void
+MHDVortexProblemExact<EvalType, Traits, NumSpaceDim>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

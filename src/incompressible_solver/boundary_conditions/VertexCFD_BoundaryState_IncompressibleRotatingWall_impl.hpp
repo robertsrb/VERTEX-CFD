@@ -62,6 +62,7 @@ IncompressibleRotatingWall<EvalType, Traits, NumSpaceDim>::IncompressibleRotatin
     this->addEvaluatedField(_boundary_lagrange_pressure);
     if (_is_edac)
         this->addEvaluatedField(_boundary_grad_lagrange_pressure);
+
     Utils::addEvaluatedVectorField(
         *this, ir.dl_scalar, _boundary_velocity, "BOUNDARY_velocity_");
 
@@ -77,14 +78,15 @@ IncompressibleRotatingWall<EvalType, Traits, NumSpaceDim>::IncompressibleRotatin
     }
 
     // Add dependent fields
-    this->addEvaluatedField(_lagrange_pressure);
+    this->addDependentField(_lagrange_pressure);
     if (_is_edac)
         this->addDependentField(_grad_lagrange_pressure);
+
     Utils::addDependentVectorField(
         *this, ir.dl_vector, _grad_velocity, "GRAD_velocity_");
 
     if (_solve_temp)
-        this->addEvaluatedField(_grad_temperature);
+        this->addDependentField(_grad_temperature);
 
     this->setName("Boundary State Incompressible Rotating Wall "
                   + std::to_string(num_space_dim) + "D");
@@ -118,7 +120,8 @@ void IncompressibleRotatingWall<EvalType, Traits, NumSpaceDim>::evaluateFields(
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void IncompressibleRotatingWall<EvalType, Traits, NumSpaceDim>::operator()(
+KOKKOS_INLINE_FUNCTION void
+IncompressibleRotatingWall<EvalType, Traits, NumSpaceDim>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();

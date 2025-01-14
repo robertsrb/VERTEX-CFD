@@ -116,7 +116,8 @@ void MethodManufacturedSolutionSource<EvalType, Traits, NumSpaceDim>::evaluateFi
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
 template<typename T>
-T MethodManufacturedSolutionSource<EvalType, Traits, NumSpaceDim>::set_function(
+KOKKOS_INLINE_FUNCTION T
+MethodManufacturedSolutionSource<EvalType, Traits, NumSpaceDim>::set_function(
     const Kokkos::Array<double, num_coeff>& coeff,
     const Kokkos::Array<T, num_space_dim>& x) const
 {
@@ -134,7 +135,8 @@ T MethodManufacturedSolutionSource<EvalType, Traits, NumSpaceDim>::set_function(
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits, int NumSpaceDim>
-void MethodManufacturedSolutionSource<EvalType, Traits, NumSpaceDim>::operator()(
+KOKKOS_INLINE_FUNCTION void
+MethodManufacturedSolutionSource<EvalType, Traits, NumSpaceDim>::operator()(
     const int cell) const
 {
     const int num_point = _continuity_mms_source.extent(1);

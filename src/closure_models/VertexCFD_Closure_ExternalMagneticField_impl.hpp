@@ -80,13 +80,7 @@ template<class EvalType, class Traits>
 void ExternalMagneticField<EvalType, Traits>::evaluateFields(
     typename Traits::EvalData workset)
 {
-    if (_ext_magn_type == ExtMagnType::constant)
-    {
-        for (int dim = 0; dim < field_size; ++dim)
-        {
-            _ext_magn_vct[dim] += _d_ext_magn_vct_dt[dim] * workset.time;
-        }
-    }
+    _time = workset.time;
 
     _ip_coords = workset.int_rules[_ir_index]->ip_coordinates;
     auto policy = panzer::HP::inst().teamPolicy<scalar_type, PHX::Device>(
@@ -96,7 +90,7 @@ void ExternalMagneticField<EvalType, Traits>::evaluateFields(
 
 //---------------------------------------------------------------------------//
 template<class EvalType, class Traits>
-void ExternalMagneticField<EvalType, Traits>::operator()(
+KOKKOS_INLINE_FUNCTION void ExternalMagneticField<EvalType, Traits>::operator()(
     const Kokkos::TeamPolicy<PHX::exec_space>::member_type& team) const
 {
     const int cell = team.league_rank();
@@ -108,7 +102,10 @@ void ExternalMagneticField<EvalType, Traits>::operator()(
             if (_ext_magn_type == ExtMagnType::constant)
             {
                 for (int dim = 0; dim < field_size; ++dim)
-                    _ext_magn_field[dim](cell, point) = _ext_magn_vct[dim];
+                {
+                    _ext_magn_field[dim](cell, point)
+                        = _ext_magn_vct[dim] + _d_ext_magn_vct_dt[dim] * _time;
+                }
             }
             else if (_ext_magn_type == ExtMagnType::toroidal)
             {
