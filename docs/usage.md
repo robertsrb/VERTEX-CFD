@@ -101,4 +101,5 @@ Time integration complete.
 ```
 Once the simulation is completed. The results should be ready for visualization. For the visualization, we suggest ParaView. However, any visualization software that supports Exodus format should work. The example solution file screenshot visualized in Paraview is shown below:
 
+![paraview-ss](https://github.com/user-attachments/assets/75483e4a-cfec-4a51-891f-3b7c72262ba7)
 
