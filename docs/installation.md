@@ -7,11 +7,11 @@ nav_order: 1
 VERTEX-CFD supports both CPU and GPU solvers. For full CPU and GPU capabilities, please refer to GPU installation. Otherwise, check CPU installation below.
 
 ## CPU installation
-For the CPU installation, first of all, make sure you have `TRILINOS_HOME` variable defined in your environment.
+For the CPU installation, first of all, make sure you have `TRILINOS_ROOT` variable defined in your environment.
 ```
-TRILINOS_HOME=PATH_TO_TRILINOS/TRILINOS_VERSION
+TRILINOS_ROOT=PATH_TO_TRILINOS/TRILINOS_VERSION
 ```
-Once the `TRILINOS_HOME` is set, load the dependencies:
+Once the `TRILINOS_ROOT` is set, load the dependencies:
 ```
 module load intel
 module load tbb
@@ -29,7 +29,7 @@ The content of the `vertexcfd-env` file is:
 
 SOURCE=PATH_TO/vertex-cfd
 INSTALL=INSTALLATION_PATH
-Trilinos_ROOT=PATH_TO_TRILINOS/TRILINOS_VERSION
+TRILINOS_ROOT=PATH_TO_TRILINOS/TRILINOS_VERSION
 BUILD="Release"
 BUILD_SYSTEM=Ninja
 
@@ -47,7 +47,7 @@ cmake \
     -D CMAKE_CXX_FLAGS="-Wall -Wextra -Wpedantic -fdiagnostics-color" \
     -D VertexCFD_ENABLE_TESTING=ON \
     -D CLANG_FORMAT_EXECUTABLE="PATH_TO_CLANG_FORMAT" \
-    -D Trilinos_ROOT="$Trilinos_ROOT" \
+    -D TRILINOS_ROOT="$TRILINOS_ROOT" \
     \
     ${SOURCE}
 ```
@@ -66,11 +66,11 @@ ninja install
 Once installed, VERTEX-CFD is ready to run.                                                                                  
 
 ## GPU installation
-For the GPU installation, CUDA needs to be loaded in the HPC environment and Trilinos needs to be built with the GPU support. Just like the CPU version, define the `TRILINOS_HOME` variable as:
+For the GPU installation, CUDA needs to be loaded in the HPC environment and Trilinos needs to be built with the GPU support. Just like the CPU version, define the `TRILINOS_ROOT` variable as:
 ```
-TRILINOS_HOME=PATH_TO_TRILINOS/TRILINOS_VERSION_WITH_CUDA
+TRILINOS_ROOT=PATH_TO_TRILINOS/TRILINOS_VERSION_WITH_CUDA
 ```
-Once the `TRILINOS_HOME` is set, load the dependencies by including cuda:
+Once the `TRILINOS_ROOT` is set, load the dependencies by including cuda:
 ```
 module load intel
 module load tbb
@@ -89,7 +89,7 @@ The content of the `vertexcfd-env-gpu` file is:
 
 SOURCE=PATH_TO/vertex-cfd
 INSTALL=INSTALLATION_PATH
-Trilinos_ROOT=PATH_TO_TRILINOS/TRILINOS_VERSION_WITH_CUDA
+TRILINOS_ROOT=PATH_TO_TRILINOS/TRILINOS_VERSION_WITH_CUDA
 BUILD="Release"
 BUILD_SYSTEM=Ninja
 
@@ -107,7 +107,7 @@ cmake \
     -D CMAKE_CXX_FLAGS="-Wall -Wextra -Wpedantic -fdiagnostics-color" \
     -D VertexCFD_ENABLE_TESTING=ON \
     -D CLANG_FORMAT_EXECUTABLE="PATH_TO_CLANG_FORMAT" \
-    -D Trilinos_ROOT="$Trilinos_ROOT" \
+    -D TRILINOS_ROOT="$TRILINOS_ROOT" \
     \
     ${SOURCE}
 ```
