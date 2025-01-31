@@ -1,5 +1,5 @@
-# Building VERTEX-CFD on NARSIL CPU architecture
-These instructions detail the process for building VERTEX-CFD for use on the NARSIL mod cluster CPU nodes. Similar instructions for a GPU build can be found [here](./install-vertexcfd-on-narsil-gpu.md).
+# Building VERTEX-CFD on CPU architecture
+These instructions detail the process for building VERTEX-CFD for use on the mod cluster CPU nodes. Similar instructions for a GPU build can be found [here](./install-vertexcfd-on-narsil-gpu.md).
 
 ## Initial Build
 First, create project directories to clone the source repository and compile the code:

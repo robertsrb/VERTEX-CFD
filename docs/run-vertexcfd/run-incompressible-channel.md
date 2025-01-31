@@ -93,6 +93,6 @@ Time integration complete.
 ============================================================================
 ```
 
-Once the job completed, the numerical solution can be read from the Exodus file `incompressible_2d_channel_solution.exo` using ParaView, through NoMachine client. ParaView is available on NARSIL at`/projects/vertex/opt/paraview/5.11.0/bin/paraview`.
+Once the job completed, the numerical solution can be read from the Exodus file `incompressible_2d_channel_solution.exo` using ParaView.
 
 ![](uploads/run-incompressible-2d-channel/temperature-profile-paraview.png)*Visualization of the temperature profile predicted by VertexCFD with ParaView.*
