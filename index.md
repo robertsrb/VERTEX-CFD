@@ -5,6 +5,8 @@ nav_order: 1
 permalink: /
 ---
 
+<img src="https://raw.githubusercontent.com/ORNL-MDF/additivefoam-website-assets/main/images/logo.png" alt="image" style="margin-left: 0px;">
+
 An open-source CFD code for multi-physics modeling and simulation with a focus on fusion applications.
 {: .fs-6 .fw-300 }
 
@@ -22,6 +24,7 @@ We encourage you to contribute to VERTEX-CFD! Please check the guidelines on how
 - [Furkan Oz](https://www.ornl.gov/staff-profile/furkan-oz)
 - [Kalyan Gottiparthi](https://www.ornl.gov/staff-profile/kalyan-c-gottiparthi)
 - [Jason Degraw](https://www.ornl.gov/staff-profile/jason-w-degraw)
+- [Doug Stefanski](https://www.ornl.gov/staff-profile/douglas-l-stefanski)
 - [Filipe Leite Brandao](https://www.ornl.gov/staff-profile/filipe-leite-brandao)
 
 ## Citing
