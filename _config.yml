@@ -1,8 +1,11 @@
 title: VERTEX-CFD
 description: VERTEX-CFD is a performance portable software package for computational fluid dynamics (CFD) simulations on CPU or GPU architectures.
+baseurl: "/VERTEX-CFD"
+url: "https://ORNL.github.io"
+repository: ORNL/VERTEX-CFD
 
-show_downloads: true
-google_analytics:
+#show_downloads: true
+#google_analytics:
 #theme: jekyll-theme-minimal
 
 remote_theme: just-the-docs/just-the-docs
