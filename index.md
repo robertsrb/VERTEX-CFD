@@ -5,7 +5,7 @@ nav_order: 1
 permalink: /
 ---
 
-<img src="https://github.com/ORNL/VERTEX-CFD/blob/gh-pages/docs/figures/vertex_cfd_heated_flow_logo.png" alt="image" style="margin-left: 0px;">
+[Alt text](https://github.com/ORNL/VERTEX-CFD/blob/gh-pages/docs/figures/vertex_cfd_heated_flow_logo.png "a title")
 
 An open-source CFD code for multi-physics modeling and simulation with a focus on fusion applications.
 {: .fs-6 .fw-300 }
