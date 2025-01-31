@@ -6,6 +6,7 @@ permalink: /
 ---
 
 <img src="https://raw.githubusercontent.com/ORNL-MDF/additivefoam-website-assets/main/images/logo.png" alt="image" style="margin-left: 0px;">
+<img src="docs/figures/vertex_cfd_heated_flow_logo.png" alt="image" style="margin-left: 0px;">
 
 An open-source CFD code for multi-physics modeling and simulation with a focus on fusion applications.
 {: .fs-6 .fw-300 }
