@@ -1,5 +1,6 @@
 ---
 parent: VERTEX-CFD v1.0 User Guide
+title: Installation
 nav_order: 1
 ---
 
