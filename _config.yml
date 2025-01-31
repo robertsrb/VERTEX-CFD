@@ -8,8 +8,5 @@ remote_theme: just-the-docs/just-the-docs
 
 permalink: pretty
 
-compress_html:
-  blanklines: true
-
 # Override purple (default) to ORNL green
 color_scheme: ornl_green
