@@ -12,15 +12,9 @@ permalink: pretty
 
 remote_theme: just-the-docs/just-the-docs
 
-plugins:
-  - jekyll-remote-theme
-  - jekyll-seo-tag
-  - jekyll-feed
-
-compress_html:
-  blanklines: true
-
-# Override purple (default) to ORNL green
-color_scheme: ornl_green
-
 logo: docs/figures/vertex_cfd_heated_flow_logo.png
+
+# External navigation links
+nav_external_links:
+  - title: VERTEX-CFD on GitHub
+    url: "https://github.com/ORNL/VERTEX-CFD"
