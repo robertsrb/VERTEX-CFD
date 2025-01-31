@@ -5,6 +5,3 @@ show_downloads: true
 google_analytics:
 remote_theme: just-the-docs/just-the-docs
 #theme: jekyll-theme-minimal
-
-# Override purple (default) to ORNL green
-color_scheme: ornl_green
