@@ -5,7 +5,7 @@ nav_order: 1
 permalink: /
 ---
 
-![Alt text](https://github.com/ORNL/VERTEX-CFD/blob/gh-pages/docs/figures/vertex_cfd_heated_flow_logo.png?raw=true)
+![Alt text](docs/figures/vertex_cfd_heated_flow_logo.png)
 
 <img src="https://github.com/ORNL/VERTEX-CFD/blob/gh-pages/docs/figures/vertex_cfd_heated_flow_logo.png" alt="Description of the image">
 
