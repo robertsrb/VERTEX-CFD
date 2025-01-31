@@ -38,5 +38,3 @@ If you use VERTEX-CFD in your work, please cite the Zenodo DOI [![DOI](DOI_NUMBE
   url          = {DOI_URL}
 }
 ```
-
-[VERTEX-CFD repo]: https://github.com/ORNL/VERTEX-CFD
