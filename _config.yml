@@ -12,4 +12,15 @@ permalink: pretty
 
 remote_theme: just-the-docs/just-the-docs
 
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-feed
+
+compress_html:
+  blanklines: true
+
+# Override purple (default) to ORNL green
+color_scheme: ornl_green
+
 logo: docs/figures/vertex_cfd_heated_flow_logo.png
