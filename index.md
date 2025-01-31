@@ -9,7 +9,7 @@ An open-source CFD code for multi-physics modeling and simulation with a focus o
 {: .fs-6 .fw-300 }
 
 [User Guide](docs/index.html){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
-[View it on GitHub](https://github.com/ORNL/AdditiveFOAM){: .btn .fs-5 .mb-4 .mb-md-0 }
+[View it on GitHub](https://github.com/ORNL/VERTEX-CFD){: .btn .fs-5 .mb-4 .mb-md-0 }
 
 ---
 
