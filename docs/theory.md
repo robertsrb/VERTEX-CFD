@@ -11,8 +11,6 @@ usemathjax: true
 
 ## Governing equations
 
-VERTEX-CFD is a computational fluid dynamics (CFD) solver being developed at Oak Ridge National Laboratory to model fusion blanket designs. This multiphysics problem requires a robust and fast solver that implements the incompressible Navier--Stokes equations, heat transfer and conjugate heat transfer, turbulence models, and magneto-hydrodynamic equations. The VERTEX-CFD solver relies on Trilinos and its subsequent package for high-order temporal integrators and its discretization method and solver options. Both CPU and GPU hardware are supported with the Kokkos templated C++ package. Because of the multiphysics aspect of the project, which involves a wide range of spatial and temporal scales, Trilinos was chosen to rely on an implicit solver and to select numerical methods that scale well on high-performance computing systems.
-
 VERTEX-CFD implements the incompressible Navier-Stokes equations, a temperature equation, and a magneto-hydrodynamics (MHD) equation (induction-less equation).
 
 $$
