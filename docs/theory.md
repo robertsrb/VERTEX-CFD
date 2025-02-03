@@ -63,6 +63,7 @@ The boundary conditions implemented in VERTEX-CFD are listed below:
 - **Outflow with back pressure** (Section 1.7)
 - **Conducting and isolating wall**
 
+$$
 \begin{itemize}
     \item Periodic boundary (Section \ref{sec:periodic-bc}).
     \item Dirichlet with time-transient variation (Section \ref{sec:dirichlet-bc}).
@@ -73,5 +74,6 @@ The boundary conditions implemented in VERTEX-CFD are listed below:
     \item Outflow with back pressure (Section \ref{sec:back-press-bc}).
     \item Conducting and isolating wall
 \end{itemize}
+$$
 
 ## Initial conditions
