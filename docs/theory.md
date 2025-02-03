@@ -19,7 +19,9 @@ VERTEX-CFD implements the incompressible Navier-Stokes equations, a temperature 
 \begin{matrix}
     \nabla \cdot \mathbf{u} = 0 \\
     \partial_t \rho \mathbf{u} + \rho (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla P + \rho \nu \Delta \mathbf{u} - \rho \mathbf{g} \beta (T - T_0) \\
-    \rho C_p \left( \partial_t T + \mathbf{u} \cdot \nabla T \right) = \nabla \cdot (k \nabla T ) + q^{'''}.
+    \rho C_p \left( \partial_t T + \mathbf{u} \cdot \nabla T \right) = \nabla \cdot (k \nabla T ) + q^{'''}. \\
+    \nabla \cdot \mathbf{J} = 0 \\
+    \mathbf{J} = \nabla(\sigma \mathbf{u} \cross \mathbf{B})
 \end{matrix}
 \right.
 \end{align}
