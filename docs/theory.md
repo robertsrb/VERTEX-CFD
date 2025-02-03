@@ -14,20 +14,11 @@ usemathjax: true
 VERTEX-CFD implements the incompressible Navier-Stokes equations, a temperature equation, and a magneto-hydrodynamics (MHD) equation (induction-less equation).
 
 $$
+\nabla \cdot (\mathbf{u}) = 0
 \partial_t \vec{u} + \vec{u} \cdot \nabla \vec{u} &= - \nabla p + \nu \nabla^2 \vec{u} + \vec{f}_b \tag{1} \\
-$$
-
-$$
 \partial_t T + \vec{u} \cdot \nabla T &= \alpha \nabla^2 T + S_T \tag{2} 
 $$
 
-$$
-\nabla \cdot (\mathbf{u}) = 0
-$$
-
-$$
-\rho\left(\frac{\partial \mathbf{u}}{\partial t} + \mathbf{u} \cdot \nabla \mathbf{u}\right) = \nabla \cdot (\mu \nabla \mathbf{u}) - \nabla p +  \rho_k \mathbf{g} - D\mathbf{u}
-$$
 
 ## The discretized equations
 
