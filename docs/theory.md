@@ -48,32 +48,23 @@ $$
 
 VERTEX-CFD employs a finite element discretization method and high-order implicit temporal integrators to integrate partial differential equations (PDEs). Numerical stability of the solution is ensured by the use of L-stable implicit temporal integrator and the use of appropriate mesh density.
 
+
 ## Boundary conditions
 
 Boundary conditions are weakly imposed by computing numerical flux at the boundaries' provided boundary values. The boundary conditions implemented in VERTEX-CFD are listed below:
 
 The boundary conditions implemented in VERTEX-CFD are listed below:
 
-- **Periodic boundary** (Section 1.1)
-- **Dirichlet with time-transient variation** (Section 1.2)
-- **Symmetry for isothermal flow** (Section 1.3)
-- **No-slip for viscous flow** (Section 1.4)
-- **Rotating wall for isothermal flow** (Section 1.5)
-- **Laminar flow** (Section 1.6)
-- **Outflow with back pressure** (Section 1.7)
+- **Periodic boundary**
+- **Dirichlet with time-transient variation**
+- **Symmetry for isothermal flow**
+- **No-slip for viscous flow**
+- **Rotating wall for isothermal flow**
+- **Laminar flow**
+- **Outflow with back pressure**
 - **Conducting and isolating wall**
 
-$$
-\begin{itemize}
-    \item Periodic boundary (Section \ref{sec:periodic-bc}).
-    \item Dirichlet with time-transient variation (Section \ref{sec:dirichlet-bc}).
-    \item Symmetry for isothermal flow (Section \ref{sec:symm-bc}).
-    \item No-slip for viscous flow (Section \ref{sec:viscous-flow-bc}).
-    \item Rotating wall for isothermal flow (Section \ref{sec:rotating-wall-bc}).
-    \item Laminar flow (Section \ref{sec:laminar-flow}).
-    \item Outflow with back pressure (Section \ref{sec:back-press-bc}).
-    \item Conducting and isolating wall
-\end{itemize}
-$$
+The vector solution is denoted by $$U_{bc} = (\phi_{p,{bc}}, \mathbf{u}_{bc}, T_{bc}, \varphi_{bc})$$ at the boundary. It should be noted that when the energy equation and the electric potential equation are not solved, the temperature $$T_{bc}$$ and the electric potential $$\varphi_{bc}$$ are ignored.
+
 
 ## Initial conditions
