@@ -16,11 +16,25 @@ VERTEX-CFD implements the incompressible Navier-Stokes equations, a temperature 
 $$
 \begin{align}
     \partial_t \vec{u} + \vec{u} \cdot \nabla \vec{u} &= - \nabla p + \nu \nabla^2 \vec{u} + \vec{f}_b \tag{1} \\
-    \partial_t T + \vec{u} \cdot \nabla T &= \alpha \nabla^2 T + S_T \tag{2}
+    \partial_t T + \vec{u} \cdot \nabla T &= \alpha \nabla^2 T + S_T \tag{2} 
+\end{align}
+$$
+
+$$
+\begin{align}\label{eq:final-inductionless-mhd}
+\left\{
+\begin{matrix}
+    \nabla \cdot \mathbf{u} = 0 \\
+    \partial_t \rho \mathbf{u} + \rho (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla P + \rho \nu \Delta \mathbf{u} - \rho \mathbf{g} \beta (T - T_0) \\
+    \rho C_p \left( \partial_t T + \mathbf{u} \cdot \nabla T \right) = \nabla \cdot (k \nabla T ) + q^{'''}.
+\end{matrix}
+\right.
 \end{align}
 $$
 
 ## The discretized equations
+
+The governing equations are discretized with a finite element method (FEM). The resulting ordinary differential equations (ODEs) are integrated with a fully implicit temporal integrators from the Tempus package. 
 
 ## Boundary conditions
 
