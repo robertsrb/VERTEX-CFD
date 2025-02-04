@@ -52,7 +52,7 @@ The specific fluid challenges that face a fusion blanket are associated with hel
 
 Liquid metals (i.e., conductive fluids) (LM) containing lithium are used to breed tritium and provide self-cooling and flow in a magnetic field that retards its motion and yields complex flow behaviors. Although significant progress has been made in these DNS/Maxwell MHD simulations due to algorithmic improvements, they still require extremely long run times to converge and severely limit the modeling of real blanket geometries. Computational challenges are dramatically increased if the LM MHD flow is tightly coupled with heat and mass transfer, which is usually the case in all blanket applications. LM computational fluid dynamics (CFD)/MHD problems take a very long time to converge, especially with high Hartmann numbers and multiple materials. Significant improvements are possible with new algorithms that consider peculiarities of LM flows in fusion-relevant conditions (e.g., strong magnetic field, high volumetric and surface heat fluxes, complex geometry, multi-material environment, and MHD/mass transfer/heat transfer coupling). The computational tools for LM CFD/MHD range from research codes to commercial codes with widely varying capabilities, all of which are largely incapable of modeling the entire problem at the required scale and fidelity. 
 
-VERTEX-CFD is a new open-source multiphysics package framework implementing physical phenomena found in fusion blanket designs: gas dynamics, magneto-hydrodynamics (MHD), and thermal hydraulics for conducting fluids. The main objectives of the VERTEX-CFD package is to provide an answer to the aforementioned challenges by scaling on CPU and GPU HPC platforms, leveraging and integrating AI&ML tools to enhance current physical models, and relying on a robust multiphysics solver.
+VERTEX-CFD is a new open-source multiphysics package framework implementing physical phenomena found in fusion blanket designs: gas dynamics, magneto-hydrodynamics (MHD), and thermal hydraulics for conducting fluids. The main objectives of the VERTEX-CFD package is to provide an answer to the aforementioned challenges by leveraging and integrating AI&ML tools to enhance current physical models, and relying on a robust multiphysics solver that scales on HPC platforms.
 
 
 # Current capabilities and development workflow
@@ -78,11 +78,11 @@ The VERTEX-CFD solver is still under active development and currently implements
 \right.
 \end{align}
 
-The above set of equations can be augmented with Reynolds Averaged Navier-Stokes (RANS) turbulence models, and the wall-adapting local eddy (WALE) viscosity model model [@nicoud:hal-00910373] to model turbulent flows.
+The above set of equations can be augmented with Reynolds Averaged Navier-Stokes (RANS) turbulence models, and the wall-adapting local eddy (WALE) viscosity model model [@nicoud:hal-00910373] to model turbulent flows. A graphic representation of the capabilities available in VERTEX-CFD is provided in \autoref{fig:vertexcfd-capabilities}.
+
+![VERTEX-CFD modeling capabilities. \label{fig:vertexcfd-capabilities}](figures/vertexcfd-capabilities.png){ width=100% }
 
 Solvers, finite element methods, and other relevant tools are provided by the [Trilinos package](https://trilinos.github.io/) [@trilinos-website]. The VERTEX-CFD solver is designed to scale and to be compatible with various CPU and GPU architectures on HPC platforms by leveraging Kokkos [@kokkos] programming language. VERTEX-CFD solver has demonstrated second-order temporal and spatial accuracy.
-
-![VERTEX-CFD modeling capabilities. .](figures/vertexcfd-capabilities.png){ width=100% }
 
 
 ## Development workflow: testing, validation and verification
