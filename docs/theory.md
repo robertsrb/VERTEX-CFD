@@ -77,7 +77,7 @@ Boundary fluxes are evaluated at quadrature points, and their contribution is ad
 The time derivative terms $$\partial_t U$$ are evaluated with a high-order temporal integrator (SDIRK-22 or SDIRK-54) from the Tempus package \cite{tempus-website}. Given a test function $$\phi_i$$ of order $$p$$, integral terms are evaluated with a $$p+1$$ quadrature rule. VERTEX-CFD does not currently implement any numerical method to stabilize the numerical solution and solely relies on the numerical dissipation from the discretization method and the implicit temporal integrator. This strategy has been sufficient for laminar flows, as demonstrated in the following sections.
 
 
-## Boundary conditions
+## Boundary conditions\label{sec:bcs}
 
 Boundary conditions are weakly imposed by computing numerical flux at the boundaries' provided boundary values. The boundary conditions implemented in VERTEX-CFD are listed below:
 
