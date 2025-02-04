@@ -69,7 +69,7 @@ The VERTEX-CFD solver is still under active development and currently implements
 \begin{align}\label{eq:pdes}
 \left\{
 \begin{matrix}
-    \nabla \cdot \mathbf{u} = 0 \\
+    \partial_t + \nabla \cdot ( P \mathbf{u}) = \frac{1}{M^2}\nabla \cdot ( \frac{C_p \mu}{\gamma k} \nabla P ) \\
     \partial_t \rho \mathbf{u} + \rho (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla P + \rho \nu \Delta \mathbf{u} + f^L - \rho \mathbf{g} \beta (T - T_0) \\
     f^L = \mathbf{J} \times \mathbf{B^0} = \sigma \left( -\nabla \varphi \times \mathbf{B^0} + (\mathbf{B} \cdot \mathbf{u}) \cdot \mathbf{B^0} - ||\mathbf{B^0}||^2 \mathbf{u} \right) \\
     \rho C_p \left( \partial_t T + \mathbf{u} \cdot \nabla T \right) = \nabla \cdot (k \nabla T ) + q^{'''} \\
