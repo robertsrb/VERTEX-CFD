@@ -48,6 +48,34 @@ $$
 
 VERTEX-CFD employs a finite element discretization method and high-order implicit temporal integrators to integrate partial differential equations (PDEs). Numerical stability of the solution is ensured by the use of L-stable implicit temporal integrator and the use of appropriate mesh density.
 
+A continuous Galerkin finite element method from the Trilinos package, Panzer \cite{panzer-website}, is employed to discretize the equations presented in Eq. \ref{eq:incomp-ns}. Considering a finite dimensional subspace $$V^p_h$$, an approximate solution $U_h$ of $U$ can be expressed as
+
+$$
+\begin{equation}
+    U_h = \sum_i U_i \phi_i~~,
+\end{equation}
+$$
+
+where $$\phi_i \in V^p_h$$ is a basis function. A weak form of Eq. \ref{eq:incomp-ns} is obtained by substituting $$U$$ with $$U_h$$, taking an inner product between each term of the partial differential equation and a test function and integrating over the computational volume:
+
+$$
+\begin{equation}\label{eq:weak-form}
+    \iiint \left[ \phi^T \partial_t U + \phi^T \nabla \cdot F(U) - \phi^T \nabla \cdot G(U, \nabla U) - \phi^T S(U) \right] d\Omega = 0.0~~.
+\end{equation}
+$$
+
+Equation \ref{eq:weak-form} can be further transformed by integrating per part the conservative fluxes to yield boundary fluxes denoted by the under script $$bc$$:
+
+$$
+\begin{align}\label{eq:weak-form-bc}
+    \oiiint \phi^T \partial_t U d\Omega - \oiiint \nabla \phi^T \cdot F(U) d\Omega + \\ \oiiint \nabla \cdot \phi^T \cdot G(U, \nabla U) d\Omega - \oiiint \phi^T S(U) d\Omega \nonumber = \\ -\oiint \phi^T F_{bc}(U) \Vec{n} d \delta \Omega + \oiint \phi^T G_{bc}(U, \nabla U) \Vec{n} d \delta \Omega~~.
+\end{align}
+$$
+
+Boundary fluxes are evaluated at quadrature points, and their contribution is added to the global residuals. The boundary flux $G$ is evaluated with the symmetric interior penalty method \cite{penaltyMethod}. Implementation of the boundary conditions is further detailed in Section \ref{sec:bcs}.
+
+The time derivative terms $$\partial_t U$$ are evaluated with a high-order temporal integrator (SDIRK-22 or SDIRK-54) from the Tempus package \cite{tempus-website}. Given a test function $\phi_i$ of order $p$, integral terms are evaluated with a $$p+1$$ quadrature rule. VERTEX-CFD does not currently implement any numerical method to stabilize the numerical solution and solely relies on the numerical dissipation from the discretization method and the implicit temporal integrator. This strategy has been sufficient for laminar flows, as demonstrated in the following sections.
+
 
 ## Boundary conditions
 
@@ -240,7 +268,7 @@ $$
 \end{equation}
 $$
 
-The user is required to specify the index $$n$$ aligned with the boundary normal vector, and the index $v$ of the direction in which the velocity is aligned. The velocity components are then defined as:
+The user is required to specify the index $$n$$ aligned with the boundary normal vector, and the index $$v$$ of the direction in which the velocity is aligned. The velocity components are then defined as:
 
 $$
 \begin{equation}
