@@ -108,5 +108,64 @@ $$
 \end{align}
 $$
 
+### No-slip boundary condition
+The \emph{no-slip} boundary condition is used to model a viscous flow interacting with a moving wall. The velocity of the flow and the wall are the same which can be put in the mathematical form:
+
+$$
+\begin{equation}
+    \mathbf{u_{bc}} = \mathbf{u_{wall}} \ ,
+\end{equation}
+$$
+
+where $$\mathbf{u_{wall}}$$ is an user input parameter that is defaulted to the zero vector. Since this is a wall, the temperature is set to the wall temperature $$T_{wall}$$. The Lagrange pressure is set to its interior value:
+
+$$
+\begin{equation}
+\left\{
+\begin{matrix}
+    \phi_{bc}(\mathbf{r}, t) &=& \phi(\mathbf{r}, t) \\
+    \mathbf{u}_{bc}(\mathbf{r}, t) &=& \mathbf{u_{wall}} \\
+    T_{bc}(\mathbf{r}, t) &=& T_{wall}
+\end{matrix}
+\right.
+\end{equation}
+$$
+
+All boundary gradients are set to the interior values: 
+
+$$
+\begin{equation}
+    \partial_i f_{bc}(\mathbf{r}, t) = \partial_i f(\mathbf{r}, t)
+\end{equation}
+$$
+
+In VERTEX-CFD the wall boundary velocity $$\mathbf{u_{wall}}$$ can linearly vary as a function of time. This is particularly useful when modeling flow with non-natural initial conditions (non-stationary flow over a stationary obstacle). The wall boundary velocity is set to initially match the flow velocity and linearly decreases to zero with time. This strategy is commonly adopted to ease the work of the numerical solver while developing steady-state flow.
+
+
+###Rotating wall boundary condition
+The \emph{rotating wall} boundary condition is used to model the interaction of a fluid with a rotating wall. The wall in contact with the fluid rotates with an angular velocity $$\omega_w$$ in the XY plane. The Lagrange pressure is set to the interior value, while the fluid velocity is computed from the angular velocity and the fluid temperature set to the wall temperature $$T_{wall}$$ as follows:
+
+$$
+\begin{equation}
+\left\{
+    \begin{matrix}
+    \phi_{bc}(\mathbf{r}, t) &=& \phi(\mathbf{r}, t) \\
+    \mathbf{u}_{bc}(\mathbf{r}, t) &=& \omega_{wall} \left(-y, x, 0.0 \right) \\
+    T_{bc}(\mathbf{r}, t) &=& T_{wall}
+    \end{matrix}
+\right.
+\end{equation}
+$$
+
+The Cartesian coordinates are defined as $x$ and $y$ and the z-component of the velocity is assumed to be zero when used in three dimension.
+
+All boundary gradients are set to the interior values such as:
+
+$$
+\begin{equation}
+    \partial_i f_{bc}(\mathbf{r}, t) = \partial_i f(\mathbf{r}, t)
+\end{equation}
+$$
+
 
 ## Initial conditions
