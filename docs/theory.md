@@ -68,13 +68,13 @@ Equation \ref{eq:weak-form} can be further transformed by integrating per part t
 
 $$
 \begin{align}\label{eq:weak-form-bc}
-    \oiiint \phi^T \partial_t U d\Omega - \oiiint \nabla \phi^T \cdot F(U) d\Omega + \\ \oiiint \nabla \cdot \phi^T \cdot G(U, \nabla U) d\Omega - \oiiint \phi^T S(U) d\Omega \nonumber = \\ -\oiint \phi^T F_{bc}(U) \Vec{n} d \delta \Omega + \oiint \phi^T G_{bc}(U, \nabla U) \Vec{n} d \delta \Omega~~.
+\iiint \phi^T \partial_t U d\Omega - \iiint \nabla \phi^T \cdot F(U) d\Omega + \\ \oiiint \nabla \cdot \phi^T \cdot G(U, \nabla U) d\Omega - \oiiint \phi^T S(U) d\Omega \nonumber = \\ -\iint \phi^T F_{bc}(U) \Vec{n} d \delta \Omega + \iint \phi^T G_{bc}(U, \nabla U) \Vec{n} d \delta \Omega~~.
 \end{align}
 $$
 
-Boundary fluxes are evaluated at quadrature points, and their contribution is added to the global residuals. The boundary flux $G$ is evaluated with the symmetric interior penalty method \cite{penaltyMethod}. Implementation of the boundary conditions is further detailed in Section \ref{sec:bcs}.
+Boundary fluxes are evaluated at quadrature points, and their contribution is added to the global residuals. The boundary flux $$G$$ is evaluated with the symmetric interior penalty method \cite{penaltyMethod}. Implementation of the boundary conditions is further detailed in Section \ref{sec:bcs}.
 
-The time derivative terms $$\partial_t U$$ are evaluated with a high-order temporal integrator (SDIRK-22 or SDIRK-54) from the Tempus package \cite{tempus-website}. Given a test function $\phi_i$ of order $p$, integral terms are evaluated with a $$p+1$$ quadrature rule. VERTEX-CFD does not currently implement any numerical method to stabilize the numerical solution and solely relies on the numerical dissipation from the discretization method and the implicit temporal integrator. This strategy has been sufficient for laminar flows, as demonstrated in the following sections.
+The time derivative terms $$\partial_t U$$ are evaluated with a high-order temporal integrator (SDIRK-22 or SDIRK-54) from the Tempus package \cite{tempus-website}. Given a test function $$\phi_i$$ of order $$p$$, integral terms are evaluated with a $$p+1$$ quadrature rule. VERTEX-CFD does not currently implement any numerical method to stabilize the numerical solution and solely relies on the numerical dissipation from the discretization method and the implicit temporal integrator. This strategy has been sufficient for laminar flows, as demonstrated in the following sections.
 
 
 ## Boundary conditions
