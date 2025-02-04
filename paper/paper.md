@@ -12,9 +12,9 @@ authors:
     affiliation: 1
   - name: Furkan Oz
     affiliation: 1
-  - name: Jason DeGraw
-    affiliation: 2
   - name: Kalyan Gottiparthi
+    affiliation: 2
+  - name: Jason DeGraw
     affiliation: 3
   - name: Doug Stefanski
     affiliation: 4
@@ -27,9 +27,9 @@ authors:
 affiliations:
   - name: Nuclear Energy and Fuel Cycle Division, Oak Ridge National Laboratory
     index: 1
-  - name: Building and Transportation Division, Oak Ridge National Laboratory
-    index: 2
   - name: National Center for Computation Science Division, Oak Ridge National Laboratory
+    index: 2
+  - name: Building and Transportation Division, Oak Ridge National Laboratory
     index: 3
   - name: Computational Science and Engineering Division, Oak Ridge National Laboratory
     index: 4
@@ -41,7 +41,7 @@ bibliography: paper.bib
 
 # Summary:
 
-The demand for high-performance computational fluid dynamics and multiphysics software packages has grown in recent years as a response to effort in complex engineering and research applications. While the widespread deployment of high-performance computing (HPC) resources has enabled larger, more complex simulations to be conducted, few commercial or open-source software packages are available which scale performantly on CPU and GPU computing architectures, and represent the multitude of physical processes relevant to these applications. The VERTEX initiative is developed to address this technical gap, with a special emphasis on high-fidelity multiphysics modeling of coupled turbulent fluid flow, heat transfer, and magnetohydrodynamics for applications in fusion and fission energy, and other spaces. The VERTEX-CFD module was developed to solve the governing equations of these problems using a high-order continuous Galerkin finite element framework, and fully-implicit monolithic solvers. Special attention is being paid during the development process to verify and to validate the solver, and to ensure performance portability across both CPU and GPU computing platforms. A comprehensive verification and validation (V&V) suite and unit tests were designed to assess the accuracy and convergence behavior of the VERTEX-CFD module for problems taken from the published literature.
+The demand for high-performance computational fluid dynamics and multiphysics software packages has grown in recent years as a response to effort in complex engineering and research applications. While the widespread deployment of high-performance computing (HPC) resources has enabled larger, more complex simulations to be conducted, few commercial or open-source software packages are available which scale performantly on CPU and GPU computing architectures, and represent the multitude of physical processes relevant to these applications. The VERTEX-CFD solver is developed to address this technical gap, with a special emphasis on high-fidelity multiphysics modeling of coupled turbulent fluid flow, heat transfer, and magnetohydrodynamics for applications in fusion and fission energy, and other spaces. The VERTEX-CFD package was developed to solve the governing equations of these problems using a high-order continuous Galerkin finite element framework, and fully-implicit monolithic solvers. Special attention is being paid during the development process to verify and to validate the solver, and to ensure performance portability across both CPU and GPU computing platforms. A comprehensive verification and validation (V&V) suite and unit tests were designed to assess the accuracy and convergence behavior of the VERTEX-CFD module for problems taken from the published literature.
 
 
 # Statement of need
@@ -52,7 +52,7 @@ The specific fluid challenges that face a fusion blanket are associated with hel
 
 Liquid metals (i.e., conductive fluids) (LM) containing lithium are used to breed tritium and provide self-cooling and flow in a magnetic field that retards its motion and yields complex flow behaviors. Although significant progress has been made in these DNS/Maxwell MHD simulations due to algorithmic improvements, they still require extremely long run times to converge and severely limit the modeling of real blanket geometries. Computational challenges are dramatically increased if the LM MHD flow is tightly coupled with heat and mass transfer, which is usually the case in all blanket applications. LM computational fluid dynamics (CFD)/MHD problems take a very long time to converge, especially with high Hartmann numbers and multiple materials. Significant improvements are possible with new algorithms that consider peculiarities of LM flows in fusion-relevant conditions (e.g., strong magnetic field, high volumetric and surface heat fluxes, complex geometry, multi-material environment, and MHD/mass transfer/heat transfer coupling). The computational tools for LM CFD/MHD range from research codes to commercial codes with widely varying capabilities, all of which are largely incapable of modeling the entire problem at the required scale and fidelity. 
 
-VERTEX-CFD is a new open-source multiphysics package framework implementing physical equations found in fusion blanket designs: gas dynamics, magneto-hydrodynamics (MHD), and thermal hydraulics for conducting fluids. The main objectives of the VERTEX-CFD package is to provide an answer to the aforementioned challenges by leveraging and integrating AI&ML tools to enhance current physical models, and relying on a robust multiphysics solver that scales on HPC platforms.
+VERTEX-CFD is a new open-source package designed to address the aforementioned challenges by leveraging and integrating AI&ML tools to enhance current physical models, and relying on a robust multiphysics solver that scales on HPC platforms.
 
 
 # Current capabilities and development workflow
