@@ -157,7 +157,7 @@ $$
 \end{equation}
 $$
 
-The Cartesian coordinates are defined as $x$ and $y$ and the z-component of the velocity is assumed to be zero when used in three dimension.
+The Cartesian coordinates are defined as $$x$$ and $$y$$ and the z-component of the velocity is assumed to be zero when used in three dimension.
 
 All boundary gradients are set to the interior values such as:
 
@@ -167,5 +167,91 @@ $$
 \end{equation}
 $$
 
+###Laminar flow
+The laminar flow boundary condition sets a parabolic profile for the velocity in the wall normal direction. The input parameters are the average velocity amplitude $u_i^{avg}$, the coordinates of the two points on the circle which can be connected by a line that pass through the circle center. The resultant inlet velocity profiles can be calculated as:
+
+$$
+\begin{equation}
+    u_i(x,y,z) = C_i u_i^{avg}\cdot\mathbf{n}\left(1.0 - \frac{r^2}{R^2}\right)~~,
+\end{equation}
+$$
+
+where $$R$$ is the characteristic radius of the circle, $$\mathbf{r}$$ is the distance to the circle center which is calculated from the two points provided by the user, and $$C_i$$ is a constant based on the dimensionality of the problem. In 2D, $$C_i$$ is $3/2$, while in 3D, it is $2.0$. This boundary condition can be used with 2D rectangular channels and 3D pipes. The flow direction is calculated based on the surface normals, where the boundary condition is applied. An uniform inlet temperature can also be provided if solving for the temperature equation. The boundary conditions are as follows:
+
+$$
+\begin{equation}
+\left\{
+    \begin{matrix}
+    \phi_{bc}(\mathbf{r}, t) &=& \phi(\mathbf{r}, t) \\
+    \mathbf{u}_{bc}(\mathbf{r}, t) &=& \left(u_i\cdot n_x, u_i\cdot n_y, u_i\cdot n_z \right) \\
+    T_{bc}(\mathbf{r}, t) &=& T_{inlet}
+    \end{matrix}
+\right.
+\end{equation}
+$$
+
+All boundary gradients are set to the interior values such as:
+
+$$
+\begin{equation}
+    \partial_i f_{bc}(\mathbf{r}, t) = \partial_i f(\mathbf{r}, t)
+\end{equation}
+$$
+
+### Outflow boundary condition
+The outflow boundary condition is employed when the back pressure is known at an outlet. The Lagrange pressure is computed from the back pressure $$P_b$$:
+
+$$
+\begin{equation}
+    \phi_{p,bc} = P_b
+\end{equation}
+$$
+
+The velocity, the temperature and all boundary gradients are set to their respective interior values such as:
+
+$$
+\begin{equation}
+\left\{
+    \begin{matrix}
+    \mathbf{u}_{bc}(\mathbf{r}, t) &=& \mathbf{u}(\mathbf{r}, t) \\
+    \partial_i U_{bc}(\mathbf{r}, t) &=& \partial_i U(\mathbf{r}, t) \\
+    T_{bc}(\mathbf{r}, t) &=& T(\mathbf{r}, t) \\
+    \partial_i T_{bc}(\mathbf{r}, t) &=& \partial_i T(\mathbf{r}, t)
+    \end{matrix}
+\right.
+\end{equation}
+$$
+
+### Cavity Lid
+
+A special boundary condition is implemented for the lid-driven cavity case to provide a smooth transition from the lid velocity to the no-slip condition at the wall, as described by Leriche and Gavrilakis \cite{Leriche2000}. The condition assumes that the domain consists of a two- or three-dimensional cube with half width $$h$$, centered on the origin. The Lagrange pressure at the boundary is set to the interior value:
+
+$$
+\begin{equation}
+    \phi_{bc} \left(\mathbf{r}, t \right) = \phi \left(\mathbf{r}, t \right)
+\end{equation}
+$$
+
+If the energy equation is to be solved, the boundary temperature is set to a specified constant value:
+
+$$
+\begin{equation}
+    T_{bc} \left(\mathbf{r}, t \right)= T_b
+\end{equation}
+$$
+
+The user is required to specify the index $$n$$ aligned with the boundary normal vector, and the index $v$ of the direction in which the velocity is aligned. The velocity components are then defined as:
+
+$$
+\begin{equation}
+    u_{i} \left(\mathbf{r}, t \right) = \left\{ \begin{matrix}
+    0, i \neq v \\
+    U_0 \prod_{j=0, j \neq n}^{N} \left( 1 - \left(r_i / h \right)^{18} \right)^2
+    \end{matrix}
+    \right.
+\end{equation}
+$$
+
+where $$U_0$$ is the nominal wall velocity, $$N$$ is the number of spatial directions, and $$r_i$$ is the distance of the current location from the origin in the $$i^{th}$$ direction.
 
 ## Initial conditions
