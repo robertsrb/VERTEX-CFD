@@ -56,7 +56,7 @@ $$
 \end{equation}
 $$
 
-where $$\phi_i \in V^p_h$$ is a basis function. A weak form of Eq. \ref{eq:incomp-ns} is obtained by substituting $$U$$ with $$U_h$$, taking an inner product between each term of the partial differential equation and a test function and integrating over the computational volume:
+where $$\phi_i \in V^p_h$$ is a basis function. A weak form of Eq. \ref{eq:pdes} is obtained by substituting $$U$$ with $$U_h$$, taking an inner product between each term of the partial differential equation and a test function and integrating over the computational volume:
 
 $$
 \begin{equation}\label{eq:weak-form}
