@@ -80,7 +80,7 @@ The VERTEX-CFD solver is still under active development and currently implements
 
 The above set of equations can be augmented with Reynolds Averaged Navier-Stokes (RANS) turbulence models, and the wall-adapting local eddy (WALE) viscosity model model [@nicoud:hal-00910373] to model turbulent flows. A graphic representation of the capabilities available in VERTEX-CFD is provided in \autoref{fig:vertexcfd-capabilities}.
 
-![VERTEX-CFD modeling capabilities. \label{fig:vertexcfd-capabilities}](vertexcfd-capabilities-no-vertex.png){ width=100% }
+![VERTEX-CFD modeling capabilities. \label{fig:vertexcfd-capabilities}](figures/vertexcfd-capabilities-no-vertex.png){ width=100% }
 
 Solvers, finite element methods, and other relevant tools are provided by the [Trilinos package](https://trilinos.github.io/) [@trilinos-website]. The VERTEX-CFD solver is designed to scale and to be compatible with various CPU and GPU architectures on HPC platforms by leveraging Kokkos [@kokkos] programming language. VERTEX-CFD solver has demonstrated second-order temporal and spatial accuracy.
 
