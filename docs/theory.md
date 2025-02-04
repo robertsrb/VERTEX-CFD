@@ -77,20 +77,20 @@ Boundary fluxes are evaluated at quadrature points, and their contribution is ad
 The time derivative terms $$\partial_t U$$ are evaluated with a high-order temporal integrator (SDIRK-22 or SDIRK-54) from the Tempus package \cite{tempus-website}. Given a test function $$\phi_i$$ of order $$p$$, integral terms are evaluated with a $$p+1$$ quadrature rule. VERTEX-CFD does not currently implement any numerical method to stabilize the numerical solution and solely relies on the numerical dissipation from the discretization method and the implicit temporal integrator. This strategy has been sufficient for laminar flows, as demonstrated in the following sections.
 
 
-## Boundary conditions\label{sec:bcs}
+## Boundary conditions
 
 Boundary conditions are weakly imposed by computing numerical flux at the boundaries' provided boundary values. The boundary conditions implemented in VERTEX-CFD are listed below:
 
 The boundary conditions implemented in VERTEX-CFD are listed below:
 
-- **Periodic boundary**
-- **Dirichlet with time-transient variation**
-- **Symmetry for isothermal flow**
-- **No-slip for viscous flow**
-- **Rotating wall for isothermal flow**
-- **Laminar flow**
-- **Outflow with back pressure**
-- **Conducting and isolating wall**
+- Periodic boundary
+- [Dirichlet with time-transient variation](#dirichlet-boundary)
+- [Symmetry for isothermal flow](#symmetry-boundary-condition)
+- [No-slip for viscous flow](#no-slip-boundary-condition)
+- [Rotating wall for isothermal flow](#rotating-wall-boundary-condition)
+- [Laminar flow](#laminar-flow)
+- [Outflow with back pressure](#outflow-boundary-condition)
+- [Cavity Lid](#cavity-Lid)
 
 The vector solution is denoted by $$U_{bc} = (P_{p,{bc}}, \mathbf{u}_{bc}, T_{bc}, \varphi_{bc})$$ at the boundary. It should be noted that when the energy equation and the electric potential equation are not solved, the temperature $$T_{bc}$$ and the electric potential $$\varphi_{bc}$$ are ignored.
 
