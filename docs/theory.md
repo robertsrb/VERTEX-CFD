@@ -142,7 +142,7 @@ $$
 In VERTEX-CFD the wall boundary velocity $$\mathbf{u_{wall}}$$ can linearly vary as a function of time. This is particularly useful when modeling flow with non-natural initial conditions (non-stationary flow over a stationary obstacle). The wall boundary velocity is set to initially match the flow velocity and linearly decreases to zero with time. This strategy is commonly adopted to ease the work of the numerical solver while developing steady-state flow.
 
 
-###Rotating wall boundary condition
+### Rotating wall boundary condition
 The \emph{rotating wall} boundary condition is used to model the interaction of a fluid with a rotating wall. The wall in contact with the fluid rotates with an angular velocity $$\omega_w$$ in the XY plane. The Lagrange pressure is set to the interior value, while the fluid velocity is computed from the angular velocity and the fluid temperature set to the wall temperature $$T_{wall}$$ as follows:
 
 $$
@@ -167,7 +167,7 @@ $$
 \end{equation}
 $$
 
-###Laminar flow
+### Laminar flow
 The laminar flow boundary condition sets a parabolic profile for the velocity in the wall normal direction. The input parameters are the average velocity amplitude $u_i^{avg}$, the coordinates of the two points on the circle which can be connected by a line that pass through the circle center. The resultant inlet velocity profiles can be calculated as:
 
 $$
