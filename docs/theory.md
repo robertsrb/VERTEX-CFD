@@ -255,3 +255,36 @@ $$
 where $$U_0$$ is the nominal wall velocity, $$N$$ is the number of spatial directions, and $$r_i$$ is the distance of the current location from the origin in the $$i^{th}$$ direction.
 
 ## Initial conditions
+
+The initial conditions are specified for the velocity $$\mathbf{u}$$, the Lagrange pressure $$\phi_p$$ and the temperature $$T$$ when solving for the energy equation. The electric potential $$\varphi$$ is assumed constant and set to $$\varphi_0$$ in all initial conditions presented below.
+
+### Uniform initial conditions
+The normalized Lagrange pressure, the velocity and the temperature are initialized to constant value across each block of the computational domain:
+
+$$
+\begin{align}
+    \left\{
+    \begin{matrix}
+    \phi_p(\mathbf{r}, t) &=& \phi_{p,0} \\
+    \mathbf{u}(\mathbf{r}, t) &=& \mathbf{u}_0 \\
+    T(\mathbf{r}, t) &=& T_0
+    \end{matrix}
+    \right.
+\end{align}
+$$
+
+### Laminar flow
+When using the laminar flow initial condition, the x-component of the velocity is initialized with a parabolic profile. The Lagrange pressure and the temperature are initialized to constant values. The current implementation can be used for two geometries that are a 2D rectangular channel and a 3D pipe. The parabolic profile is function of the average velocity and the channel height $$h$$ in 2D or the pipe diameter $$D$$ in 3D. It is assumed that the flow direction is aligned with the x-axis which yields the following expressions:
+
+$$
+\begin{align}
+    \left\{
+    \begin{matrix}
+    \phi_p(\mathbf{r}, t) &=& \phi_{p,0} \\
+    \mathbf{u}(\mathbf{r}, t) &=& \left(\frac{3}{2}\cdot u_{avg}\left(1.0 - \frac{y^2}{h}\right), 0.0 \right) \text{ in 2D} \\
+    \mathbf{u}(\mathbf{r}, t) &=& \left(2\cdot u_{avg}\left(1.0 - \frac{y^2 + z^2}{D}\right), 0.0, 0.0 \right) \text{ in 3D} \\
+    T(\mathbf{r}, t) &=& T_0
+    \end{matrix}
+    \right.
+\end{align}
+$$
