@@ -66,5 +66,47 @@ The boundary conditions implemented in VERTEX-CFD are listed below:
 
 The vector solution is denoted by $$U_{bc} = (\phi_{p,{bc}}, \mathbf{u}_{bc}, T_{bc}, \varphi_{bc})$$ at the boundary. It should be noted that when the energy equation and the electric potential equation are not solved, the temperature $$T_{bc}$$ and the electric potential $$\varphi_{bc}$$ are ignored.
 
+### Dirichlet boundary
+The Dirichlet boundary condition denotes the Dirichlet boundary condition in VERTEX-CFD. The velocity is set equal to the user-specified values or Dirichlet values $$\mathbf{u}_D$$ while the Lagrange pressure and the boundary gradients are set to the interior values. The temperature is also set to a user-specified value $T_{bc}$. Linear ramping in time is also available and can be used to vary each primitive variable independently.
+
+$$
+\begin{equation}
+\left\{ \
+\begin{matrix}
+    u_{i,bc}(\mathbf{r}, t) = u_{i,D}(t) \\
+    \phi_{p,{bc}}(\mathbf{r}, t) = \phi_p(\mathbf{r}, t) \\
+    \partial_i U_{bc}(\mathbf{r}, t) = \partial_i U(\mathbf{r}, t) \\
+    T_{bc}(\mathbf{r}, t) = T_{D}
+\end{matrix}
+\right.
+\end{equation}
+$$
+
+### Symmetry boundary condition
+The symmetry boundary condition is a no-penetration condition. The normal component of the fluid velocity to the wall is zero while the tangential component is unrestricted. The same observation is valid for the temeprature gradient as well. Assuming the outward normal vector to a wall boundary is denoted by $$\mathbf{n}_{bc} = \left(n_{bc,x}, n_{bc,y}, n_{bc,z} \right)$$ in a three-dimensional computational domain, the boundary condition for the primitive variables reads:
+
+$$
+\begin{equation}
+\left\{
+\begin{matrix}
+    \phi_{bc}(\mathbf{r}, t) &=& \phi(\mathbf{r}, t) \\
+    \mathbf{u}_{bc}(\mathbf{r}, t) &=& \mathbf{u}(\mathbf{r}, t) - \left( \mathbf{u}(\mathbf{r}, t) \cdot \mathbf{n}_{bc} \right) \mathbf{n_{bc}} \\
+    T_{bc}(\mathbf{r}, t) &=& T(\mathbf{r}, t) \\
+    \varphi_{bc}(\mathbf{r}, t) &=& \varphi(\mathbf{r}, t)
+\end{matrix}
+\right.
+\end{equation}
+$$
+
+The boundary gradients are function of the interior values:
+
+$$
+\begin{align}
+    \partial_i U_{bc}(\mathbf{r}, t) =& \partial_i U(\mathbf{r}, t) \nonumber\\
+    \partial_i T_{bc}(\mathbf{r}, t) =& \partial_i T(\mathbf{r}, t) - \left(\partial_i T(\mathbf{r}, t) \cdot \mathbf{n}_{bc} \right) n_{i} \\
+    \partial_i \varphi_{bc}(\mathbf{r}, t) =& \partial_i \varphi(\mathbf{r}, t) - \left(\partial_i \varphi(\mathbf{r}, t) \cdot \mathbf{n}_{bc} \right) n_{i} \nonumber
+\end{align}
+$$
+
 
 ## Initial conditions
