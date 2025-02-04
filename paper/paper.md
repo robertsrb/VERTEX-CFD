@@ -62,7 +62,7 @@ VERTEX-CFD is a new open-source multiphysics package framework implementing phys
 The VERTEX-CFD package is an open-source code that is hosted on the ORNL GitHub account [https://github.com/ORNL/VERTEX-CFD](https://github.com/ORNL/VERTEX-CFD). VERTEX-CFD is built upon the [Trilinos package](https://trilinos.github.io/) [@trilinos-website] that provides a suite of tools for code development on HPC platforms. It has been deployed on a wide range of HPC platforms from small clusters to exascale computers alike Summit (REF), Frontier (REF), and Perlmutter (REF).
 
 
-## Governing equations
+## Governing equations and discretization methods
 
 The VERTEX-CFD solver is still under active development and currently implements a set of partial differential equations (PDEs) discretized with a finite element method (FEM) and a high-order temporal integrators: entropically dumped artificial compressibility (weakly incompressible) Navier-Stokes equations [@Clausen2013], temperature equation, and induction-less magneto-hydrodynamic (MHD) equations. Coupling between the different physics is ensured by source terms that are the Buoyancy force and the Lorentz force. A conservative form of the set of PDEs is implemented in VERTEX-CFD as shown in Equation \autoref{eq:pdes}.
 
@@ -80,16 +80,19 @@ The VERTEX-CFD solver is still under active development and currently implements
 
 The above set of equations can be augmented with Reynolds Averaged Navier-Stokes (RANS) turbulence models, and the wall-adapting local eddy (WALE) viscosity model turbulence model [@nicoud:hal-00910373] to model turbulent flows.
 
-Solvers, finite element methods, and other relevant tools are provided by the [Trilinos package](https://trilinos.github.io/) [@trilinos-website]. The VERTEX-CFD solver is designed to scale and to be compatible with various CPU and GPU architectures on HPC platforms by leveraging Kokkos [@kokkos] programming language.
+Solvers, finite element methods, and other relevant tools are provided by the [Trilinos package](https://trilinos.github.io/) [@trilinos-website]. The VERTEX-CFD solver is designed to scale and to be compatible with various CPU and GPU architectures on HPC platforms by leveraging Kokkos [@kokkos] programming language. VERTEX-CFD solver has demonstrated second-order temporal and spatial accuracy.
 
-VERTEX-CFD solver has demonstrated second-order temporal and spatial accuracy. Scaling of the VERTEX-CFD solver was assessed on CPUs and GPUs architecture. It was found that strong and weak scaling were comparable to other CFD solvers alike NekRS. (ADD FIGURE).
+![Caption for example figure.](figures/vertexcfd-capabilities.png){ width=20% }
 
 
-## Validation, verification and testing
+## Development workflow: testing, validation and verification
 
-The long term objectives of the VERTEX initiative is to facilitate the addition of new physical models by relying on a plug-and-play architecture, and also guarantee the correctness of the implemented model over time. New physics and equations are easily added to the global tree and allow for quick deployment of new physical model on HPC platforms. Such approach can only be made possible by setting clear requirements and review process for all developers contributing to the project code: any changes and additions to the source code is reviewed and tested before being merged. VERTEX-CFD solver is tested daily on a continuous integration (CI) workflow that is hosted on ORNL network.
+The long term objectives of the VERTEX initiative is to facilitate the addition of new physical models by relying on a plug-and-play architecture, and also guarantee the correctness of the implemented model over time. New physics and equations are easily added to the global tree and allow for quick deployment of new physical model on HPC platforms.
 
-Each new physics is implemented in closure models with unit tests that are run on CPU and GPU nodes. Physical models and coupling between equations were verified and validated against benchmark problems taken from the published literature: isothermal flows [@Taylor-green-vortex, @10.1115/1.3240731; @Clausen2013], heated flows [@Kuehn_Goldstein_1976; @tritton_1959], transient and steady-state cases, turbulent cases [@nicoud:hal-00910373; @nasa-web], and MHD flows [@SMOLENTSEV201565].
+Such approach can only be made possible by setting clear requirements and review process for all developers contributing to the project code: any changes and additions to the source code is reviewed and tested before being merged. VERTEX-CFD solver is tested daily on a continuous integration (CI) workflow that is hosted on ORNL network. Each new physics is implemented in closure models with unit tests that are run on CPU and GPU nodes.
+
+Physical models and coupling between equations were verified and validated against benchmark problems taken from the published literature: isothermal flows [@Taylor-green-vortex, @10.1115/1.3240731; @Clausen2013], heated flows [@Kuehn_Goldstein_1976; @tritton_1959], transient and steady-state cases, turbulent cases [@nicoud:hal-00910373; @nasa-web], and MHD flows [@SMOLENTSEV201565].
+
 
 # Conclusions
 
