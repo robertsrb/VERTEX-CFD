@@ -82,7 +82,7 @@ The above set of equations can be augmented with Reynolds Averaged Navier-Stokes
 
 Solvers, finite element methods, and other relevant tools are provided by the [Trilinos package](https://trilinos.github.io/) [@trilinos-website]. The VERTEX-CFD solver is designed to scale and to be compatible with various CPU and GPU architectures on HPC platforms by leveraging Kokkos [@kokkos] programming language. VERTEX-CFD solver has demonstrated second-order temporal and spatial accuracy.
 
-![Caption for example figure.](figures/vertexcfd-capabilities.png){ width=20% }
+![Caption for example figure.](figures/vertexcfd-capabilities.png){ width=100% }
 
 
 ## Development workflow: testing, validation and verification
