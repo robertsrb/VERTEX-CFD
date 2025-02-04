@@ -11,7 +11,7 @@ usemathjax: true
 
 ## Governing equations
 
-VERTEX-CFD implements the incompressible Navier-Stokes equations, a temperature equation, and a magneto-hydrodynamics (MHD) equation (induction-less equation). Coupling between the different equations is ensured by the Buoyancy force and the Lorentz force.
+VERTEX-CFD implements the entropically damped artificial compressibility (EDAC) Navier-Stokes equations, a temperature equation, and a magneto-hydrodynamics (MHD) equation (induction-less equation). Coupling between the different equations is ensured by the Buoyancy force and the Lorentz force.
 
 $$
 \begin{align}
@@ -44,11 +44,11 @@ $$
 $$
 
 
-## The discretized equations
+## Discretized equations
 
 VERTEX-CFD employs a finite element discretization method and high-order implicit temporal integrators to integrate partial differential equations (PDEs). Numerical stability of the solution is ensured by the use of L-stable implicit temporal integrator and the use of appropriate mesh density.
 
-A continuous Galerkin finite element method from the Trilinos package, Panzer \cite{panzer-website}, is employed to discretize the equations presented in Eq. \ref{eq:pdes}. Considering a finite dimensional subspace $$V^p_h$$, an approximate solution $U_h$ of $U$ can be expressed as
+A continuous Galerkin finite element method from the Trilinos package, Panzer \cite{panzer-website}, is employed to discretize the equations presented in Eq. \ref{eq:pdes}. Considering a finite dimensional subspace $$V^p_h$$, an approximate solution $$U_h$$ of $$U$$ can be expressed as
 
 $$
 \begin{equation}
