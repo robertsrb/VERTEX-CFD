@@ -68,7 +68,7 @@ Equation \ref{eq:weak-form} can be further transformed by integrating per part t
 
 $$
 \begin{align}\label{eq:weak-form-bc}
-\iiint \phi^T \partial_t U d\Omega - \iiint \nabla \phi^T \cdot F(U) d\Omega + \\ \oiiint \nabla \cdot \phi^T \cdot G(U, \nabla U) d\Omega - \oiiint \phi^T S(U) d\Omega \nonumber = \\ -\iint \phi^T F_{bc}(U) \Vec{n} d \delta \Omega + \iint \phi^T G_{bc}(U, \nabla U) \Vec{n} d \delta \Omega~~.
+\iiint \phi^T \partial_t U d\Omega - \iiint \nabla \phi^T \cdot F(U) d\Omega + \\ \iiint \nabla \cdot \phi^T \cdot G(U, \nabla U) d\Omega - \iiint \phi^T S(U) d\Omega \nonumber = \\ -\iint \phi^T F_{bc}(U) \vec{n} d \delta \Omega + \iint \phi^T G_{bc}(U, \nabla U) \vec{n} d \delta \Omega~~.
 \end{align}
 $$
 
