@@ -78,11 +78,11 @@ The VERTEX-CFD solver is still under active development and currently implements
 \right.
 \end{align}
 
-The above set of equations can be augmented with Reynolds Averaged Navier-Stokes (RANS) turbulence models, and the wall-adapting local eddy (WALE) viscosity model turbulence model [@nicoud:hal-00910373] to model turbulent flows.
+The above set of equations can be augmented with Reynolds Averaged Navier-Stokes (RANS) turbulence models, and the wall-adapting local eddy (WALE) viscosity model model [@nicoud:hal-00910373] to model turbulent flows.
 
 Solvers, finite element methods, and other relevant tools are provided by the [Trilinos package](https://trilinos.github.io/) [@trilinos-website]. The VERTEX-CFD solver is designed to scale and to be compatible with various CPU and GPU architectures on HPC platforms by leveraging Kokkos [@kokkos] programming language. VERTEX-CFD solver has demonstrated second-order temporal and spatial accuracy.
 
-![Caption for example figure.](figures/vertexcfd-capabilities.png){ width=100% }
+![VERTEX-CFD modeling capabilities. .](figures/vertexcfd-capabilities.png){ width=100% }
 
 
 ## Development workflow: testing, validation and verification
@@ -94,11 +94,14 @@ Such approach can only be made possible by setting clear requirements and review
 Physical models and coupling between equations were verified and validated against benchmark problems taken from the published literature: isothermal flows [@Taylor-green-vortex, @10.1115/1.3240731; @Clausen2013], heated flows [@Kuehn_Goldstein_1976; @tritton_1959], transient and steady-state cases, turbulent cases [@nicoud:hal-00910373; @nasa-web], and MHD flows [@SMOLENTSEV201565].
 
 
-# Conclusions
+# Conclusions and current development activities
 
 VERTEX-CFD is an open-source CFD solver that relies on a finite element discretization method to solve for the incompressible Navier-Stokes equations coupled to a temperature equation and MHD equation. Reynolds Averaged Navier-Stokes (RANS) turbulence models and large eddy simulation model are also available. The code relies on the  Trilinos package and offers a wide range of temporal integrators, solvers and preconditioners to run on CPU- and GPU-enabled platforms. VERTEX-CFD solver was verified and validated for steady and unsteady incompressible flows with benchmark cases taken from the published literature: natural convection, viscous heating, laminar flow over a circle, and turbulent channels. It was also demonstrated that VERTEX-CFD solver scales on CPUs (Perlmutter) and GPUs (Perlmutter and Summit [@olcf-web]) architectures.
 
-Future development will focus on implementing wall functions for RANS models, and adding conjugate heat transfer capabilities.
+The development activities are currently focusing on three main activities that are:
+- implementation of a conjugate heat transfer model.
+- coupling with TensorFlowLite for AI&ML applications.
+- implementation of wall function for RANS models to enable high-Reynolds turbulence models.
 
 
 # Acknowledgements
