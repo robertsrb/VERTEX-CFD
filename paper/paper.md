@@ -59,7 +59,7 @@ VERTEX-CFD is a new open-source package designed to address the aforementioned c
 
 ## Dependencies and deployment
 
-The VERTEX-CFD package is an open-source code that is hosted on the ORNL GitHub account [https://github.com/ORNL/VERTEX-CFD](https://github.com/ORNL/VERTEX-CFD). VERTEX-CFD is built upon the [Trilinos package](https://trilinos.github.io/) [@trilinos-website] that provides a suite of tools for code development on HPC platforms. It has been deployed on a wide range of HPC platforms from small clusters to exascale computers alike Summit (REF), Frontier (REF), and Perlmutter (REF).
+The VERTEX-CFD package is an open-source code that is hosted on the ORNL GitHub account [https://github.com/ORNL/VERTEX-CFD](https://github.com/ORNL/VERTEX-CFD). VERTEX-CFD is built upon the [Trilinos package](https://trilinos.github.io/) [@trilinos-website] that provides a suite of tools for code development on HPC platforms. It has been deployed on a wide range of HPC platforms from small clusters to exascale computers alike Summit [@olcf-web], Frontier [@olcf-web], and Perlmutter [@nersc-web].
 
 
 ## Governing equations and discretization methods
@@ -69,7 +69,7 @@ The VERTEX-CFD solver is still under active development and currently implements
 \begin{align}\label{eq:pdes}
 \left\{
 \begin{matrix}
-    \partial_t + \nabla \cdot ( P \mathbf{u}) = \frac{1}{M^2}\nabla \cdot ( \frac{C_p \mu}{\gamma k} \nabla P ) \\
+    \partial_t P + \nabla \cdot ( P \mathbf{u}) = \frac{1}{M^2}\nabla \cdot ( \frac{C_p \mu}{\gamma k} \nabla P ) \\
     \partial_t \rho \mathbf{u} + \rho (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla P + \rho \nu \Delta \mathbf{u} + f^L - \rho \mathbf{g} \beta (T - T_0) \\
     f^L = \mathbf{J} \times \mathbf{B^0} = \sigma \left( -\nabla \varphi \times \mathbf{B^0} + (\mathbf{B} \cdot \mathbf{u}) \cdot \mathbf{B^0} - ||\mathbf{B^0}||^2 \mathbf{u} \right) \\
     \rho C_p \left( \partial_t T + \mathbf{u} \cdot \nabla T \right) = \nabla \cdot (k \nabla T ) + q^{'''} \\
