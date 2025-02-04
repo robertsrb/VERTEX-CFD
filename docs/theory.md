@@ -64,7 +64,7 @@ The boundary conditions implemented in VERTEX-CFD are listed below:
 - **Outflow with back pressure**
 - **Conducting and isolating wall**
 
-The vector solution is denoted by $$U_{bc} = (\phi_{p,{bc}}, \mathbf{u}_{bc}, T_{bc}, \varphi_{bc})$$ at the boundary. It should be noted that when the energy equation and the electric potential equation are not solved, the temperature $$T_{bc}$$ and the electric potential $$\varphi_{bc}$$ are ignored.
+The vector solution is denoted by $$U_{bc} = (P_{p,{bc}}, \mathbf{u}_{bc}, T_{bc}, \varphi_{bc})$$ at the boundary. It should be noted that when the energy equation and the electric potential equation are not solved, the temperature $$T_{bc}$$ and the electric potential $$\varphi_{bc}$$ are ignored.
 
 ### Dirichlet boundary
 The Dirichlet boundary condition denotes the Dirichlet boundary condition in VERTEX-CFD. The velocity is set equal to the user-specified values or Dirichlet values $$\mathbf{u}_D$$ while the Lagrange pressure and the boundary gradients are set to the interior values. The temperature is also set to a user-specified value $T_{bc}$. Linear ramping in time is also available and can be used to vary each primitive variable independently.
@@ -74,7 +74,7 @@ $$
 \left\{ \
 \begin{matrix}
     u_{i,bc}(\mathbf{r}, t) = u_{i,D}(t) \\
-    \phi_{p,{bc}}(\mathbf{r}, t) = \phi_p(\mathbf{r}, t) \\
+    P_{p,{bc}}(\mathbf{r}, t) = P(\mathbf{r}, t) \\
     \partial_i U_{bc}(\mathbf{r}, t) = \partial_i U(\mathbf{r}, t) \\
     T_{bc}(\mathbf{r}, t) = T_{D}
 \end{matrix}
@@ -89,7 +89,7 @@ $$
 \begin{equation}
 \left\{
 \begin{matrix}
-    \phi_{bc}(\mathbf{r}, t) &=& \phi(\mathbf{r}, t) \\
+    P_{bc}(\mathbf{r}, t) &=& P(\mathbf{r}, t) \\
     \mathbf{u}_{bc}(\mathbf{r}, t) &=& \mathbf{u}(\mathbf{r}, t) - \left( \mathbf{u}(\mathbf{r}, t) \cdot \mathbf{n}_{bc} \right) \mathbf{n_{bc}} \\
     T_{bc}(\mathbf{r}, t) &=& T(\mathbf{r}, t) \\
     \varphi_{bc}(\mathbf{r}, t) &=& \varphi(\mathbf{r}, t)
@@ -123,7 +123,7 @@ $$
 \begin{equation}
 \left\{
 \begin{matrix}
-    \phi_{bc}(\mathbf{r}, t) &=& \phi(\mathbf{r}, t) \\
+    P_{bc}(\mathbf{r}, t) &=& P(\mathbf{r}, t) \\
     \mathbf{u}_{bc}(\mathbf{r}, t) &=& \mathbf{u_{wall}} \\
     T_{bc}(\mathbf{r}, t) &=& T_{wall}
 \end{matrix}
@@ -149,7 +149,7 @@ $$
 \begin{equation}
 \left\{
     \begin{matrix}
-    \phi_{bc}(\mathbf{r}, t) &=& \phi(\mathbf{r}, t) \\
+    P_{bc}(\mathbf{r}, t) &=& P(\mathbf{r}, t) \\
     \mathbf{u}_{bc}(\mathbf{r}, t) &=& \omega_{wall} \left(-y, x, 0.0 \right) \\
     T_{bc}(\mathbf{r}, t) &=& T_{wall}
     \end{matrix}
@@ -182,7 +182,7 @@ $$
 \begin{equation}
 \left\{
     \begin{matrix}
-    \phi_{bc}(\mathbf{r}, t) &=& \phi(\mathbf{r}, t) \\
+    P_{bc}(\mathbf{r}, t) &=& P(\mathbf{r}, t) \\
     \mathbf{u}_{bc}(\mathbf{r}, t) &=& \left(u_i\cdot n_x, u_i\cdot n_y, u_i\cdot n_z \right) \\
     T_{bc}(\mathbf{r}, t) &=& T_{inlet}
     \end{matrix}
@@ -203,7 +203,7 @@ The outflow boundary condition is employed when the back pressure is known at an
 
 $$
 \begin{equation}
-    \phi_{p,bc} = P_b
+    P_{p,bc} = P_b
 \end{equation}
 $$
 
@@ -228,7 +228,7 @@ A special boundary condition is implemented for the lid-driven cavity case to pr
 
 $$
 \begin{equation}
-    \phi_{bc} \left(\mathbf{r}, t \right) = \phi \left(\mathbf{r}, t \right)
+    P_{bc} \left(\mathbf{r}, t \right) = P \left(\mathbf{r}, t \right)
 \end{equation}
 $$
 
@@ -256,7 +256,7 @@ where $$U_0$$ is the nominal wall velocity, $$N$$ is the number of spatial direc
 
 ## Initial conditions
 
-The initial conditions are specified for the velocity $$\mathbf{u}$$, the Lagrange pressure $$\phi_p$$ and the temperature $$T$$ when solving for the energy equation. The electric potential $$\varphi$$ is assumed constant and set to $$\varphi_0$$ in all initial conditions presented below.
+The initial conditions are specified for the velocity $$\mathbf{u}$$, the Lagrange pressure $$P$$ and the temperature $$T$$ when solving for the energy equation. The electric potential $$\varphi$$ is assumed constant and set to $$\varphi_0$$ in all initial conditions presented below.
 
 ### Uniform initial conditions
 The normalized Lagrange pressure, the velocity and the temperature are initialized to constant value across each block of the computational domain:
@@ -265,7 +265,7 @@ $$
 \begin{align}
     \left\{
     \begin{matrix}
-    \phi_p(\mathbf{r}, t) &=& \phi_{p,0} \\
+    P(\mathbf{r}, t) &=& P_{p,0} \\
     \mathbf{u}(\mathbf{r}, t) &=& \mathbf{u}_0 \\
     T(\mathbf{r}, t) &=& T_0
     \end{matrix}
@@ -280,7 +280,7 @@ $$
 \begin{align}
     \left\{
     \begin{matrix}
-    \phi_p(\mathbf{r}, t) &=& \phi_{p,0} \\
+    P(\mathbf{r}, t) &=& P_{p,0} \\
     \mathbf{u}(\mathbf{r}, t) &=& \left(\frac{3}{2}\cdot u_{avg}\left(1.0 - \frac{y^2}{h}\right), 0.0 \right) \text{ in 2D} \\
     \mathbf{u}(\mathbf{r}, t) &=& \left(2\cdot u_{avg}\left(1.0 - \frac{y^2 + z^2}{D}\right), 0.0, 0.0 \right) \text{ in 3D} \\
     T(\mathbf{r}, t) &=& T_0
