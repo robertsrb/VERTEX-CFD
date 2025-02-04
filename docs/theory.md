@@ -30,7 +30,7 @@ $$
 The equations are recast in a conservative form and solved for the pressure $$P$$, the velocity $$\mathbf{u}$$, the temperature $$T$$, and the electric potential $$\varphi$$.
 
 $$
-\begin{align}
+\begin{align}\label{eq:pdes}
 \left\{
 \begin{matrix}
     \nabla \cdot \mathbf{u} = 0 \\
@@ -48,7 +48,7 @@ $$
 
 VERTEX-CFD employs a finite element discretization method and high-order implicit temporal integrators to integrate partial differential equations (PDEs). Numerical stability of the solution is ensured by the use of L-stable implicit temporal integrator and the use of appropriate mesh density.
 
-A continuous Galerkin finite element method from the Trilinos package, Panzer \cite{panzer-website}, is employed to discretize the equations presented in Eq. \ref{eq:incomp-ns}. Considering a finite dimensional subspace $$V^p_h$$, an approximate solution $U_h$ of $U$ can be expressed as
+A continuous Galerkin finite element method from the Trilinos package, Panzer \cite{panzer-website}, is employed to discretize the equations presented in Eq. \ref{eq:pdes}. Considering a finite dimensional subspace $$V^p_h$$, an approximate solution $U_h$ of $U$ can be expressed as
 
 $$
 \begin{equation}
