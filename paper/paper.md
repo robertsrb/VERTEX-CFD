@@ -67,7 +67,7 @@ The VERTEX-CFD package is an open-source code that is hosted on the ORNL GitHub 
 The VERTEX-CFD solver is still under active development and currently implements a set of partial differential equations (PDEs) discretized with a finite element method (FEM) and a high-order temporal integrators: entropically dumped artificial compressibility (weakly incompressible) Navier-Stokes equations [@Clausen2013], temperature equation, and induction-less magneto-hydrodynamic (MHD) equations. Coupling between the different physics is ensured by source terms that are the Buoyancy force and the Lorentz force. A conservative form of the set of PDEs is implemented in VERTEX-CFD as shown in Equation \autoref{eq:pdes}.
 
 $$
-\begin{align}\label{eq:pdes}
+\begin{equation}\label{eq:pdes}
 \left\{
 \begin{matrix}
     \nabla \cdot \mathbf{u} = 0 \\
@@ -77,7 +77,7 @@ $$
     \nabla \cdot (\sigma \nabla \varphi) = \nabla \cdot [ \sigma \mathbf{u} \times \mathbf{B^0} ]
 \end{matrix}
 \right.
-\end{align}
+\end{equation}
 $$
 
 The above set of equations can be augmented with Reynolds Averaged Navier-Stokes (RANS) turbulence models, and the wall-adapting local eddy (WALE) viscosity model turbulence model [@nicoud:hal-00910373] to model turbulent flows.
