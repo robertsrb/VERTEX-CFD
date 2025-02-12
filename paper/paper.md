@@ -62,13 +62,14 @@ The VERTEX-CFD package is an open-source code that is hosted on the ORNL GitHub 
 
 ## Governing equations and discretization methods
 
-The VERTEX-CFD solver is still under active development and currently implements a set of partial differential equations (PDEs) discretized with a finite element method (FEM) and a high-order temporal integrators: entropically dumped artificial compressibility (EDAC) Navier-Stokes equations [@Clausen2013], temperature equation, and induction-less magneto-hydrodynamic (MHD) equations. Coupling between the different physics is ensured by source terms that are the Buoyancy force and the Lorentz force. A conservative form of the set of PDEs is implemented in VERTEX-CFD as shown in Equation \autoref{eq:pdes}.
+The VERTEX-CFD solver is still under active development and currently implements a set of partial differential equations (PDEs) discretized with a finite element method (FEM) and a high-order temporal integrators: entropically dumped artificial compressibility (EDAC) Navier-Stokes equations [@Clausen2013], temperature equation, and induction-less magneto-hydrodynamic (MHD) equations. Coupling between the different physics is ensured by source terms that are the Buoyancy force $$f^B$$ and the Lorentz force $$f^L$$. A conservative form of the set of PDEs is implemented in VERTEX-CFD as shown in Equation \autoref{eq:pdes} and solves for the pressure $$P$$, the temperature $$T$$, the velocity $$\mathbf{u}$$ and the electric potential $$\varphi$$. The density $$\rho$, the heat capacity $$C_p$$, the electrical conductivity $$\sigma$$, the thermal conductivity $$k$$, the thermal expansion $$\beta$$, are the fluid properties and are all assumed constant. The external magnetic field, the reference temperature for Buoyancy force and the volumetric heat source are denoted by $$\mathbf{B^0}$$, $$T_0$$ and $$q^{'''}, respectively.
 
 \begin{align}\label{eq:pdes}
 \left\{
 \begin{matrix}
     \partial_t P + \nabla \cdot ( P \mathbf{u}) = \frac{1}{M^2}\nabla \cdot ( \frac{C_p \mu}{\gamma k} \nabla P ) \\
-    \partial_t \rho \mathbf{u} + \rho (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla P + \rho \nu \Delta \mathbf{u} + f^L - \rho \mathbf{g} \beta (T - T_0) \\
+    \partial_t \rho \mathbf{u} + \rho (\mathbf{u} \cdot \nabla) \mathbf{u} = -\nabla P + \rho \nu \Delta \mathbf{u} + f^L - f^B \\
+    f^B = \rho \mathbf{g} \beta (T - T_0) \\
     f^L = \mathbf{J} \times \mathbf{B^0} = \sigma \left( -\nabla \varphi \times \mathbf{B^0} + (\mathbf{B} \cdot \mathbf{u}) \cdot \mathbf{B^0} - ||\mathbf{B^0}||^2 \mathbf{u} \right) \\
     \rho C_p \left( \partial_t T + \mathbf{u} \cdot \nabla T \right) = \nabla \cdot (k \nabla T ) + q^{'''} \\
     \nabla \cdot (\sigma \nabla \varphi) = \nabla \cdot [ \sigma \mathbf{u} \times \mathbf{B^0} ]
