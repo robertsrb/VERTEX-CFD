@@ -1,5 +1,5 @@
 ---
-title: 'VERTEX-CFD: A multiphysics platform for fusion applications'
+title: 'VERTEX-CFD: A multi-physics platform for fusion applications'
 tags:
   - Computational Fluid Dynamics
   - CPU and GPU
@@ -16,6 +16,8 @@ authors:
     affiliation: 2
   - name: Jason DeGraw
     affiliation: 3
+  - name: Filipe Leite Brandao
+    affiliation: 1
   - name: Doug Stefanski
     affiliation: 4
   - name: Ryan Glasby
@@ -35,7 +37,7 @@ affiliations:
     index: 4
   - name: Enrichment Science and Engineering Division, Oak Ridge National Laboratory
     index: 5
-date: 19 December 2024
+date: 12 February 2025
 bibliography: paper.bib
 ---
 
@@ -86,7 +88,7 @@ Solvers, finite element methods, and other relevant tools are provided by the [T
 
 ## Development workflow: testing, validation and verification
 
-The long term objectives of the VERTEX initiative is to facilitate the addition of new physical models by relying on a plug-and-play architecture, and also to guarantee the correctness of the implemented model over time. New physics and equations are easily added to the global tree and allow for quick deployment of new physical model on HPC platforms.
+The long term objectives of the VERTEX initiative are to facilitate the addition of new physical models by relying on a plug-and-play architecture, and also to guarantee the correctness of the implemented model over time. New physics and equations are easily added to the global tree and allow for quick deployment of new physical model on HPC platforms.
 
 Such approach can only be made possible by setting clear requirements and review process for all developers contributing to the project code: any changes and additions to the source code is reviewed and tested before being merged. VERTEX-CFD solver is tested daily on a continuous integration (CI) workflow that is hosted on ORNL network. Each new physics is implemented in closure models with unit tests that are run on CPU and GPU nodes.
 
@@ -108,7 +110,7 @@ The development tasks are currently focusing on three main activities that are:
 
 # Acknowledgements
 
-This work was funded by the Laboratory Directed Research and Development (LDRD) program at Oak Ridge National Laboratory, and the Scientific Discovery through Advanced Computing (SciDac) program.
+This work was funded by the Laboratory Directed Research and Development (LDRD) program at Oak Ridge National Laboratory.
 
 
 # Disclaimer
