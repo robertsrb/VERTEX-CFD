@@ -110,8 +110,7 @@ The development tasks are currently focusing on three main activities that are:
 
 # Acknowledgements
 
-This work was funded by the Laboratory Directed Research and Development (LDRD) program at Oak Ridge National Laboratory. Research at Oak Ridge National Laboratory is supported under contract DE-AC05-00OR22725 from the U.S. Department of Energy to UT-Battelle, LLC.
-
+This work was funded by the Laboratory Directed Research and Development (LDRD) program at Oak Ridge National Laboratory.
 
 # Disclaimer
 
