@@ -23,9 +23,9 @@ We encourage you to contribute to VERTEX-CFD! Please check the guidelines on how
 - [Kellis Kincaid](https://www.ornl.gov/staff-profile/kellis-c-kincaid)
 - [Furkan Oz](https://www.ornl.gov/staff-profile/furkan-oz)
 - [Kalyan Gottiparthi](https://www.ornl.gov/staff-profile/kalyan-c-gottiparthi)
-- [Jason Degraw](https://www.ornl.gov/staff-profile/jason-w-degraw)
+- [Jason W. DeGraw](https://www.ornl.gov/staff-profile/jason-w-degraw)
 - [Doug Stefanski](https://www.ornl.gov/staff-profile/douglas-l-stefanski)
-- [Filipe Leite Brandao](https://www.ornl.gov/staff-profile/filipe-leite-brandao)
+- [Filipe L. Brandao](https://www.ornl.gov/staff-profile/filipe-leite-brandao)
 
 ## Citing
 If you use VERTEX-CFD in your work, please cite the Zenodo DOI [![DOI](DOI_NUMBER)](DOI_NUMBER) of the version you used as a software citation:
