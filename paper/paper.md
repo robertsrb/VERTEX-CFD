@@ -79,11 +79,7 @@ The VERTEX-CFD software is still under active development and currently implemen
 \right.
 \end{align}
 
-The above set of equations can be augmented with Reynolds Averaged Navier-Stokes (RANS) turbulence models, and the wall-adapting local eddy (WALE) viscosity model [@nicoud:hal-00910373] to model turbulent flows. A graphic representation of the capabilities available in VERTEX-CFD is provided in \autoref{fig:vertexcfd-capabilities}.
-
-![VERTEX-CFD modeling capabilities. \label{fig:vertexcfd-capabilities}](figures/vertexcfd-capabilities-no-vertex.png){ width=100% }
-
-Solvers, finite element methods, and other relevant tools are provided by the [Trilinos package](https://trilinos.github.io/) [@trilinos-website]. The VERTEX-CFD software is designed to scale and to be compatible with various CPU and GPU architectures on HPC platforms by leveraging Kokkos [@kokkos] programming language. VERTEX-CFD software has demonstrated second-order temporal and spatial accuracy.
+The above set of equations can be augmented with Reynolds Averaged Navier-Stokes (RANS) turbulence models, and the wall-adapting local eddy (WALE) viscosity model [@nicoud:hal-00910373] to model turbulent flows. Solvers, finite element methods, and other relevant tools are provided by the [Trilinos package](https://trilinos.github.io/) [@trilinos-website]. The VERTEX-CFD software is designed to scale and to be compatible with various CPU and GPU architectures on HPC platforms by leveraging Kokkos [@kokkos] programming language. VERTEX-CFD software has demonstrated second-order temporal and spatial accuracy.
 
 
 ## Development workflow: testing, validation and verification
