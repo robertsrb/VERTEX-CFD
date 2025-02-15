@@ -24,7 +24,7 @@ authors:
     affiliation: 4
   - name: Stuart Slattery
     affiliation: 4
-  - name: Franklin Stuart
+  - name: Franklin Curtis
     affiliation: 5
 affiliations:
   - name: Nuclear Energy and Fuel Cycle Division, Oak Ridge National Laboratory
